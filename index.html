@@ -304,10 +304,17 @@ img,svg{max-width:100%}
 .receipt__s{font-family:var(--f-mono);font-size:11.5px;color:var(--green-ink);margin-top:2px}
 .unlocked{padding:22px}
 .unlocked h1{font-size:clamp(1.5rem,6.6cqw,1.85rem)}
-.rail{display:flex;gap:10px;overflow-x:auto;padding:16px 22px 4px;margin-inline:-22px;
-  scroll-snap-type:x mandatory;scrollbar-width:none}
-.rail::-webkit-scrollbar{display:none}
-.rail>*{scroll-snap-align:start}
+.got{list-style:none;margin:16px 0 0;padding:0;border-top:1px solid var(--line)}
+.got__row{display:flex;align-items:center;gap:11px;padding:10px 0;border-bottom:1px solid var(--line);min-width:0}
+.got__b{min-width:0;flex:1}
+.got__t{display:block;font-size:14px;font-weight:650;letter-spacing:-.01em;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.got__s{display:block;font-size:11.5px;color:var(--ink-3);margin-top:1px}
+.got__s.is-done{color:var(--green-ink);font-weight:600}
+.got__v{font-family:var(--f-mono);font-size:13px;font-weight:600;white-space:nowrap;flex:none}
+.got__note{font-size:11.5px;color:var(--ink-3);text-align:center;margin-top:10px}
+.got__all{display:flex;align-items:center;justify-content:center;gap:7px;margin-top:16px;
+  font-size:13.5px;font-weight:650;color:var(--green-ink)}
 
 /* lowdata: meter */
 .hero--lowdata .hero__panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-l);
@@ -959,30 +966,37 @@ const HEROES = {
       </div>
     </section>`;
   },
-  /* Success: the recharge receipt, then immediately what it earned. */
+  /* Success: the receipt, then the three things it earned — stated, not
+     re-offered. Claiming happens in the priority section right below,
+     or all three at once from here. */
   success(cfg,t){
-    const fresh = ['cash100','ott599','shop50'].map(id=>view(B[id]));
+    const fresh = ['cash100','ott599','shop50'].map(id => view(B[id]));
+    const open  = fresh.filter(b => b.state === 'ready');
+    const worth = open.reduce((n,b) => n + b.value, 0);
+    const rows = fresh.map(b => {
+      const done = b.state !== 'ready';
+      return `<li class="got__row">
+        <span class="card__ico card__ico--${b.type}">${ico(b.type==='cash'?'cash':b.type==='ott'?'ott':'voucher',15,2)}</span>
+        <span class="got__b"><span class="got__t">${esc(b.title)}</span>
+          <span class="got__s ${done?'is-done':''}">${done ? (b.state==='active'?'Activated ✓':'Claimed ✓') : 'Ready to claim'}</span></span>
+        <span class="got__v">${money(b.value)}</span></li>`;
+    }).join('');
     return `<section class="sec hero hero--success" data-flip="hero">
       <div class="hero__panel">
         <div class="receipt">
           <span class="receipt__tick">${ico('tick',18,2.6)}</span>
           <div><div class="receipt__t">Recharge successful 🎉</div>
-          <div class="receipt__s">₹599 · 84 days · 2GB/day · 10 Sep, 4:12 PM</div></div>
+          <div class="receipt__s">₹599 · 84 days · 2GB/day</div></div>
         </div>
         <div class="unlocked">
           <p class="eyebrow">And this is what it earned you</p>
           <h1 style="margin-top:8px">You also unlocked 3 benefits</h1>
           <p class="hero__meta" style="margin-top:8px">Worth ${money(449)}. Nothing to hunt for — they're already on your account.</p>
-          <div class="rail">
-            ${fresh.map(b=>`<div class="card" style="width:204px;flex:none">
-              <div class="card__top"><span class="card__ico card__ico--${b.type}">${ico(b.type==='cash'?'cash':b.type==='ott'?'ott':'voucher',18)}</span>
-              <span class="card__flags"><span class="chip chip--new">New</span></span></div>
-              <h3 class="card__title" style="font-size:15px">${esc(b.title)}</h3>
-              <div class="card__foot"><span class="status status--${b.state==='used'?'past':'ready'}">${b.state==='used'?'Claimed':'Ready to claim'}</span>
-              <span class="expiry">${expiryLabel(b)||''}</span></div>
-              ${b.cta?`<button class="btn btn--sm btn--ghost" data-act="open" data-id="${b.id}">${esc(b.cta)}</button>`:''}
-            </div>`).join('')}
-          </div>
+          <ul class="got">${rows}</ul>
+          ${open.length
+            ? `<button class="btn btn--primary btn--wide" style="margin-top:16px" data-act="claimAll">Claim all ${open.length} · ${money(worth)}</button>
+               <p class="got__note">Or take them one at a time below.</p>`
+            : `<p class="got__all">${ico('tick',15,2.6)} All three are on your account</p>`}
         </div>
       </div>
     </section>`;
@@ -1030,7 +1044,7 @@ const SECTIONS = {
       .filter(b => b.state==='ready' || (b.state==='locked' && cfg.hero==='lowdata'));
     const top = ranked.slice(0, cfg.hero==='success' ? 3 : 2);
     inAttention = new Set(top.map(b=>b.id));
-    if (!top.length) return el('<section class="sec"></section>');
+    if (!top.length) return null;
     const best = top[0]?._s ?? 0;
     const wrap = el(`<section class="sec" data-flip="attention">
       <div class="sec__head"><div>
@@ -1231,6 +1245,7 @@ function render(animate = true){
   stack.innerHTML = '';
   cfg.sections.forEach((id, i) => {
     const node = SECTIONS[id](cfg);
+    if (!node) return;
     node.style.animationDelay = (animate && !reduce) ? `${i * 45}ms` : '0ms';
     stack.appendChild(node);
   });
@@ -1421,6 +1436,11 @@ document.addEventListener('click', e => {
   else if (a === 'confirm')confirmSheet();
   else if (a === 'spin')   spin();
   else if (a === 'toast')  toast(t.dataset.msg);
+  else if (a === 'claimAll'){
+    ['cash100','ott599','shop50'].forEach(id => B[id].type === 'ott' ? state.activated.add(id) : state.claimed.add(id));
+    toast('3 benefits claimed', '₹449 added to your Airtel account.');
+    render(false); burst(document.querySelector('.hero--success'));
+  }
   else if (a === 'claimScratch'){ state.claimed.add('cash100'); toast('₹100 cashback claimed','Credited to Airtel Payments Bank.'); render(false); }
   else if (a === 'streak'){ state.streak = Math.min(state.streak + 1, 4);
     toast(state.streak > 3 ? 'Challenge complete' : `Day ${state.streak - 1} done`, state.streak > 3 ? 'Spin & Win is unlocked below.' : 'Come back tomorrow to keep the streak.');
