@@ -1,0 +1,1380 @@
+<title>Airtel Benefits Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* ============================================================
+   TOKENS — light is the base; dark redefines tokens only.
+   Neutrals are warm (red-biased) so they sit under Airtel red.
+   Brand red is identity + primary action. Urgency is ember,
+   a separate semantic hue, so the page never turns all-red.
+   ============================================================ */
+:root{
+  color-scheme:light;
+  --paper:#FBF7F5;
+  --surface:#FFFFFF;
+  --surface-2:#F5EFEC;
+  --surface-3:#EDE4DF;
+  --ink:#191110;
+  --ink-2:#5C4F4A;
+  --ink-3:#8D7C76;
+  --line:#EADFD9;
+  --line-2:#DCCEC7;
+
+  --red:#E30613;
+  --red-deep:#C10510;
+  --red-ink:#B00512;
+  --red-wash:#FDECEC;
+
+  --ember:#D4530F;
+  --ember-ink:#B14409;
+  --ember-wash:#FCEDE3;
+  --green:#0E7A55;
+  --green-ink:#0B6446;
+  --green-wash:#E3F2EB;
+  --amber-wash:#FBF1DA;
+
+  --plum:#2A0B10;
+  --plum-2:#3D1219;
+  --gold:#C79141;
+  --gold-soft:#E7C68C;
+
+  --shadow-1:0 1px 2px rgba(60,30,25,.06);
+  --shadow-2:0 6px 18px -8px rgba(60,30,25,.20), 0 1px 2px rgba(60,30,25,.05);
+  --shadow-3:0 20px 44px -20px rgba(90,20,20,.34), 0 2px 6px rgba(60,30,25,.07);
+
+  --r-s:8px; --r-m:14px; --r-l:22px; --r-pill:999px;
+
+  --f-display:"Bricolage Grotesque","Figtree",system-ui,sans-serif;
+  --f-ui:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+
+  --gut:20px;
+  --chrome:#181110;
+  --chrome-ink:#F2E8E4;
+  --chrome-ink-2:#A2908A;
+  --chrome-line:#3A2A27;
+  --chrome-field:#241A18;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --paper:#141010;
+    --surface:#1D1817;
+    --surface-2:#251E1C;
+    --surface-3:#302825;
+    --ink:#F7F0ED;
+    --ink-2:#C5B5AF;
+    --ink-3:#93807A;
+    --line:#332927;
+    --line-2:#453936;
+    --red:#F0323D;
+    --red-deep:#FF4A54;
+    --red-ink:#FF8080;
+    --red-wash:#33181A;
+    --ember:#E8722F;
+    --ember-ink:#FF9C63;
+    --ember-wash:#331F16;
+    --green:#28A277;
+    --green-ink:#5FCBA1;
+    --green-wash:#132A22;
+    --amber-wash:#2E2415;
+    --plum:#20080C;
+    --plum-2:#341015;
+    --shadow-1:0 1px 2px rgba(0,0,0,.5);
+    --shadow-2:0 6px 18px -8px rgba(0,0,0,.6), 0 1px 2px rgba(0,0,0,.4);
+    --shadow-3:0 20px 44px -20px rgba(0,0,0,.75), 0 2px 6px rgba(0,0,0,.4);
+    --chrome:#0E0A09;
+    --chrome-field:#1E1615;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --paper:#141010;
+  --surface:#1D1817;
+  --surface-2:#251E1C;
+  --surface-3:#302825;
+  --ink:#F7F0ED;
+  --ink-2:#C5B5AF;
+  --ink-3:#93807A;
+  --line:#332927;
+  --line-2:#453936;
+  --red:#F0323D;
+  --red-deep:#FF4A54;
+  --red-ink:#FF8080;
+  --red-wash:#33181A;
+  --ember:#E8722F;
+  --ember-ink:#FF9C63;
+  --ember-wash:#331F16;
+  --green:#28A277;
+  --green-ink:#5FCBA1;
+  --green-wash:#132A22;
+  --amber-wash:#2E2415;
+  --plum:#20080C;
+  --plum-2:#341015;
+  --shadow-1:0 1px 2px rgba(0,0,0,.5);
+  --shadow-2:0 6px 18px -8px rgba(0,0,0,.6), 0 1px 2px rgba(0,0,0,.4);
+  --shadow-3:0 20px 44px -20px rgba(0,0,0,.75), 0 2px 6px rgba(0,0,0,.4);
+  --chrome:#0E0A09;
+  --chrome-field:#1E1615;
+}
+
+/* ---------- base ---------- */
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-ui);
+  -webkit-font-smoothing:antialiased;font-size:15px;line-height:1.5}
+h1,h2,h3,h4,p{margin:0}
+h1,h2,h3{text-wrap:balance;font-family:var(--f-display);letter-spacing:-.02em;line-height:1.05}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none}
+a{color:inherit;text-decoration:none}
+img,svg{max-width:100%}
+:focus-visible{outline:2.5px solid var(--red);outline-offset:2px;border-radius:4px}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.rupee{font-family:var(--f-display);font-variant-numeric:tabular-nums}
+
+/* ---------- prototype chrome (deliberately NOT the product) ---------- */
+.chrome{position:sticky;top:0;z-index:60;background:var(--chrome);color:var(--chrome-ink);
+  border-bottom:1px solid var(--chrome-line)}
+.chrome__in{max-width:1120px;margin:0 auto;padding:10px var(--gut);
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.chrome__label{font-family:var(--f-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--chrome-ink-2);display:flex;align-items:center;gap:7px}
+.chrome__dot{width:6px;height:6px;border-radius:50%;background:var(--red);box-shadow:0 0 0 3px rgba(227,6,19,.22)}
+.chrome__field{position:relative;display:flex;align-items:center}
+.chrome__field svg{position:absolute;right:10px;pointer-events:none;color:var(--chrome-ink-2)}
+.chrome select{appearance:none;background:var(--chrome-field);color:var(--chrome-ink);
+  border:1px solid var(--chrome-line);border-radius:var(--r-pill);padding:7px 32px 7px 14px;
+  font-size:13px;font-weight:600;min-height:36px}
+.chrome select:hover{border-color:#54403c}
+.chrome__note{font-size:12px;color:var(--chrome-ink-2);margin-left:auto;max-width:44ch}
+.chrome__note b{color:var(--chrome-ink);font-weight:600}
+@media (max-width:640px){.chrome__note{display:none}}
+
+/* ---------- product header ---------- */
+.head{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--paper) 88%,transparent);
+  backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:border-color .2s,background .2s}
+.head.is-stuck{border-bottom-color:var(--line)}
+.head__in{max-width:1120px;margin:0 auto;padding:12px var(--gut);display:flex;align-items:center;gap:12px}
+.brand{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:-.015em;font-size:16px}
+.brand__mark{width:26px;height:26px;border-radius:50%;background:var(--red);position:relative;flex:none}
+.brand__mark::after{content:"";position:absolute;inset:7px 5px 5px 7px;border-left:3.5px solid #fff;
+  border-bottom:3.5px solid #fff;border-bottom-left-radius:12px;transform:rotate(-45deg)}
+.brand__sep{width:1px;height:17px;background:var(--line-2)}
+.brand__page{font-weight:600;color:var(--ink-2);font-size:15px}
+.head__acts{margin-left:auto;display:flex;align-items:center;gap:6px}
+.iconbtn{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:var(--ink-2);
+  transition:background .15s,color .15s}
+.iconbtn:hover{background:var(--surface-2);color:var(--ink)}
+.avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(150deg,var(--red),#7C0410);
+  color:#fff;display:grid;place-items:center;font-size:12px;font-weight:700;letter-spacing:.02em}
+
+/* ---------- layout ---------- */
+.wrap{max-width:1120px;margin:0 auto;padding:0 var(--gut) 96px}
+.stack{display:flex;flex-direction:column;gap:clamp(28px,4.4vw,48px)}
+.sec{display:flex;flex-direction:column;gap:14px}
+.sec__head{display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap}
+.sec__title{font-size:19px;font-weight:700;letter-spacing:-.02em}
+.sec__sub{font-size:13px;color:var(--ink-3);margin-top:3px}
+.sec__link{margin-left:auto;font-size:13px;font-weight:600;color:var(--ink-2);white-space:nowrap;
+  display:flex;align-items:center;gap:4px}
+.sec__link:hover{color:var(--red)}
+.eyebrow{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-3)}
+.eyebrow--ember{color:var(--ember-ink)}
+
+/* ============================================================
+   HERO — seven distinct compositions, one per cohort state.
+   Not a shared shell with swapped copy: different geometry,
+   different surface, different supporting instrument.
+   ============================================================ */
+.hero{padding:26px 0 4px}
+.hero__eyebrow{margin-bottom:12px}
+
+/* default: earnings ledger */
+.hero--default .hero__grid{display:grid;gap:22px;grid-template-columns:1fr}
+@media (min-width:860px){.hero--default .hero__grid{grid-template-columns:1.15fr .85fr;align-items:end;gap:40px}}
+.hero__amount{display:flex;align-items:baseline;gap:4px;font-family:var(--f-display);font-weight:800;
+  letter-spacing:-.045em;font-size:clamp(3.4rem,13vw,5.4rem);line-height:.86}
+.hero__amount .cur{font-size:.5em;font-weight:700;letter-spacing:-.02em;transform:translateY(-.1em)}
+.hero__lede{font-size:clamp(1.05rem,3.4vw,1.3rem);font-weight:600;letter-spacing:-.015em;margin-top:14px;max-width:22ch}
+.hero__meta{font-size:13.5px;color:var(--ink-2);margin-top:7px}
+.hero__ledger{border-top:1px solid var(--line-2);display:flex;flex-direction:column}
+.led{display:flex;align-items:center;gap:12px;padding:11px 2px;border-bottom:1px solid var(--line)}
+.led__t{font-size:14px;font-weight:600}
+.led__s{font-size:11.5px;color:var(--ink-3)}
+.led__v{margin-left:auto;font-family:var(--f-mono);font-size:13px;font-weight:600}
+.led__dot{width:7px;height:7px;border-radius:50%;flex:none}
+
+/* welcome: streak */
+.hero--welcome .hero__panel{background:linear-gradient(168deg,var(--surface),var(--amber-wash));
+  border:1px solid var(--line);border-radius:var(--r-l);padding:26px 22px;box-shadow:var(--shadow-2)}
+.hero--welcome h1{font-size:clamp(1.9rem,7vw,2.7rem)}
+.streak{display:flex;gap:10px;margin-top:20px}
+.streak__day{flex:1;border-radius:var(--r-m);border:1px solid var(--line-2);background:var(--surface);
+  padding:12px 8px;text-align:center;position:relative;overflow:hidden}
+.streak__day.is-done{border-color:transparent;background:var(--green);color:#fff}
+.streak__day.is-today{border:1.5px dashed var(--red);background:var(--red-wash)}
+.streak__n{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.72}
+.streak__mark{font-size:20px;font-weight:700;line-height:1.2;font-family:var(--f-display)}
+.streak__day.is-today .streak__mark{color:var(--red-ink)}
+
+/* premium: plum */
+.hero--premium .hero__panel{background:linear-gradient(150deg,var(--plum-2),var(--plum));color:#F6EBE3;
+  border-radius:var(--r-l);padding:clamp(24px,4vw,38px);box-shadow:var(--shadow-3);
+  border:1px solid rgba(199,145,65,.28);position:relative;overflow:hidden}
+.hero--premium .hero__panel::after{content:"";position:absolute;right:-70px;top:-70px;width:240px;height:240px;
+  border-radius:50%;background:radial-gradient(circle,rgba(199,145,65,.30),transparent 68%)}
+.hero--premium h1{font-size:clamp(1.8rem,5.6vw,2.5rem);max-width:16ch}
+.hero--premium .hero__meta{color:#D9C4B8}
+.tier{display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(231,198,140,.4);
+  border-radius:var(--r-pill);padding:5px 12px;font-family:var(--f-mono);font-size:10.5px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:16px}
+.tier__gem{width:6px;height:6px;background:var(--gold);transform:rotate(45deg)}
+.prem__row{display:grid;gap:14px;grid-template-columns:repeat(3,1fr);margin-top:26px;
+  border-top:1px solid rgba(231,198,140,.22);padding-top:18px;position:relative}
+.prem__v{font-family:var(--f-display);font-size:clamp(1.1rem,4vw,1.5rem);font-weight:700;letter-spacing:-.03em}
+.prem__l{font-size:11px;color:#C9AFA3;margin-top:2px}
+
+/* urgent: countdown */
+.hero--urgent .hero__panel{display:grid;gap:20px;grid-template-columns:1fr;align-items:center;
+  background:var(--surface);border:1px solid var(--ember);border-radius:var(--r-l);
+  padding:22px;box-shadow:0 18px 40px -22px rgba(212,83,15,.55)}
+@media (min-width:720px){.hero--urgent .hero__panel{grid-template-columns:auto 1fr;gap:30px;padding:28px 32px}}
+.ring{width:132px;height:132px;position:relative;flex:none;margin:0 auto}
+.ring svg{transform:rotate(-90deg)}
+.ring__mid{position:absolute;inset:0;display:grid;place-content:center;text-align:center}
+.ring__n{font-family:var(--f-display);font-size:30px;font-weight:800;letter-spacing:-.04em;line-height:1}
+.ring__l{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--ember-ink);margin-top:4px}
+.hero--urgent h1{font-size:clamp(1.7rem,5.6vw,2.3rem)}
+
+/* success: recharge receipt */
+.hero--success .hero__panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-l);
+  box-shadow:var(--shadow-2);overflow:hidden}
+.receipt{display:flex;align-items:center;gap:14px;padding:18px 22px;background:var(--green-wash);
+  border-bottom:1px dashed var(--line-2)}
+.receipt__tick{width:36px;height:36px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;flex:none}
+.receipt__t{font-weight:700;letter-spacing:-.01em}
+.receipt__s{font-family:var(--f-mono);font-size:11.5px;color:var(--green-ink);margin-top:2px}
+.unlocked{padding:22px}
+.unlocked h1{font-size:clamp(1.6rem,5.4vw,2.15rem)}
+.rail{display:flex;gap:10px;overflow-x:auto;padding:16px 2px 4px;margin:0 -2px;scroll-snap-type:x mandatory;
+  scrollbar-width:thin}
+.rail>*{scroll-snap-align:start}
+
+/* lowdata: meter */
+.hero--lowdata .hero__panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-l);
+  padding:24px 22px;box-shadow:var(--shadow-2)}
+.meter{margin-top:20px}
+.meter__bar{height:12px;border-radius:var(--r-pill);background:var(--surface-3);overflow:hidden;position:relative}
+.meter__fill{height:100%;border-radius:var(--r-pill);background:linear-gradient(90deg,var(--ember),#EE8B3D);
+  width:4%;transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.meter__row{display:flex;justify-content:space-between;margin-top:8px;font-family:var(--f-mono);
+  font-size:11.5px;color:var(--ink-3);letter-spacing:.02em}
+.meter__row b{color:var(--ember-ink);font-weight:600}
+
+/* action: hellotune waveform */
+.hero--action .hero__panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-l);
+  padding:24px 22px;box-shadow:var(--shadow-2);position:relative;overflow:hidden}
+.wave{display:flex;align-items:flex-end;gap:3px;height:44px;margin-top:20px}
+.wave i{flex:1;background:linear-gradient(180deg,var(--red),#F2837F);border-radius:2px;opacity:.85;
+  animation:wv 1.5s ease-in-out infinite alternate}
+@keyframes wv{from{height:16%}to{height:100%}}
+
+/* ---------- controls ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:44px;padding:0 18px;
+  border-radius:var(--r-pill);font-weight:650;font-size:14.5px;letter-spacing:-.005em;
+  transition:transform .12s cubic-bezier(.2,.8,.2,1),box-shadow .18s,background .15s,border-color .15s;
+  border:1px solid transparent;white-space:nowrap}
+.btn:active{transform:translateY(1px) scale(.99)}
+.btn--primary{background:var(--red);color:#fff;box-shadow:0 6px 16px -8px rgba(227,6,19,.85)}
+.btn--primary:hover{background:var(--red-deep);box-shadow:0 10px 22px -9px rgba(227,6,19,.9)}
+.btn--ember{background:var(--ember);color:#fff;box-shadow:0 6px 16px -8px rgba(212,83,15,.85)}
+.btn--ember:hover{filter:brightness(1.06)}
+.btn--ghost{background:var(--surface);border-color:var(--line-2);color:var(--ink)}
+.btn--ghost:hover{border-color:var(--ink-3);background:var(--surface-2)}
+.btn--quiet{background:transparent;color:var(--ink-2);padding:0 12px;min-height:38px;font-size:13.5px}
+.btn--quiet:hover{color:var(--ink);background:var(--surface-2)}
+.btn--gold{background:var(--gold);color:#231007;box-shadow:0 6px 16px -9px rgba(199,145,65,.9)}
+.btn--gold:hover{filter:brightness(1.06)}
+.btn--sm{min-height:36px;font-size:13.5px;padding:0 14px}
+.btn--wide{width:100%}
+.btn[disabled]{opacity:.5;pointer-events:none}
+
+.chip{display:inline-flex;align-items:center;gap:5px;border-radius:var(--r-pill);padding:3px 9px;
+  font-family:var(--f-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:500}
+.chip--new{background:var(--red);color:#fff}
+.chip--urgent{background:var(--ember-wash);color:var(--ember-ink)}
+.chip--active{background:var(--green-wash);color:var(--green-ink)}
+.chip--muted{background:var(--surface-2);color:var(--ink-3)}
+.chip--gold{background:rgba(199,145,65,.16);color:var(--gold)}
+
+/* ---------- benefit cards: three weights, set by priority score ---------- */
+.grid{display:grid;gap:12px;grid-template-columns:1fr}
+@media (min-width:600px){.grid{grid-template-columns:1fr 1fr;gap:14px}}
+@media (min-width:960px){.grid{grid-template-columns:repeat(3,1fr)}}
+
+.card{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-m);
+  padding:16px;display:flex;flex-direction:column;gap:9px;box-shadow:var(--shadow-1);
+  transition:box-shadow .2s,border-color .2s,transform .2s}
+.card:hover{box-shadow:var(--shadow-2)}
+.card__top{display:flex;align-items:flex-start;gap:10px}
+.card__ico{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;flex:none;
+  background:var(--surface-2);color:var(--ink-2)}
+.card__ico--cash{background:var(--green-wash);color:var(--green-ink)}
+.card__ico--ott{background:var(--red-wash);color:var(--red-ink)}
+.card__ico--voucher{background:var(--amber-wash);color:#8A5D04}
+.card__ico--plan{background:var(--surface-3);color:var(--ink-2)}
+.card__ico--insider{background:rgba(199,145,65,.16);color:#966A26}
+.card__flags{margin-left:auto;display:flex;gap:6px;align-items:center}
+.card__title{font-size:16.5px;font-weight:700;letter-spacing:-.02em;font-family:var(--f-display)}
+.card__why{font-size:13px;color:var(--ink-2);line-height:1.45}
+.card__foot{margin-top:auto;padding-top:4px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.status{font-size:12.5px;font-weight:600}
+.status--ready{color:var(--green-ink)}
+.status--active{color:var(--green-ink)}
+.status--expiring{color:var(--ember-ink)}
+.status--locked{color:var(--ink-3)}
+.status--past{color:var(--ink-3)}
+.expiry{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-left:auto;letter-spacing:.02em}
+.expiry--hot{color:var(--ember-ink);font-weight:600}
+.card .btn{margin-top:6px}
+
+/* LEVEL 1: featured — one card, only when the engine says it dominates */
+.card--featured{padding:20px;border-color:transparent;box-shadow:var(--shadow-3);gap:11px}
+@media (min-width:600px){.card--featured{grid-column:span 2}}
+@media (min-width:960px){.card--featured{grid-column:span 2}}
+.card--featured .card__title{font-size:clamp(1.35rem,4.4vw,1.75rem)}
+.card--featured .card__why{font-size:14px;max-width:44ch}
+.card--featured::before{content:"";position:absolute;inset:0;border-radius:var(--r-m);padding:1.5px;
+  background:linear-gradient(140deg,var(--ember),rgba(212,83,15,.15));pointer-events:none;
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.card--featured.tone-red::before{background:linear-gradient(140deg,var(--red),rgba(227,6,19,.12))}
+.card--featured.tone-green::before{background:linear-gradient(140deg,var(--green),rgba(14,122,85,.12))}
+.card--featured .card__ico{width:40px;height:40px;border-radius:12px}
+
+/* LEVEL 3: quiet — passive benefits become rows, not cards */
+.card--quiet{background:transparent;border:0;border-bottom:1px solid var(--line);border-radius:0;
+  box-shadow:none;padding:13px 2px;flex-direction:row;align-items:center;gap:12px}
+.card--quiet:hover{box-shadow:none;background:var(--surface-2);border-radius:var(--r-s)}
+.card--quiet .card__ico{width:30px;height:30px;border-radius:9px}
+.card--quiet .card__body{min-width:0;flex:1}
+.card--quiet .card__title{font-size:14.5px;font-family:var(--f-ui);font-weight:650}
+.card--quiet .card__why{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card--quiet .card__foot{margin:0;padding:0}
+.card--quiet .btn{margin:0}
+@media (min-width:600px){.card--quiet{grid-column:1/-1}}
+.card--past{opacity:.62}
+.card--past:hover{opacity:.85}
+
+/* ---------- filter bar ---------- */
+.filters{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.search{position:relative;flex:1;min-width:180px}
+.search input{width:100%;min-height:42px;border-radius:var(--r-pill);border:1px solid var(--line-2);
+  background:var(--surface);padding:0 14px 0 38px;font-size:14px}
+.search input::placeholder{color:var(--ink-3)}
+.search svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--ink-3);pointer-events:none}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{border-radius:var(--r-pill);border:1px solid var(--line-2);background:var(--surface);
+  padding:8px 13px;font-size:13px;font-weight:600;color:var(--ink-2);white-space:nowrap;min-height:38px;
+  transition:background .15s,color .15s,border-color .15s}
+.tab:hover{border-color:var(--ink-3)}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.tab__n{font-family:var(--f-mono);font-size:10.5px;opacity:.7;margin-left:4px}
+.empty{padding:28px 16px;text-align:center;color:var(--ink-3);font-size:13.5px;
+  border:1px dashed var(--line-2);border-radius:var(--r-m)}
+
+/* ---------- gamification ---------- */
+.play{display:grid;gap:14px;grid-template-columns:1fr}
+@media (min-width:720px){.play{grid-template-columns:1.05fr .95fr}}
+.play__card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-m);
+  padding:18px;display:flex;flex-direction:column;gap:12px;box-shadow:var(--shadow-1)}
+.play__head{display:flex;align-items:center;gap:9px}
+.play__t{font-weight:700;font-size:15.5px;letter-spacing:-.015em}
+.play__s{font-size:12.5px;color:var(--ink-3)}
+.scratch{position:relative;height:150px;border-radius:var(--r-m);overflow:hidden;background:
+  linear-gradient(135deg,var(--red) 0%,#A50410 55%,#6E0209 100%);display:grid;place-items:center;text-align:center}
+.scratch__prize{position:absolute;inset:0;display:grid;place-content:center;gap:4px;text-align:center;
+  background:var(--surface);color:var(--ink)}
+.scratch__amt{font-family:var(--f-display);font-size:34px;font-weight:800;letter-spacing:-.04em}
+.scratch__lbl{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--green-ink)}
+.scratch canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:grab}
+.scratch canvas:active{cursor:grabbing}
+.scratch__hint{position:absolute;color:#fff;font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;pointer-events:none;text-shadow:0 1px 6px rgba(0,0,0,.4)}
+.scratch.is-open canvas,.scratch.is-open .scratch__hint{display:none}
+
+.wheel-wrap{display:grid;place-items:center;gap:12px;padding:4px 0}
+.wheel-outer{position:relative;width:170px;height:170px}
+.wheel{width:170px;height:170px;border-radius:50%;position:relative;
+  transition:transform 4.2s cubic-bezier(.12,.72,.06,1);border:6px solid var(--surface);
+  box-shadow:0 0 0 1px var(--line-2),var(--shadow-2)}
+.wheel__lbl{position:absolute;left:50%;top:50%;transform-origin:0 0;font-family:var(--f-mono);
+  font-size:9.5px;font-weight:600;letter-spacing:.02em;color:#fff;white-space:nowrap;text-shadow:0 1px 2px rgba(0,0,0,.35)}
+.wheel__hub{position:absolute;inset:50% auto auto 50%;transform:translate(-50%,-50%);width:40px;height:40px;
+  border-radius:50%;background:var(--surface);border:1px solid var(--line-2);display:grid;place-items:center;
+  font-family:var(--f-mono);font-size:9px;letter-spacing:.1em;color:var(--ink-3);z-index:2}
+.wheel__pin{position:absolute;left:50%;top:-4px;transform:translateX(-50%);width:0;height:0;
+  border-left:8px solid transparent;border-right:8px solid transparent;border-top:14px solid var(--ink);z-index:3}
+.wheel__out{font-size:13px;color:var(--ink-2);text-align:center;min-height:20px}
+.wheel__out b{color:var(--ink);font-weight:700}
+
+.task{display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid var(--line)}
+.task:last-child{border-bottom:0}
+.task__box{width:20px;height:20px;border-radius:6px;border:1.5px solid var(--line-2);flex:none;display:grid;place-items:center}
+.task.is-done .task__box{background:var(--green);border-color:var(--green);color:#fff}
+.task__t{font-size:14px;font-weight:600}
+.task.is-done .task__t{color:var(--ink-3);text-decoration:line-through}
+.task__r{margin-left:auto;font-family:var(--f-mono);font-size:11.5px;color:var(--ink-3)}
+
+/* ---------- extras ---------- */
+.extras{display:grid;gap:14px;grid-template-columns:1fr}
+@media (min-width:680px){.extras{grid-template-columns:1fr 1fr}}
+.xcard{border-radius:var(--r-m);padding:20px;display:flex;flex-direction:column;gap:5px;
+  border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow-1);position:relative;overflow:hidden}
+.xcard__v{font-family:var(--f-display);font-size:clamp(1.8rem,6vw,2.3rem);font-weight:800;letter-spacing:-.04em;margin-top:6px}
+.xcard__s{font-size:13px;color:var(--ink-2)}
+.xcard .btn{margin-top:14px;align-self:flex-start}
+.xcard--coins{background:linear-gradient(150deg,var(--surface),var(--amber-wash));border-color:#E8D6AE}
+.xcard--coins .xcard__v{color:#8A5D04}
+.coinstack{position:absolute;right:-18px;bottom:-18px;opacity:.16;color:#8A5D04}
+.subrow{display:flex;align-items:center;margin-top:10px}
+.sublogo{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;font-weight:800;font-size:12px;
+  color:#fff;border:2px solid var(--surface);margin-right:-8px}
+
+/* ---------- activity ---------- */
+.act{display:flex;flex-direction:column}
+.act__row{display:flex;align-items:center;gap:12px;padding:12px 2px;border-bottom:1px solid var(--line)}
+.act__mark{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;flex:none;font-size:11px}
+.act__t{font-size:14px;font-weight:600}
+.act__s{font-size:11.5px;color:var(--ink-3);font-family:var(--f-mono)}
+.act__v{margin-left:auto;font-family:var(--f-mono);font-size:13px;color:var(--ink-2)}
+
+/* ---------- dialog + toast ---------- */
+.scrim{position:fixed;inset:0;background:rgba(25,17,16,.45);backdrop-filter:blur(3px);z-index:80;
+  display:grid;place-items:end center;padding:0;opacity:0;pointer-events:none;transition:opacity .22s}
+.scrim.is-open{opacity:1;pointer-events:auto}
+.scrim[hidden]{display:none}
+@media (min-width:640px){.scrim{place-items:center}}
+.sheet{width:100%;max-width:420px;background:var(--surface);border-radius:var(--r-l) var(--r-l) 0 0;
+  padding:24px 22px calc(24px + env(safe-area-inset-bottom));box-shadow:var(--shadow-3);
+  transform:translateY(14px);transition:transform .28s cubic-bezier(.2,.9,.2,1);border:1px solid var(--line)}
+@media (min-width:640px){.sheet{border-radius:var(--r-l);transform:translateY(10px) scale(.98)}}
+.scrim.is-open .sheet{transform:none}
+.sheet__grab{width:38px;height:4px;border-radius:2px;background:var(--line-2);margin:-8px auto 16px}
+@media (min-width:640px){.sheet__grab{display:none}}
+.sheet__ico{width:56px;height:56px;border-radius:18px;display:grid;place-items:center;margin-bottom:14px}
+.sheet h3{font-size:22px}
+.sheet__why{font-size:13.5px;color:var(--ink-2);margin-top:6px}
+.sheet__terms{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:8px}
+.trow{display:flex;gap:12px;font-size:12.5px;color:var(--ink-2)}
+.trow b{color:var(--ink);font-weight:600;margin-left:auto;font-family:var(--f-mono);font-size:12px}
+.sheet__acts{margin-top:20px;display:flex;flex-direction:column;gap:8px}
+.done{display:grid;place-items:center;text-align:center;gap:6px;padding:8px 0 4px}
+.done__tick{width:64px;height:64px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;
+  animation:pop .45s cubic-bezier(.2,1.5,.4,1)}
+@keyframes pop{0%{transform:scale(.5);opacity:0}60%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+.handoff{display:grid;place-items:center;gap:14px;padding:22px 0}
+.spinner{width:34px;height:34px;border-radius:50%;border:3px solid var(--line-2);border-top-color:var(--red);
+  animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+.toasts{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:90;display:flex;
+  flex-direction:column;gap:8px;width:calc(100% - 32px);max-width:400px;pointer-events:none}
+.toast{background:var(--ink);color:var(--paper);border-radius:var(--r-m);padding:12px 15px;font-size:13.5px;
+  font-weight:550;box-shadow:var(--shadow-3);display:flex;align-items:center;gap:10px;
+  animation:tin .3s cubic-bezier(.2,.9,.2,1)}
+.toast b{font-weight:700}
+@keyframes tin{from{transform:translateY(14px);opacity:0}}
+.toast__t{width:20px;height:20px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;flex:none}
+
+/* ---------- motion ---------- */
+@keyframes rise{from{opacity:0;transform:translateY(10px)}}
+.sec{animation:rise .38s cubic-bezier(.2,.8,.2,1) both}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:95}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;
+    transition-duration:.001ms!important;scroll-behavior:auto!important}
+  .wave i{height:60%}
+}
+</style>
+
+<!-- ============ PROTOTYPE CHROME (demo control, not the product) ============ -->
+<div class="chrome">
+  <div class="chrome__in">
+    <span class="chrome__label"><span class="chrome__dot"></span>Preview experience</span>
+    <div class="chrome__field">
+      <label class="sr" for="cohort">Preview cohort</label>
+      <select id="cohort">
+        <option value="active">Default — Active customer</option>
+        <option value="dormant">Cohort A — Dormant / low engagement</option>
+        <option value="voice">Cohort B — Prepaid voice-only</option>
+        <option value="arpu">Cohort C — High-ARPU Fiber / Postpaid</option>
+        <option value="data">Cohort D — Data-exhausted</option>
+        <option value="expiring">State — Expiring benefits</option>
+        <option value="recharged">State — Just recharged</option>
+      </select>
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+    </div>
+    <p class="chrome__note" id="chromeNote"></p>
+  </div>
+</div>
+
+<!-- ============ PRODUCT ============ -->
+<header class="head" id="head">
+  <div class="head__in">
+    <a class="brand" href="#hub"><span class="brand__mark" aria-hidden="true"></span>airtel</a>
+    <span class="brand__sep" aria-hidden="true"></span>
+    <span class="brand__page">Benefits</span>
+    <div class="head__acts">
+      <button class="iconbtn" id="searchJump" aria-label="Search benefits">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
+      </button>
+      <button class="iconbtn" aria-label="Account"><span class="avatar" aria-hidden="true">RS</span></button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap" id="hub"><div class="stack" id="stack"></div></main>
+
+<div class="scrim" id="scrim" role="dialog" aria-modal="true" aria-labelledby="sheetTitle" hidden>
+  <div class="sheet" id="sheet"></div>
+</div>
+<div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+
+<script>
+/* ============================================================================
+   AIRTEL UNIFIED BENEFITS HUB — prototype
+   Architecture (single-file port of the component tree):
+     rewardData      → BENEFITS, ACTIVITY, SUBS
+     cohortConfig    → COHORTS (hero variant, section order, weights, nudge)
+     priorityEngine  → score() + rank()
+     components      → Hero*, PrioritySection, BenefitCard, BenefitGrid,
+                       FilterBar, GamifiedReward(ScratchCard, SpinWheel),
+                       CoinsCard, SubscriptionsCard, ActivitySection,
+                       ClaimDialog, ToastFeedback
+   ========================================================================== */
+
+/* ---------------------------- icons ---------------------------- */
+const I = {
+  cash:'<path d="M7 7h10M7 11h10M9 7c3 0 5 2 5 5s-2 5-5 5h6"/>',
+  ott:'<rect x="2.5" y="4.5" width="19" height="15" rx="3"/><path d="m10 9.5 5 2.5-5 2.5z"/>',
+  voucher:'<path d="M3 8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4z"/><path d="M14 6v2M14 11v2M14 16v2"/>',
+  plan:'<path d="M4 20V10M10 20V4M16 20v-8M22 20h-2"/>',
+  insider:'<path d="m12 3 2.6 5.6 6 .8-4.4 4.2 1.1 6.1L12 16.8 6.7 19.7l1.1-6.1L3.4 9.4l6-.8z"/>',
+  game:'<path d="M12 3v18M3 12h18M6.5 6.5l11 11M17.5 6.5l-11 11"/>',
+  music:'<path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/>',
+  coin:'<circle cx="12" cy="12" r="8.5"/><path d="M9.5 9.5h5M9.5 12h5M11 9.5c2 0 3 1 3 2.5s-1 2.5-3 2.5h3.5"/>',
+  sub:'<rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10.5 18.5h3"/>',
+  clock:'<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>',
+  tick:'<path d="m5 12.5 4.5 4.5L19 7"/>',
+  arrow:'<path d="M5 12h13M13 6.5 18.5 12 13 17.5"/>',
+  zap:'<path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/>',
+  wifi:'<path d="M2.5 9a15 15 0 0 1 19 0M6 12.7a10 10 0 0 1 12 0M9.5 16.4a5 5 0 0 1 5 0"/><circle cx="12" cy="20" r="1"/>',
+  gift:'<path d="M20 12v9H4v-9M2 7h20v5H2zM12 21V7M12 7H7.5a2.5 2.5 0 1 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 1 0 0-5C13 2 12 7 12 7z"/>',
+  sparkle:'<path d="M12 3v6M12 15v6M3 12h6M15 12h6M6.5 6.5l3 3M14.5 14.5l3 3M17.5 6.5l-3 3M9.5 14.5l-3 3"/>',
+  users:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 5.2a3.5 3.5 0 0 1 0 5.6M18 20a6.6 6.6 0 0 0-2-4.7"/>',
+  card:'<rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19M6 15h3"/>'
+};
+const ico = (n,s=18,w=1.9) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[n]||I.gift}</svg>`;
+const money = n => '₹' + n.toLocaleString('en-IN');
+
+/* ================================ rewardData.ts ============================ */
+/* A benefit answers, in this order: WHAT · WHY · STATUS · EXPIRY · ACTION.    */
+const B = {
+  cash100:   {id:'cash100',   type:'cash',    title:'₹100 Cashback',            why:'Unlocked with your ₹599 recharge',           state:'ready',  value:100,  exp:0,  isNew:true,  tags:['recharge','money'], cta:'Claim now', to:'Airtel Payments Bank'},
+  ott599:    {id:'ott599',    type:'ott',     title:'1 month Sony LIV',         why:'Unlocked with your ₹599 recharge',           state:'ready',  value:299,  exp:5,  isNew:true,  tags:['recharge','entertainment'], cta:'Activate', partner:true},
+  shop50:    {id:'shop50',    type:'voucher', title:'₹50 Shopping voucher',     why:'Unlocked with your ₹599 recharge',           state:'ready',  value:50,   exp:14, isNew:true,  tags:['recharge','shopping'], cta:'Claim now'},
+  myntra:    {id:'myntra',    type:'voucher', title:'₹500 Myntra voucher',      why:'Airtel Insider reward · Level 3',            state:'ready',  value:500,  exp:2,  tags:['shopping'], cta:'Use now', partner:true},
+  mmt:       {id:'mmt',       type:'insider', title:'₹1,500 off MakeMyTrip',    why:'Insider benefit for 4 years with Airtel',    state:'ready',  value:1500, exp:9,  tags:['travel','premium'], cta:'Use now', partner:true},
+  xstream:   {id:'xstream',   type:'ott',     title:'Airtel Xstream Play',      why:'Included in your plan · 22 apps',            state:'active', value:149,  exp:32, tags:['entertainment'], cta:'Open'},
+  netflix:   {id:'netflix',   type:'ott',     title:'Netflix Basic',            why:'Included with your ₹1,199 postpaid plan',    state:'active', value:199,  exp:26, tags:['entertainment','premium'], cta:'Open'},
+  wynk:      {id:'wynk',      type:'ott',     title:'Wynk Music Premium',       why:'Free with your prepaid pack',                state:'active', value:99,   exp:58, tags:['music'], cta:'Open'},
+  fiber:     {id:'fiber',     type:'plan',    title:'Speed boost · 300 Mbps',   why:'Active on your Fiber connection till 30 Sep',state:'active', value:0,    exp:20, tags:['premium','fiber'], cta:'Manage'},
+  shield:    {id:'shield',    type:'insider', title:'Device Shield cover',      why:'Airtel Black benefit · ₹40,000 cover',       state:'active', value:0,    exp:120,tags:['premium'], cta:'View policy'},
+  talktime:  {id:'talktime',  type:'plan',    title:'₹30 talktime',             why:'Set a HelloTune to unlock this reward',      state:'locked', value:30,   exp:null, tags:['music','engagement'], cta:'Set up HelloTune'},
+  autopay:   {id:'autopay',   type:'cash',    title:'₹50 off every month',      why:'Turn on AutoPay for your Fiber bill',        state:'locked', value:600,  exp:null, tags:['premium','billing'], cta:'Set up AutoPay'},
+  family:    {id:'family',    type:'plan',    title:'Add 3 members free',       why:'Link family accounts to your Airtel Black',  state:'locked', value:0,    exp:null, tags:['premium','family'], cta:'Link accounts'},
+  minidata:  {id:'minidata',  type:'plan',    title:'1 GB data, on us',         why:'Recharge ₹19 or more in the app today',      state:'locked', value:19,   exp:null, tags:['data'], cta:'Recharge & unlock'},
+  comeback:  {id:'comeback',  type:'cash',    title:'₹20 cashback',             why:'Waiting for you since 28 Aug',               state:'ready',  value:20,   exp:6,  tags:['money'], cta:'Claim now'},
+  spin:      {id:'spin',      type:'game',    title:'Spin & Win',               why:"Complete today's challenge to unlock",       state:'locked', value:0,    exp:null, tags:['game'], cta:'Unlock'},
+  amazon:    {id:'amazon',    type:'voucher', title:'Amazon ₹500 voucher',      why:'Used on 3 Sep · order #4471',                state:'used',   value:500,  exp:null, tags:['shopping']},
+  oldcash:   {id:'oldcash',   type:'cash',    title:'₹100 Cashback',            why:'Expired 8 Sep · unclaimed for 30 days',      state:'expired',value:100,  exp:null, tags:['money'], cta:'View details'}
+};
+
+const ACTIVITY = [
+  {t:'₹75 Cashback',            s:'Claimed · 6 Sep',  v:'+₹75',  k:'ok'},
+  {t:'Zomato ₹150 voucher',     s:'Used · 3 Sep',     v:'−₹150', k:'ok'},
+  {t:'Airtel Xstream · 1 month', s:'Activated · 1 Sep',v:'₹149',  k:'ok'},
+  {t:'₹100 Cashback',           s:'Expired · 8 Sep',  v:'lapsed',k:'bad'}
+];
+const SUBS = [{n:'Netflix',c:'#E50914'},{n:'Xstream',c:'#E30613'},{n:'Wynk',c:'#0B7C6B'}];
+
+/* ============================== cohortConfig.ts ============================
+   Each cohort changes SIX things, not just copy:
+   hero composition · section order · which benefits exist · relevance tags ·
+   priority weights · the one recommended action.
+   ========================================================================== */
+const COHORTS = {
+  active: {
+    label:'Active customer',
+    note:'The default hub. Priority engine leads with what needs action; everything else falls in behind it.',
+    hero:'default',
+    sections:['hero','attention','benefits','earn','extras','activity'],
+    ids:['cash100','myntra','ott599','xstream','netflix','mmt','shop50','wynk','spin','amazon','oldcash'],
+    relevant:['entertainment','shopping','money'],
+    weights:{urgency:.30,recency:.20,relevance:.15,value:.20,engage:.15},
+    copy:{attention:'Needs your attention', attentionSub:'Two of these run out this week'}
+  },
+  dormant: {
+    label:'Dormant / low engagement',
+    note:'Re-engagement first. The catalogue is deliberately trimmed — one streak, one reward, nothing else competing.',
+    hero:'welcome',
+    sections:['hero','challenge','benefits','earn','extras'],
+    ids:['comeback','wynk','spin'],
+    relevant:['engagement','game'],
+    weights:{urgency:.15,recency:.10,relevance:.25,value:.15,engage:.35},
+    copy:{benefits:'Benefits waiting for you', benefitsSub:'Still yours, nothing expired yet'}
+  },
+  voice: {
+    label:'Prepaid voice-only',
+    note:'No data pack, no OTT habit. The hub leads with the one action this user is actually likely to take.',
+    hero:'action',
+    sections:['hero','recommend','benefits','earn','extras'],
+    ids:['talktime','wynk','comeback','spin','amazon'],
+    relevant:['music','engagement'],
+    weights:{urgency:.15,recency:.10,relevance:.35,value:.10,engage:.30},
+    copy:{benefits:'What you already have', recommend:'Because you call more than you stream'}
+  },
+  arpu: {
+    label:'High-ARPU Fiber / Postpaid',
+    note:'This user already holds real value. Premium surface, benefits stated as facts, action framed as "get more".',
+    hero:'premium',
+    sections:['hero','recommend','benefits','extras','activity'],
+    ids:['autopay','family','netflix','fiber','shield','mmt','xstream'],
+    relevant:['premium','fiber','family'],
+    weights:{urgency:.15,recency:.10,relevance:.30,value:.30,engage:.15},
+    copy:{benefits:'Active on your account', recommend:'Get more from your Airtel plan', benefitsSub:'Airtel Black · 3 services on one bill'}
+  },
+  data: {
+    label:'Data-exhausted',
+    note:'Third exhaustion this month. The reward is framed as the fix, not as an upsell.',
+    hero:'lowdata',
+    sections:['hero','recommend','attention','benefits','earn'],
+    ids:['minidata','cash100','wynk','xstream','spin'],
+    relevant:['data'],
+    weights:{urgency:.20,recency:.15,relevance:.35,value:.15,engage:.15},
+    copy:{recommend:'Recommended for you right now', attention:'Also waiting for you'}
+  },
+  expiring: {
+    label:'Benefits expiring today',
+    note:'Urgency is spent on two cards only — the rest of the page stays calm so the warning still reads as a warning.',
+    hero:'urgent',
+    sections:['hero','attention','benefits','extras','activity'],
+    ids:['cash100','myntra','ott599','xstream','netflix','shop50','wynk','amazon','oldcash'],
+    relevant:['money','shopping'],
+    weights:{urgency:.55,recency:.10,relevance:.10,value:.15,engage:.10},
+    copy:{attention:'Use these before they expire', attentionSub:'After this they are gone — no extension', benefits:'Your other benefits'}
+  },
+  recharged: {
+    label:'Just recharged · ₹599',
+    note:'The post-transaction moment the BRD is built around: the user sees what the recharge earned before they leave the screen.',
+    hero:'success',
+    sections:['hero','attention','earn','benefits','extras'],
+    ids:['cash100','ott599','shop50','xstream','wynk','myntra','spin'],
+    relevant:['recharge'],
+    weights:{urgency:.20,recency:.40,relevance:.20,value:.10,engage:.10},
+    copy:{attention:'Claim what you just unlocked', attentionSub:'All three are already yours — one tap each', benefits:'Everything else you have'}
+  }
+};
+
+/* ============================== priorityEngine.ts ==========================
+   priorityScore = urgency · recency · userRelevance · rewardValue · engagement
+   Every factor is normalised 0–1, then weighted by the cohort. The score does
+   two jobs: it ORDERS the benefits, and it sets each card's VISUAL WEIGHT
+   (featured → standard → quiet), so prioritisation is visible, not just sorted.
+   ========================================================================== */
+const clamp01 = n => Math.max(0, Math.min(1, n));
+
+function score(b, cfg){
+  // Spent or lapsed benefits never compete for attention.
+  if (b.state === 'used' || b.state === 'expired') return 0.04;
+
+  // 1. Urgency — a 14-day runway; today = 1, anything further out decays fast.
+  const urgency  = b.exp === null ? 0 : clamp01(1 - b.exp / 14);
+  // 2. Recency — just-earned beats long-held, and unclaimed beats already-on.
+  const recency  = b.isNew ? 1 : (b.state === 'ready' ? .5 : .2);
+  // 3. Relevance — tag overlap with what this cohort actually cares about.
+  const hits     = b.tags.filter(t => cfg.relevant.includes(t)).length;
+  const relevance= clamp01(hits / 1.5);
+  // 4. Value — ₹ worth, flattened so one big voucher can't own the page.
+  const value    = clamp01(Math.sqrt(b.value) / 39);
+  // 5. Engagement opportunity — something still to unlock is a hook.
+  const engage   = b.state === 'locked' ? .95 : .2;
+
+  const w = cfg.weights;
+  return urgency*w.urgency + recency*w.recency + relevance*w.relevance
+       + value*w.value + engage*w.engage;
+}
+
+function rank(ids, cfg){
+  return ids.map(id => ({...B[id], _s: score(B[id], cfg)}))
+            .sort((a, b) => b._s - a._s);
+}
+// Visual weight bands. Only ONE card is ever allowed to be featured.
+function weightOf(b, i, top){
+  if (b.state === 'used' || b.state === 'expired') return 'past';
+  if (i === 0 && b._s >= .5 && b._s === top) return 'featured';
+  if (b._s < .3) return 'quiet';
+  return 'standard';
+}
+
+/* ================================ state ==================================== */
+const state = {
+  cohort:'active', filter:'all', q:'',
+  claimed:new Set(), activated:new Set(),
+  scratch:{open:false}, spin:{angle:0, result:null, spinning:false},
+  streak:1, tasks:{recharge:true, hellotune:false, refer:false}
+};
+const $  = s => document.querySelector(s);
+const el = html => { const t = document.createElement('template'); t.innerHTML = html.trim(); return t.content.firstElementChild; };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* live status: claiming/activating in this session rewrites the card state */
+function view(b){
+  const o = {...b};
+  if (state.claimed.has(b.id))   { o.state='used';   o.why='Claimed just now · added to your account'; o.cta=null; o.exp=null; o.isNew=false; }
+  if (state.activated.has(b.id)) { o.state='active'; o.why='Activated just now · ready to use'; o.cta='Open'; }
+  return o;
+}
+function expiryLabel(b){
+  if (b.exp === null || b.state==='used' || b.state==='expired') return '';
+  if (b.exp <= 0) return 'Expires today';
+  if (b.exp === 1) return 'Expires tomorrow';
+  if (b.exp <= 14) return `Expires in ${b.exp} days`;
+  return `Valid till ${new Date(2026, 8, 10 + b.exp).toLocaleDateString('en-IN',{day:'numeric',month:'short'})}`;
+}
+const STATUS = {
+  ready:   b => ['Ready to claim','ready'],
+  active:  b => ['Active','active'],
+  locked:  b => ['Not unlocked yet','locked'],
+  used:    b => ['Used','past'],
+  expired: b => ['Expired','past']
+};
+
+/* ============================= BenefitCard ================================= */
+function BenefitCard(raw, weight){
+  const b = raw, hot = b.exp !== null && b.exp <= 2 && (b.state==='ready'||b.state==='active');
+  const [stxt, skey] = (STATUS[b.state] || STATUS.ready)(b);
+  const status = hot && b.state !== 'locked' ? ['Expiring','expiring'] : [stxt, skey];
+  const tone = b.state==='locked' ? 'tone-red' : (hot ? '' : 'tone-green');
+  const exp = expiryLabel(b);
+  const btnKind = weight==='featured' ? (hot ? 'btn--ember' : 'btn--primary')
+                : b.state==='locked' ? 'btn--ghost' : (hot ? 'btn--ember' : 'btn--ghost');
+
+  if (weight === 'quiet' || weight === 'past'){
+    return el(`<article class="card card--quiet ${weight==='past'?'card--past':''}" data-flip="b-${b.id}">
+      <span class="card__ico card__ico--${b.type}">${ico(b.type==='cash'?'cash':b.type==='ott'?'ott':b.type==='voucher'?'voucher':b.type==='insider'?'insider':b.type==='game'?'game':'plan',16)}</span>
+      <div class="card__body">
+        <h3 class="card__title">${esc(b.title)}</h3>
+        <p class="card__why">${esc(b.why)}</p>
+      </div>
+      <div class="card__foot">
+        <span class="status status--${status[1]}">${status[0]}</span>
+        ${b.cta ? `<button class="btn btn--quiet" data-act="open" data-id="${b.id}">${esc(b.cta)}</button>` : ''}
+      </div>
+    </article>`);
+  }
+
+  return el(`<article class="card ${weight==='featured'?'card--featured '+tone:''}" data-flip="b-${b.id}">
+    <div class="card__top">
+      <span class="card__ico card__ico--${b.type}">${ico(b.type==='cash'?'cash':b.type==='ott'?'ott':b.type==='voucher'?'voucher':b.type==='insider'?'insider':b.type==='game'?'game':'plan', weight==='featured'?21:18)}</span>
+      <span class="card__flags">
+        ${b.isNew && b.state!=='used' ? '<span class="chip chip--new">New</span>' : ''}
+        ${hot ? `<span class="chip chip--urgent">${b.exp<=0?'Today':b.exp+'d left'}</span>` : ''}
+        ${b.state==='active' && !hot ? '<span class="chip chip--active">Active</span>' : ''}
+      </span>
+    </div>
+    <h3 class="card__title">${esc(b.title)}</h3>
+    <p class="card__why">${esc(b.why)}</p>
+    <div class="card__foot">
+      <span class="status status--${status[1]}">${status[0]}</span>
+      ${exp ? `<span class="expiry ${hot?'expiry--hot':''}">${exp}</span>` : ''}
+    </div>
+    ${b.cta ? `<button class="btn ${btnKind} ${weight==='featured'?'':'btn--sm'}" data-act="open" data-id="${b.id}">
+        ${esc(b.cta)} ${weight==='featured'?ico('arrow',17,2.2):''}</button>` : ''}
+  </article>`);
+}
+
+/* ================================= Hero ==================================== */
+function totals(cfg){
+  const list = cfg.ids.map(id => view(B[id]));
+  const own  = list.filter(b => b.state==='ready' || b.state==='active');
+  return {
+    value: own.reduce((n,b)=>n+b.value,0),
+    ready: list.filter(b=>b.state==='ready').length,
+    soon:  list.filter(b=>b.exp!==null && b.exp<=2 && b.state!=='used' && b.state!=='expired').length,
+    locked:list.filter(b=>b.state==='locked').length
+  };
+}
+
+const HEROES = {
+  /* Ledger: the number is the headline, the ledger proves it. */
+  default(cfg,t){
+    const rows = rank(cfg.ids,cfg).map(view).filter(b=>b.state==='ready'||b.state==='active').slice(0,3);
+    return `<section class="sec hero hero--default" data-flip="hero">
+      <p class="eyebrow hero__eyebrow">Your Airtel benefits · September</p>
+      <div class="hero__grid">
+        <div>
+          <div class="hero__amount"><span class="cur">₹</span>${t.value.toLocaleString('en-IN')}</div>
+          <p class="hero__lede">unlocked and sitting in your account right now.</p>
+          <p class="hero__meta"><b>${t.ready} ready to use</b> · ${t.soon} need attention this week</p>
+        </div>
+        <div class="hero__ledger">
+          ${rows.map(b=>`<div class="led">
+            <span class="led__dot" style="background:${b.state==='ready'?'var(--ember)':'var(--green)'}"></span>
+            <span><span class="led__t">${esc(b.title)}</span><br><span class="led__s">${b.state==='ready'?'Waiting to be claimed':'Active now'}</span></span>
+            <span class="led__v">${b.value?money(b.value):'—'}</span></div>`).join('')}
+        </div>
+      </div>
+    </section>`;
+  },
+  /* Streak: the reward is three days away and the page says so in one glance. */
+  welcome(cfg,t){
+    const days = [1,2,3].map(d=>{
+      const done = d < state.streak, today = d === state.streak;
+      return `<div class="streak__day ${done?'is-done':''} ${today?'is-today':''}">
+        <div class="streak__n">Day ${d}</div>
+        <div class="streak__mark">${done?'✓':today?'●':'○'}</div></div>`;
+    }).join('');
+    return `<section class="sec hero hero--welcome" data-flip="hero">
+      <div class="hero__panel">
+        <p class="eyebrow hero__eyebrow">It's been 34 days</p>
+        <h1>Welcome back 👋</h1>
+        <p class="hero__meta" style="margin-top:10px;max-width:32ch">Open the app 3 days in a row and we'll unlock a reward for you.</p>
+        <div class="streak">${days}</div>
+        <button class="btn btn--primary btn--wide" style="margin-top:18px" data-act="streak">
+          ${state.streak>3?'Reward unlocked':'Start today’s challenge'} ${ico('arrow',17,2.2)}</button>
+      </div>
+    </section>`;
+  },
+  /* Premium: dark plum, benefits stated as held facts, not offers. */
+  premium(cfg,t){
+    return `<section class="sec hero hero--premium" data-flip="hero">
+      <div class="hero__panel">
+        <span class="tier"><span class="tier__gem"></span>Airtel Black · 4 years</span>
+        <h1>Get more from your Airtel plan</h1>
+        <p class="hero__meta" style="margin-top:12px;max-width:36ch">You're already holding ${money(t.value)} of benefits across Fiber, postpaid and DTH. Two more are one tap away.</p>
+        <div class="prem__row">
+          <div><div class="prem__v">${money(t.value)}</div><div class="prem__l">Benefits held</div></div>
+          <div><div class="prem__v">3</div><div class="prem__l">Services, one bill</div></div>
+          <div><div class="prem__v">₹7,200</div><div class="prem__l">Saved this year</div></div>
+        </div>
+      </div>
+    </section>`;
+  },
+  /* Urgent: a countdown instrument, and urgency spent nowhere else. */
+  urgent(cfg,t){
+    const pct = 0.31, C = 2*Math.PI*56;
+    return `<section class="sec hero hero--urgent" data-flip="hero">
+      <div class="hero__panel">
+        <div class="ring">
+          <svg width="132" height="132" aria-hidden="true">
+            <circle cx="66" cy="66" r="56" fill="none" stroke="var(--ember-wash)" stroke-width="9"/>
+            <circle cx="66" cy="66" r="56" fill="none" stroke="var(--ember)" stroke-width="9" stroke-linecap="round"
+              stroke-dasharray="${C}" stroke-dashoffset="${C*(1-pct)}"/>
+          </svg>
+          <div class="ring__mid"><div class="ring__n mono">7h</div><div class="ring__l">left today</div></div>
+        </div>
+        <div>
+          <p class="eyebrow eyebrow--ember hero__eyebrow">${t.soon} benefits end at midnight</p>
+          <h1>Use these before they expire</h1>
+          <p class="hero__meta" style="margin-top:10px;max-width:34ch">${money(600)} of your benefits lapse tonight. Claiming takes one tap each — no code to copy.</p>
+          <button class="btn btn--ember" style="margin-top:16px" data-act="open" data-id="cash100">Claim ₹100 now ${ico('arrow',17,2.2)}</button>
+        </div>
+      </div>
+    </section>`;
+  },
+  /* Success: the recharge receipt, then immediately what it earned. */
+  success(cfg,t){
+    const fresh = ['cash100','ott599','shop50'].map(id=>view(B[id]));
+    return `<section class="sec hero hero--success" data-flip="hero">
+      <div class="hero__panel">
+        <div class="receipt">
+          <span class="receipt__tick">${ico('tick',18,2.6)}</span>
+          <div><div class="receipt__t">Recharge successful 🎉</div>
+          <div class="receipt__s">₹599 · 84 days · 2GB/day · 10 Sep, 4:12 PM</div></div>
+        </div>
+        <div class="unlocked">
+          <p class="eyebrow">And this is what it earned you</p>
+          <h1 style="margin-top:8px">You also unlocked 3 benefits</h1>
+          <p class="hero__meta" style="margin-top:8px">Worth ${money(449)}. Nothing to hunt for — they're already on your account.</p>
+          <div class="rail">
+            ${fresh.map(b=>`<div class="card" style="min-width:216px;flex:none">
+              <div class="card__top"><span class="card__ico card__ico--${b.type}">${ico(b.type==='cash'?'cash':b.type==='ott'?'ott':'voucher',18)}</span>
+              <span class="card__flags"><span class="chip chip--new">New</span></span></div>
+              <h3 class="card__title" style="font-size:15px">${esc(b.title)}</h3>
+              <div class="card__foot"><span class="status status--${b.state==='used'?'past':'ready'}">${b.state==='used'?'Claimed':'Ready to claim'}</span>
+              <span class="expiry">${expiryLabel(b)||''}</span></div>
+              ${b.cta?`<button class="btn btn--sm btn--ghost" data-act="open" data-id="${b.id}">${esc(b.cta)}</button>`:''}
+            </div>`).join('')}
+          </div>
+        </div>
+      </div>
+    </section>`;
+  },
+  /* Low data: the meter is the argument; the reward is the fix. */
+  lowdata(cfg,t){
+    return `<section class="sec hero hero--lowdata" data-flip="hero">
+      <div class="hero__panel">
+        <p class="eyebrow eyebrow--ember hero__eyebrow">${ico('wifi',12,2.4)} Third time this month</p>
+        <h1 style="font-size:clamp(1.7rem,5.6vw,2.3rem);margin-top:10px">You're running low on data</h1>
+        <div class="meter">
+          <div class="meter__bar"><div class="meter__fill" id="meterFill"></div></div>
+          <div class="meter__row"><span><b>0.08 GB left</b> of 2 GB today</span><span>Resets in 7h 12m</span></div>
+        </div>
+        <p class="hero__meta" style="margin-top:16px;max-width:36ch">Top up inside the app and we'll add <b>1 GB free</b> — app-only, today.</p>
+        <button class="btn btn--primary btn--wide" style="margin-top:14px" data-act="open" data-id="minidata">Recharge &amp; unlock ${ico('arrow',17,2.2)}</button>
+      </div>
+    </section>`;
+  },
+  /* Voice-only: a music instrument for a music action. */
+  action(cfg,t){
+    const bars = Array.from({length:26},(_,i)=>`<i style="animation-delay:${(i%7)*.12}s;height:${20+((i*37)%70)}%"></i>`).join('');
+    return `<section class="sec hero hero--action" data-flip="hero">
+      <div class="hero__panel">
+        <p class="eyebrow hero__eyebrow">${ico('music',12,2.2)} Picked for you</p>
+        <h1 style="font-size:clamp(1.75rem,5.8vw,2.4rem);margin-top:10px">Unlock a reward</h1>
+        <p class="hero__meta" style="margin-top:10px;max-width:32ch">Set a HelloTune on your number and we'll credit <b>₹30 talktime</b> — yours to keep.</p>
+        <div class="wave" aria-hidden="true">${bars}</div>
+        <button class="btn btn--primary btn--wide" style="margin-top:18px" data-act="open" data-id="talktime">Set up HelloTune ${ico('arrow',17,2.2)}</button>
+        <p class="hero__meta" style="margin-top:10px;font-size:12px;color:var(--ink-3)">Takes about 40 seconds · no charge on your pack</p>
+      </div>
+    </section>`;
+  }
+};
+
+/* ============================== sections =================================== */
+let inAttention = new Set();
+
+const SECTIONS = {
+  hero(cfg){ return el(HEROES[cfg.hero](cfg, totals(cfg))); },
+
+  /* PrioritySection — top of the engine's ranking, whatever that is today. */
+  attention(cfg){
+    const ranked = rank(cfg.ids,cfg).map(view)
+      .filter(b => b.state==='ready' || (b.state==='locked' && cfg.hero==='lowdata'));
+    const top = ranked.slice(0, cfg.hero==='success' ? 3 : 2);
+    inAttention = new Set(top.map(b=>b.id));
+    if (!top.length) return el('<section class="sec"></section>');
+    const best = top[0]?._s ?? 0;
+    const wrap = el(`<section class="sec" data-flip="attention">
+      <div class="sec__head"><div>
+        <h2 class="sec__title">${esc(cfg.copy?.attention || 'Needs your attention')}</h2>
+        <p class="sec__sub">${esc(cfg.copy?.attentionSub || 'Ranked by expiry, value and how recently you earned it')}</p>
+      </div></div>
+      <div class="grid"></div></section>`);
+    const g = wrap.querySelector('.grid');
+    top.forEach((b,i)=> g.appendChild(BenefitCard(b, weightOf(b,i,best))));
+    return wrap;
+  },
+
+  /* 3-day re-engagement streak (dormant only) */
+  challenge(cfg){
+    const done = state.streak > 3;
+    return el(`<section class="sec" data-flip="challenge">
+      <div class="sec__head"><div>
+        <h2 class="sec__title">Your 3-day challenge</h2>
+        <p class="sec__sub">${done?'Done — your reward is unlocked below.':`Day ${state.streak} of 3 · reward unlocks on day 3`}</p>
+      </div></div>
+      <div class="play__card">
+        <div class="task ${state.tasks.recharge?'is-done':''}"><span class="task__box">${ico('tick',13,3)}</span>
+          <span class="task__t">Open the app today</span><span class="task__r">Day ${Math.min(state.streak,3)}/3</span></div>
+        <div class="task ${done?'is-done':''}"><span class="task__box">${ico('tick',13,3)}</span>
+          <span class="task__t">Unlock: Spin &amp; Win</span><span class="task__r">${done?'Unlocked':'Locked'}</span></div>
+        <button class="btn ${done?'btn--ghost':'btn--primary'} btn--wide" data-act="${done?'scrollEarn':'streak'}">
+          ${done?'Go to Spin & Win':'Continue the challenge'}</button>
+      </div></section>`);
+  },
+
+  /* the one recommended action for this cohort */
+  recommend(cfg){
+    const primary = view(B[cfg.ids[0]]);
+    const extra   = state.cohort==='arpu' ? view(B.family) : null;
+    const wrap = el(`<section class="sec" data-flip="recommend">
+      <div class="sec__head"><div>
+        <h2 class="sec__title">${esc(cfg.copy?.recommend || 'Recommended for you')}</h2>
+        <p class="sec__sub">Based on how you've used Airtel in the last 30 days</p>
+      </div></div>
+      <div class="grid"></div></section>`);
+    const g = wrap.querySelector('.grid');
+    g.appendChild(BenefitCard(primary,'featured'));
+    if (extra) g.appendChild(BenefitCard(extra,'standard'));
+    inAttention = new Set([primary.id, extra?.id].filter(Boolean));
+    return wrap;
+  },
+
+  /* FilterBar + BenefitGrid */
+  benefits(cfg){
+    const filtering = state.filter !== 'all' || state.q.trim() !== '';
+    const all = rank(cfg.ids,cfg).map(view);
+    const counts = {
+      all: all.length,
+      ready: all.filter(b=>b.state==='ready').length,
+      active: all.filter(b=>b.state==='active').length,
+      expiring: all.filter(b=>b.exp!==null&&b.exp<=2&&(b.state==='ready'||b.state==='active')).length,
+      past: all.filter(b=>b.state==='used'||b.state==='expired').length
+    };
+    const q = state.q.trim().toLowerCase();
+    let list = all.filter(b=>{
+      if (!filtering && inAttention.has(b.id)) return false;   // no duplicate of the priority row
+      if (b.state === 'locked' && b.type === 'game') return false; // lives in Earn more
+      if (q && !(b.title+' '+b.why).toLowerCase().includes(q)) return false;
+      if (state.filter==='ready')    return b.state==='ready';
+      if (state.filter==='active')   return b.state==='active';
+      if (state.filter==='expiring') return b.exp!==null && b.exp<=2 && (b.state==='ready'||b.state==='active');
+      if (state.filter==='past')     return b.state==='used' || b.state==='expired';
+      return true;
+    });
+    const tab = (k,l,n) => `<button class="tab" role="tab" data-filter="${k}" aria-selected="${state.filter===k}">${l}<span class="tab__n">${n}</span></button>`;
+    const wrap = el(`<section class="sec" data-flip="benefits">
+      <div class="sec__head"><div>
+        <h2 class="sec__title">${esc(cfg.copy?.benefits || 'Your benefits')}</h2>
+        <p class="sec__sub">${esc(cfg.copy?.benefitsSub || 'Everything you hold right now, in one place')}</p>
+      </div></div>
+      <div class="filters">
+        <div class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
+          <input id="q" type="search" placeholder="Search benefits" value="${esc(state.q)}" aria-label="Search benefits"></div>
+        <div class="tabs" role="tablist" aria-label="Filter benefits">
+          ${tab('all','All',counts.all)}${tab('ready','Ready to use',counts.ready)}${tab('active','Active',counts.active)}${tab('expiring','Expiring',counts.expiring)}${tab('past','Used &amp; expired',counts.past)}
+        </div>
+      </div>
+      <div class="grid"></div></section>`);
+    const g = wrap.querySelector('.grid');
+    if (!list.length){
+      g.appendChild(el(`<div class="empty" style="grid-column:1/-1">Nothing here${q?` for “${esc(state.q)}”`:''}. Try “All”.</div>`));
+    } else {
+      const best = list[0]._s;
+      list.forEach((b,i)=>{
+        // inside the catalogue, never promote to featured — the priority row owns that weight
+        const w = weightOf(b,i,best);
+        g.appendChild(BenefitCard(b, w==='featured' ? 'standard' : w));
+      });
+    }
+    return wrap;
+  },
+
+  /* GamifiedReward: ScratchCard + SpinWheel, one module, same product */
+  earn(cfg){
+    const locked = state.streak <= 3 && state.cohort==='dormant';
+    const segs = [
+      {l:'₹10 cashback', c:'#E30613'},{l:'50 MB data', c:'#2A0B10'},
+      {l:'₹100 voucher', c:'#D4530F'},{l:'Better luck', c:'#5C4F4A'},
+      {l:'1 GB data',    c:'#0E7A55'},{l:'₹25 cashback', c:'#B0121F'}
+    ];
+    const step = 360/segs.length;
+    const grad = segs.map((s,i)=>`${s.c} ${i*step}deg ${(i+1)*step}deg`).join(',');
+    const labels = segs.map((s,i)=>`<span class="wheel__lbl" style="transform:rotate(${i*step+step/2-90}deg) translate(28px,-4px)">${s.l}</span>`).join('');
+
+    const wrap = el(`<section class="sec" data-flip="earn">
+      <div class="sec__head"><div>
+        <h2 class="sec__title">Earn more</h2>
+        <p class="sec__sub">Complete a task. Unlock a reward.</p>
+      </div><button class="sec__link" data-act="toast" data-msg="All challenges refresh at midnight.">All challenges ${ico('arrow',14,2.4)}</button></div>
+      <div class="play">
+        <div class="play__card">
+          <div class="play__head"><span class="card__ico card__ico--voucher">${ico('sparkle',17)}</span>
+            <div><div class="play__t">Today's scratch card</div><div class="play__s">${state.scratch.open?'Revealed — claim it below':'Earned with your last recharge'}</div></div></div>
+          <div class="scratch ${state.scratch.open?'is-open':''}" id="scratch">
+            <div class="scratch__prize"><div class="scratch__amt">₹100</div><div class="scratch__lbl">Cashback won</div></div>
+            <canvas id="scratchCanvas"></canvas>
+            <span class="scratch__hint">Scratch to reveal</span>
+          </div>
+          <button class="btn ${state.scratch.open?'btn--primary':'btn--ghost'} btn--wide" ${state.scratch.open?'':'disabled'} data-act="claimScratch">
+            ${state.scratch.open?'Redeem ₹100 now':'Scratch the card first'}</button>
+        </div>
+        <div class="play__card">
+          <div class="play__head"><span class="card__ico card__ico--ott">${ico('game',17)}</span>
+            <div><div class="play__t">Spin &amp; Win</div><div class="play__s">${locked?'Unlocks on day 3 of your challenge':'One free spin today'}</div></div></div>
+          <div class="wheel-wrap">
+            <div class="wheel-outer">
+              <span class="wheel__pin"></span>
+              <div class="wheel" id="wheel" style="background:conic-gradient(${grad});transform:rotate(${state.spin.angle}deg)">${labels}</div>
+              <span class="wheel__hub">SPIN</span>
+            </div>
+            <p class="wheel__out" id="spinOut">${state.spin.result?`You won <b>${state.spin.result}</b>`:'Land the pointer on a prize'}</p>
+          </div>
+          <button class="btn ${locked?'btn--ghost':'btn--primary'} btn--wide" ${locked||state.spin.result?'disabled':''} data-act="spin">
+            ${locked?'Locked':state.spin.result?'Come back tomorrow':'Play now'}</button>
+        </div>
+      </div></section>`);
+    return wrap;
+  },
+
+  /* CoinsCard + SubscriptionsCard */
+  extras(cfg){
+    return el(`<section class="sec" data-flip="extras">
+      <div class="sec__head"><div><h2 class="sec__title">Your Airtel extras</h2>
+        <p class="sec__sub">Coins and subscriptions, without leaving this page</p></div></div>
+      <div class="extras">
+        <div class="xcard xcard--coins">
+          <span class="coinstack">${ico('coin',120,1.2)}</span>
+          <span class="chip chip--gold">${ico('coin',12,2.2)} Airtel Coins</span>
+          <div class="xcard__v mono">2,450</div>
+          <p class="xcard__s">You've saved ${money(245)} with coins so far. 400 coins expire on 30 Sep.</p>
+          <button class="btn btn--sm btn--ghost" data-act="toast" data-msg="Coins wallet — 2,450 coins available.">View coins</button>
+        </div>
+        <div class="xcard">
+          <span class="chip chip--muted">${ico('sub',12,2.2)} Subscriptions</span>
+          <div class="xcard__v">3 active</div>
+          <p class="xcard__s">Netflix, Xstream Play and Wynk — all billed with your Airtel plan.</p>
+          <div class="subrow">${SUBS.map(s=>`<span class="sublogo" style="background:${s.c}" title="${s.n}">${s.n[0]}</span>`).join('')}</div>
+          <button class="btn btn--sm btn--ghost" data-act="toast" data-msg="Subscriptions — 3 active, next bill 28 Sep.">Manage subscriptions</button>
+        </div>
+      </div></section>`);
+  },
+
+  /* ActivitySection */
+  activity(cfg){
+    const rows = ACTIVITY.map(a=>`<div class="act__row">
+      <span class="act__mark" style="background:${a.k==='ok'?'var(--green-wash)':'var(--surface-2)'};color:${a.k==='ok'?'var(--green-ink)':'var(--ink-3)'}">${ico(a.k==='ok'?'tick':'clock',13,2.6)}</span>
+      <span><span class="act__t">${a.t}</span><br><span class="act__s">${a.s}</span></span>
+      <span class="act__v">${a.v}</span></div>`).join('');
+    return el(`<section class="sec" data-flip="activity">
+      <div class="sec__head"><div><h2 class="sec__title">Your activity</h2>
+        <p class="sec__sub">Claimed, used and expired — last 30 days</p></div>
+        <button class="sec__link" data-act="toast" data-msg="Full benefits history opened.">View history ${ico('arrow',14,2.4)}</button></div>
+      <div class="act">${rows}</div></section>`);
+  }
+};
+
+/* =============================== renderer ================================== */
+const stack = $('#stack');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function render(animate = true){
+  const cfg = COHORTS[state.cohort];
+  cfg.id = state.cohort;
+  const before = new Map();
+  if (animate && !reduce) stack.querySelectorAll('[data-flip]').forEach(n => before.set(n.dataset.flip, n.getBoundingClientRect()));
+
+  const focused = document.activeElement?.id === 'q';
+  const caret = focused ? $('#q').selectionStart : null;
+
+  inAttention = new Set();
+  stack.innerHTML = '';
+  cfg.sections.forEach((id, i) => {
+    const node = SECTIONS[id](cfg);
+    node.style.animationDelay = (animate && !reduce) ? `${i * 45}ms` : '0ms';
+    stack.appendChild(node);
+  });
+
+  // FLIP: sections that survive the cohort change slide to their new slot
+  if (animate && !reduce){
+    stack.querySelectorAll('[data-flip]').forEach(n => {
+      const b = before.get(n.dataset.flip); if (!b) return;
+      const a = n.getBoundingClientRect();
+      const dy = b.top - a.top, dx = b.left - a.left;
+      if (Math.abs(dy) < 2 && Math.abs(dx) < 2) return;
+      n.style.animation = 'none';
+      n.animate([{transform:`translate(${dx}px,${dy}px)`},{transform:'none'}],
+                {duration:460, easing:'cubic-bezier(.2,.85,.2,1)'});
+    });
+  }
+
+  if (focused){ const q = $('#q'); q.focus(); q.setSelectionRange(caret, caret); }
+  initScratch();
+  if (state.cohort === 'data') requestAnimationFrame(()=>{ const m = $('#meterFill'); if (m) m.style.width = '4%'; });
+  $('#chromeNote').innerHTML = `<b>${esc(cfg.label)}.</b> ${esc(cfg.note)}`;
+}
+
+/* ============================== ScratchCard ================================ */
+function initScratch(){
+  const box = $('#scratch'), cv = $('#scratchCanvas');
+  if (!cv || state.scratch.open) return;
+  const r = box.getBoundingClientRect(), dpr = Math.min(devicePixelRatio || 1, 2);
+  cv.width = r.width * dpr; cv.height = r.height * dpr;
+  const c = cv.getContext('2d');
+  c.scale(dpr, dpr);
+  const g = c.createLinearGradient(0, 0, r.width, r.height);
+  g.addColorStop(0, '#E30613'); g.addColorStop(.55, '#A50410'); g.addColorStop(1, '#6E0209');
+  c.fillStyle = g; c.fillRect(0, 0, r.width, r.height);
+  c.globalCompositeOperation = 'destination-out';
+  let drawing = false, cleared = 0;
+  const at = e => { const b = cv.getBoundingClientRect(); return [e.clientX - b.left, e.clientY - b.top]; };
+  const rub = e => {
+    if (!drawing) return;
+    const [x, y] = at(e);
+    c.beginPath(); c.arc(x, y, 22, 0, 7); c.fill();
+    if (++cleared % 9 === 0 && cleared > 16) check();
+  };
+  const check = () => {
+    const d = c.getImageData(0, 0, cv.width, cv.height).data;
+    let clear = 0; for (let i = 3; i < d.length; i += 4 * 40) if (d[i] === 0) clear++;
+    if (clear / (d.length / (4 * 40)) > .42) reveal();
+  };
+  const reveal = () => {
+    state.scratch.open = true; box.classList.add('is-open');
+    burst(box); toast('₹100 cashback revealed', 'Redeem it before 17 Sep.');
+    render(false);
+  };
+  cv.addEventListener('pointerdown', e => { drawing = true; cv.setPointerCapture(e.pointerId); rub(e); });
+  cv.addEventListener('pointermove', rub);
+  cv.addEventListener('pointerup', () => { drawing = false; check(); });
+  cv.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); reveal(); } });
+  cv.tabIndex = 0; cv.setAttribute('role','button'); cv.setAttribute('aria-label','Scratch card — press Enter to reveal your reward');
+}
+
+/* =============================== SpinWheel ================================= */
+function spin(){
+  if (state.spin.spinning || state.spin.result) return;
+  const segs = ['₹10 cashback','50 MB data','₹100 voucher','Better luck','1 GB data','₹25 cashback'];
+  const pick = 4;                                   // demo lands on "1 GB data"
+  const step = 360 / segs.length;
+  const target = 360 * 4 + (360 - (pick * step + step / 2));
+  state.spin.spinning = true;
+  const w = $('#wheel');
+  w.style.transform = `rotate(${target}deg)`;
+  const finish = () => {
+    state.spin.angle = target % 360; state.spin.result = segs[pick]; state.spin.spinning = false;
+    toast('You won 1 GB data', 'Added to your account instantly.');
+    burst($('#wheel'));
+    render(false);
+  };
+  reduce ? finish() : setTimeout(finish, 4300);
+}
+
+/* =============================== feedback ================================== */
+function toast(title, sub){
+  const t = el(`<div class="toast"><span class="toast__t">${ico('tick',12,3)}</span>
+    <span><b>${esc(title)}</b>${sub ? `<br><span style="opacity:.75">${esc(sub)}</span>` : ''}</span></div>`);
+  $('#toasts').appendChild(t);
+  setTimeout(() => { t.style.transition = 'opacity .3s, transform .3s'; t.style.opacity = '0'; t.style.transform = 'translateY(8px)'; setTimeout(() => t.remove(), 320); }, 3400);
+}
+function burst(anchor){
+  if (reduce || !anchor) return;
+  const r = anchor.getBoundingClientRect(), layer = el('<div class="confetti"></div>');
+  document.body.appendChild(layer);
+  const cols = ['#E30613','#D4530F','#0E7A55','#C79141'];
+  for (let i = 0; i < 22; i++){
+    const p = document.createElement('i');
+    p.style.cssText = `position:absolute;width:7px;height:11px;border-radius:2px;background:${cols[i%4]};
+      left:${r.left + r.width/2}px;top:${r.top + r.height/2}px`;
+    layer.appendChild(p);
+    p.animate([{transform:'translate(0,0) rotate(0)',opacity:1},
+      {transform:`translate(${(Math.random()-.5)*300}px,${-120 - Math.random()*160}px) rotate(${Math.random()*540}deg)`,opacity:0}],
+      {duration:900 + Math.random()*500, easing:'cubic-bezier(.15,.7,.3,1)'});
+  }
+  setTimeout(() => layer.remove(), 1500);
+}
+
+/* ============================== ClaimDialog ================================
+   One-tap claim. No coupon code to copy unless the partner has no SSO —
+   that fallback is shown only for the MakeMyTrip voucher.
+   ========================================================================== */
+const scrim = $('#scrim'), sheet = $('#sheet');
+let lastFocus = null, current = null;
+
+const toneOf = b => b.state==='locked' ? ['var(--red-wash)','var(--red-ink)']
+  : (b.exp !== null && b.exp <= 2) ? ['var(--ember-wash)','var(--ember-ink)'] : ['var(--green-wash)','var(--green-ink)'];
+
+function sheetConfirm(b){
+  const [bg, fg] = toneOf(b);
+  const action = b.state === 'locked' ? b.cta : (b.state === 'active' ? 'Open' : (b.type === 'ott' ? 'Activate now' : 'Claim benefit'));
+  const terms = [
+    ['What you get', b.value ? money(b.value) : 'Plan benefit'],
+    ['Why you have it', b.tags.includes('recharge') ? 'Recharge reward' : b.tags.includes('premium') ? 'Airtel Black' : b.tags.includes('engagement') ? 'Engagement reward' : 'Airtel Insider'],
+    ['Valid till', b.exp === null ? 'No expiry' : b.exp <= 0 ? 'Today, 11:59 PM' : new Date(2026, 8, 10 + b.exp).toLocaleDateString('en-IN', {day:'numeric', month:'short'})],
+    ['Where it applies', b.to || (b.partner ? 'Partner app · signed in automatically' : 'Airtel app & website')]
+  ];
+  return `<div class="sheet__grab"></div>
+    <div class="sheet__ico" style="background:${bg};color:${fg}">${ico(b.type==='cash'?'cash':b.type==='ott'?'ott':b.type==='voucher'?'voucher':b.type==='insider'?'insider':'plan',26,2)}</div>
+    <h3 id="sheetTitle">${esc(b.title)}</h3>
+    <p class="sheet__why">${esc(b.why)}</p>
+    <div class="sheet__terms">${terms.map(t=>`<div class="trow"><span>${t[0]}</span><b>${esc(t[1])}</b></div>`).join('')}</div>
+    <div class="sheet__acts">
+      <button class="btn ${b.exp!==null&&b.exp<=2?'btn--ember':'btn--primary'} btn--wide" data-act="confirm">${esc(action)}</button>
+      <button class="btn btn--quiet btn--wide" data-act="close">Not now</button>
+    </div>`;
+}
+function sheetHandoff(b){
+  return `<div class="sheet__grab"></div><div class="handoff"><div class="spinner"></div>
+    <p style="font-weight:650">Taking you to ${esc(b.id==='mmt'?'MakeMyTrip':b.id==='myntra'?'Myntra':b.id==='ott599'?'Sony LIV':'the partner')}…</p>
+    <p class="sheet__why" style="text-align:center;max-width:28ch">Signing you in with your Airtel number — no code to copy.</p></div>`;
+}
+function sheetDone(b){
+  const msg = b.state==='locked'
+    ? {t:'All set ✓', s: b.id==='talktime' ? 'HelloTune activated. ₹30 talktime is on its way.' : b.id==='autopay' ? 'AutoPay is on. ₹50 comes off every bill from October.' : b.id==='minidata' ? '1 GB added. It’s live on your number now.' : 'Unlocked. Your reward has been added.'}
+    : {t:'Claimed ✓', s:`${b.title} has been added to your account.`};
+  return `<div class="sheet__grab"></div><div class="done">
+      <span class="done__tick">${ico('tick',30,2.6)}</span>
+      <h3 id="sheetTitle" style="margin-top:10px">${msg.t}</h3>
+      <p class="sheet__why" style="max-width:30ch">${esc(msg.s)}</p></div>
+    ${b.id==='mmt' ? `<div class="sheet__terms"><div class="trow"><span>Coupon (fallback)</span><b>AIRTEL1500MMT</b></div></div>` : ''}
+    <div class="sheet__acts"><button class="btn btn--ghost btn--wide" data-act="close">Done</button></div>`;
+}
+function openSheet(id){
+  const b = view(B[id]); current = b; lastFocus = document.activeElement;
+  scrim.hidden = false; sheet.innerHTML = (b.state==='used'||b.state==='expired') ? sheetDone(b) : sheetConfirm(b);
+  requestAnimationFrame(()=>{ scrim.classList.add('is-open'); sheet.querySelector('.btn')?.focus(); });
+}
+function closeSheet(){
+  scrim.classList.remove('is-open');
+  setTimeout(()=>{ scrim.hidden = true; sheet.innerHTML=''; lastFocus?.focus?.(); }, 220);
+}
+function confirmSheet(){
+  const b = current; if (!b) return;
+  const finish = () => {
+    if (b.state === 'locked'){
+      if (b.id==='talktime') state.tasks.hellotune = true;
+      state.claimed.add(b.id);
+      toast('Unlocked', b.id==='minidata' ? '1 GB is live on your number.' : 'Your reward has been added.');
+    } else if (b.type === 'ott' || b.state === 'active'){
+      state.activated.add(b.id); toast('Activated', `${b.title} is ready to watch.`);
+    } else {
+      state.claimed.add(b.id); toast(`${b.title} claimed`, 'Added to your Airtel account.');
+    }
+    sheet.innerHTML = sheetDone(b);
+    sheet.querySelector('.btn')?.focus();
+    burst(sheet); render(false);
+  };
+  if (b.partner && b.state !== 'locked'){
+    sheet.innerHTML = sheetHandoff(b);
+    setTimeout(finish, reduce ? 0 : 1400);
+  } else finish();
+}
+
+/* =============================== events ==================================== */
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-act], [data-filter]');
+  if (!t) return;
+  const a = t.dataset.act;
+  if (t.dataset.filter){ state.filter = t.dataset.filter; render(false); return; }
+  if (a === 'open')        openSheet(t.dataset.id);
+  else if (a === 'close')  closeSheet();
+  else if (a === 'confirm')confirmSheet();
+  else if (a === 'spin')   spin();
+  else if (a === 'toast')  toast(t.dataset.msg);
+  else if (a === 'claimScratch'){ state.claimed.add('cash100'); toast('₹100 cashback claimed','Credited to Airtel Payments Bank.'); render(false); }
+  else if (a === 'streak'){ state.streak = Math.min(state.streak + 1, 4);
+    toast(state.streak > 3 ? 'Challenge complete' : `Day ${state.streak - 1} done`, state.streak > 3 ? 'Spin & Win is unlocked below.' : 'Come back tomorrow to keep the streak.');
+    render(); }
+  else if (a === 'scrollEarn') document.querySelector('[data-flip="earn"]')?.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block:'start'});
+});
+scrim.addEventListener('click', e => { if (e.target === scrim) closeSheet(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !scrim.hidden) closeSheet(); });
+document.addEventListener('input', e => { if (e.target.id === 'q'){ state.q = e.target.value; render(false); } });
+$('#cohort').addEventListener('change', e => {
+  state.cohort = e.target.value; state.filter = 'all'; state.q = '';
+  render(true); window.scrollTo({top:0, behavior: reduce ? 'auto' : 'smooth'});
+});
+$('#searchJump').addEventListener('click', () => {
+  document.querySelector('[data-flip="benefits"]')?.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block:'start'});
+  setTimeout(() => $('#q')?.focus(), reduce ? 0 : 380);
+});
+addEventListener('scroll', () => $('#head').classList.toggle('is-stuck', scrollY > 8), {passive:true});
+addEventListener('resize', () => { if (!state.scratch.open) initScratch(); });
+
+render(false);
+</script>
