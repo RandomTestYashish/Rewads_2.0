@@ -217,8 +217,9 @@ img,svg{max-width:100%}
 
 /* ---------- layout ---------- */
 .wrap{padding:0 var(--gut) 72px}
-.stack{display:flex;flex-direction:column;gap:clamp(26px,7cqw,34px)}
-.sec{display:flex;flex-direction:column;gap:14px}
+.stack{display:flex;flex-direction:column;gap:clamp(26px,7cqw,34px);min-width:0}
+.stack>*{min-width:0}
+.sec{display:flex;flex-direction:column;gap:14px;min-width:0}
 .sec__head{display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap}
 .sec__title{font-size:19px;font-weight:700;letter-spacing:-.02em}
 .sec__sub{font-size:13px;color:var(--ink-3);margin-top:3px}
@@ -244,10 +245,11 @@ img,svg{max-width:100%}
 .hero__lede{font-size:clamp(1.02rem,4.6cqw,1.18rem);font-weight:600;letter-spacing:-.015em;margin-top:14px;max-width:22ch}
 .hero__meta{font-size:13.5px;color:var(--ink-2);margin-top:7px}
 .hero__ledger{border-top:1px solid var(--line-2);display:flex;flex-direction:column}
-.led{display:flex;align-items:center;gap:12px;padding:11px 2px;border-bottom:1px solid var(--line)}
+.led{display:flex;align-items:center;gap:12px;padding:11px 2px;border-bottom:1px solid var(--line);min-width:0}
+.led>span{min-width:0}
 .led__t{font-size:14px;font-weight:600}
 .led__s{font-size:11.5px;color:var(--ink-3)}
-.led__v{margin-left:auto;font-family:var(--f-mono);font-size:13px;font-weight:600}
+.led__v{margin-left:auto;font-family:var(--f-mono);font-size:13px;font-weight:600;white-space:nowrap;flex:none}
 .led__dot{width:7px;height:7px;border-radius:50%;flex:none}
 
 /* welcome: streak */
@@ -275,10 +277,10 @@ img,svg{max-width:100%}
   border-radius:var(--r-pill);padding:5px 12px;font-family:var(--f-mono);font-size:10.5px;
   letter-spacing:.14em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:16px}
 .tier__gem{width:6px;height:6px;background:var(--gold);transform:rotate(45deg)}
-.prem__row{display:grid;gap:14px;grid-template-columns:repeat(3,1fr);margin-top:26px;
+.prem__row{display:grid;gap:12px;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:24px;
   border-top:1px solid rgba(231,198,140,.22);padding-top:18px;position:relative}
 .prem__v{font-family:var(--f-display);font-size:clamp(1.02rem,4.6cqw,1.25rem);font-weight:700;letter-spacing:-.03em}
-.prem__l{font-size:11px;color:#C9AFA3;margin-top:2px}
+.prem__l{font-size:10.5px;line-height:1.35;color:#C9AFA3;margin-top:3px}
 
 /* urgent: countdown */
 .hero--urgent .hero__panel{display:grid;gap:18px;justify-items:center;text-align:center;
@@ -302,8 +304,9 @@ img,svg{max-width:100%}
 .receipt__s{font-family:var(--f-mono);font-size:11.5px;color:var(--green-ink);margin-top:2px}
 .unlocked{padding:22px}
 .unlocked h1{font-size:clamp(1.5rem,6.6cqw,1.85rem)}
-.rail{display:flex;gap:10px;overflow-x:auto;padding:16px 2px 4px;margin:0 -2px;scroll-snap-type:x mandatory;
-  scrollbar-width:thin}
+.rail{display:flex;gap:10px;overflow-x:auto;padding:16px 22px 4px;margin-inline:-22px;
+  scroll-snap-type:x mandatory;scrollbar-width:none}
+.rail::-webkit-scrollbar{display:none}
 .rail>*{scroll-snap-align:start}
 
 /* lowdata: meter */
@@ -354,9 +357,10 @@ img,svg{max-width:100%}
 .chip--gold{background:rgba(199,145,65,.16);color:var(--gold)}
 
 /* ---------- benefit cards: three weights, set by priority score ---------- */
-.grid{display:grid;gap:11px;grid-template-columns:1fr}
+.grid{display:grid;gap:11px;grid-template-columns:minmax(0,1fr)}
+.grid>*{min-width:0}
 
-.card{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-m);
+.card{position:relative;min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-m);
   padding:16px;display:flex;flex-direction:column;gap:9px;box-shadow:var(--shadow-1);
   transition:box-shadow .2s,border-color .2s,transform .2s}
 .card:hover{box-shadow:var(--shadow-2)}
@@ -369,16 +373,18 @@ img,svg{max-width:100%}
 .card__ico--plan{background:var(--surface-3);color:var(--ink-2)}
 .card__ico--insider{background:rgba(199,145,65,.16);color:#966A26}
 .card__flags{margin-left:auto;display:flex;gap:6px;align-items:center}
-.card__title{font-size:16.5px;font-weight:700;letter-spacing:-.02em;font-family:var(--f-display)}
+.card__title{font-size:16.5px;font-weight:700;letter-spacing:-.02em;font-family:var(--f-display);
+  overflow-wrap:anywhere}
 .card__why{font-size:13px;color:var(--ink-2);line-height:1.45}
-.card__foot{margin-top:auto;padding-top:4px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.card__foot{margin-top:auto;padding-top:4px;display:flex;align-items:center;gap:6px 10px;flex-wrap:wrap;min-width:0}
 .status{font-size:12.5px;font-weight:600}
 .status--ready{color:var(--green-ink)}
 .status--active{color:var(--green-ink)}
 .status--expiring{color:var(--ember-ink)}
 .status--locked{color:var(--ink-3)}
 .status--past{color:var(--ink-3)}
-.expiry{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-left:auto;letter-spacing:.02em}
+.expiry{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-left:auto;letter-spacing:.02em;
+  white-space:nowrap}
 .expiry--hot{color:var(--ember-ink);font-weight:600}
 .card .btn{margin-top:6px}
 
@@ -399,7 +405,10 @@ img,svg{max-width:100%}
 .card--quiet:hover{box-shadow:none;background:var(--surface-2);border-radius:var(--r-s)}
 .card--quiet .card__ico{width:30px;height:30px;border-radius:9px}
 .card--quiet .card__body{min-width:0;flex:1}
-.card--quiet .card__title{font-size:14.5px;font-family:var(--f-ui);font-weight:650}
+.card--quiet .card__title{font-size:14.5px;font-family:var(--f-ui);font-weight:650;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card--quiet .card__foot{flex-wrap:nowrap;gap:8px;flex:none}
+.card--quiet .card__foot:has(.btn) .status{display:none}
 .card--quiet .card__why{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .card--quiet .card__foot{margin:0;padding:0}
 .card--quiet .btn{margin:0}
@@ -407,13 +416,14 @@ img,svg{max-width:100%}
 .card--past:hover{opacity:.85}
 
 /* ---------- filter bar ---------- */
-.filters{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.filters{display:flex;gap:10px;align-items:center;flex-wrap:wrap;min-width:0}
 .search{position:relative;flex:1;min-width:180px}
 .search input{width:100%;min-height:42px;border-radius:var(--r-pill);border:1px solid var(--line-2);
   background:var(--surface);padding:0 14px 0 38px;font-size:14px}
 .search input::placeholder{color:var(--ink-3)}
 .search svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--ink-3);pointer-events:none}
-.tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;width:100%;
+  margin-inline:calc(var(--gut)*-1);padding:0 var(--gut) 2px;-webkit-overflow-scrolling:touch}
 .tabs::-webkit-scrollbar{display:none}
 .tab{border-radius:var(--r-pill);border:1px solid var(--line-2);background:var(--surface);
   padding:8px 13px;font-size:13px;font-weight:600;color:var(--ink-2);white-space:nowrap;min-height:38px;
@@ -464,7 +474,7 @@ img,svg{max-width:100%}
 .task.is-done .task__box{background:var(--green);border-color:var(--green);color:#fff}
 .task__t{font-size:14px;font-weight:600}
 .task.is-done .task__t{color:var(--ink-3);text-decoration:line-through}
-.task__r{margin-left:auto;font-family:var(--f-mono);font-size:11.5px;color:var(--ink-3)}
+.task__r{margin-left:auto;font-family:var(--f-mono);font-size:11.5px;color:var(--ink-3);white-space:nowrap;flex:none}
 
 /* ---------- extras ---------- */
 .extras{display:grid;gap:12px}
@@ -482,11 +492,12 @@ img,svg{max-width:100%}
 
 /* ---------- activity ---------- */
 .act{display:flex;flex-direction:column}
-.act__row{display:flex;align-items:center;gap:12px;padding:12px 2px;border-bottom:1px solid var(--line)}
+.act__row{display:flex;align-items:center;gap:12px;padding:12px 2px;border-bottom:1px solid var(--line);min-width:0}
+.act__row>span{min-width:0}
 .act__mark{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;flex:none;font-size:11px}
 .act__t{font-size:14px;font-weight:600}
 .act__s{font-size:11.5px;color:var(--ink-3);font-family:var(--f-mono)}
-.act__v{margin-left:auto;font-family:var(--f-mono);font-size:13px;color:var(--ink-2)}
+.act__v{margin-left:auto;font-family:var(--f-mono);font-size:13px;color:var(--ink-2);white-space:nowrap;flex:none}
 
 /* ---------- dialog + toast ---------- */
 .scrim{position:fixed;inset:0;background:rgba(25,17,16,.45);backdrop-filter:blur(3px);z-index:80;
@@ -963,7 +974,7 @@ const HEROES = {
           <h1 style="margin-top:8px">You also unlocked 3 benefits</h1>
           <p class="hero__meta" style="margin-top:8px">Worth ${money(449)}. Nothing to hunt for — they're already on your account.</p>
           <div class="rail">
-            ${fresh.map(b=>`<div class="card" style="min-width:216px;flex:none">
+            ${fresh.map(b=>`<div class="card" style="width:204px;flex:none">
               <div class="card__top"><span class="card__ico card__ico--${b.type}">${ico(b.type==='cash'?'cash':b.type==='ott'?'ott':'voucher',18)}</span>
               <span class="card__flags"><span class="chip chip--new">New</span></span></div>
               <h3 class="card__title" style="font-size:15px">${esc(b.title)}</h3>
@@ -1076,7 +1087,8 @@ const SECTIONS = {
       ready: all.filter(b=>b.state==='ready').length,
       active: all.filter(b=>b.state==='active').length,
       expiring: all.filter(b=>b.exp!==null&&b.exp<=2&&(b.state==='ready'||b.state==='active')).length,
-      past: all.filter(b=>b.state==='used'||b.state==='expired').length
+      used: all.filter(b=>b.state==='used').length,
+      expired: all.filter(b=>b.state==='expired').length
     };
     const q = state.q.trim().toLowerCase();
     let list = all.filter(b=>{
@@ -1086,7 +1098,8 @@ const SECTIONS = {
       if (state.filter==='ready')    return b.state==='ready';
       if (state.filter==='active')   return b.state==='active';
       if (state.filter==='expiring') return b.exp!==null && b.exp<=2 && (b.state==='ready'||b.state==='active');
-      if (state.filter==='past')     return b.state==='used' || b.state==='expired';
+      if (state.filter==='used')     return b.state==='used';
+      if (state.filter==='expired')  return b.state==='expired';
       return true;
     });
     const tab = (k,l,n) => `<button class="tab" role="tab" data-filter="${k}" aria-selected="${state.filter===k}">${l}<span class="tab__n">${n}</span></button>`;
@@ -1099,7 +1112,7 @@ const SECTIONS = {
         <div class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
           <input id="q" type="search" placeholder="Search benefits" value="${esc(state.q)}" aria-label="Search benefits"></div>
         <div class="tabs" role="tablist" aria-label="Filter benefits">
-          ${tab('all','All',counts.all)}${tab('ready','Ready to use',counts.ready)}${tab('active','Active',counts.active)}${tab('expiring','Expiring',counts.expiring)}${tab('past','Used &amp; expired',counts.past)}
+          ${tab('all','All',counts.all)}${tab('ready','Ready to use',counts.ready)}${tab('active','Active',counts.active)}${tab('expiring','Expiring',counts.expiring)}${tab('used','Used',counts.used)}${tab('expired','Expired',counts.expired)}
         </div>
       </div>
       <div class="grid"></div></section>`);
