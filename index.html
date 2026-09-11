@@ -319,13 +319,16 @@ img,svg{max-width:100%}
   transition:box-shadow .2s,border-color .2s,transform .2s}
 .card:hover{box-shadow:var(--shadow-2)}
 .card__top{display:flex;align-items:flex-start;gap:10px}
-.card__ico{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;flex:none;
-  background:var(--surface-2);color:var(--ink-2)}
-.card__ico--cash{background:var(--green-wash);color:var(--green-ink)}
-.card__ico--ott{background:var(--red-wash);color:var(--red-ink)}
-.card__ico--voucher{background:var(--amber-wash);color:#E3B36A}
-.card__ico--plan{background:var(--surface-3);color:var(--ink-2)}
-.card__ico--insider{background:rgba(199,145,65,.16);color:#D8A657}
+.card__ico{--halo:rgba(255,255,255,.16);--ring:rgba(255,255,255,.12);
+  width:42px;height:42px;border-radius:14px;display:grid;place-items:center;flex:none;
+  background:radial-gradient(125% 115% at 50% 4%,var(--halo),transparent 72%),#100D0C;
+  box-shadow:inset 0 0 0 1px var(--ring),0 5px 14px -7px var(--halo)}
+.card__ico--cash{--halo:rgba(150,105,235,.42);--ring:rgba(160,120,240,.34)}
+.card__ico--ott{--halo:rgba(240,60,72,.40);--ring:rgba(240,80,90,.32)}
+.card__ico--voucher{--halo:rgba(60,200,148,.36);--ring:rgba(80,210,160,.30)}
+.card__ico--plan{--halo:rgba(45,175,158,.34);--ring:rgba(70,190,172,.28)}
+.card__ico--insider{--halo:rgba(199,145,65,.40);--ring:rgba(220,170,95,.34)}
+.card__ico--game{--halo:rgba(230,80,165,.38);--ring:rgba(240,110,180,.30)}
 .card__flags{margin-left:auto;display:flex;gap:6px;align-items:center}
 .card__title{font-size:16.5px;font-weight:700;letter-spacing:-.02em;font-family:var(--f-display);
   overflow-wrap:anywhere}
@@ -351,13 +354,13 @@ img,svg{max-width:100%}
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
 .card--featured.tone-red::before{background:linear-gradient(140deg,var(--red),rgba(227,6,19,.12))}
 .card--featured.tone-green::before{background:linear-gradient(140deg,var(--green),rgba(14,122,85,.12))}
-.card--featured .card__ico{width:40px;height:40px;border-radius:12px}
+.card--featured .card__ico{width:52px;height:52px;border-radius:17px}
 
 /* LEVEL 3: quiet — passive benefits become rows, not cards */
 .card--quiet{background:transparent;border:0;border-bottom:1px solid var(--line);border-radius:0;
   box-shadow:none;padding:13px 2px;flex-direction:row;align-items:center;gap:12px}
 .card--quiet:hover{box-shadow:none;background:var(--surface-2);border-radius:var(--r-s)}
-.card--quiet .card__ico{width:30px;height:30px;border-radius:9px}
+.card--quiet .card__ico{width:34px;height:34px;border-radius:11px}
 .card--quiet .card__body{min-width:0;flex:1}
 .card--quiet .card__title{font-size:14.5px;font-family:var(--f-ui);font-weight:650;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -499,6 +502,7 @@ img,svg{max-width:100%}
 .xcard__v{font-family:var(--f-display);font-size:clamp(1.75rem,7.6cqw,2.05rem);font-weight:800;letter-spacing:-.04em;margin-top:6px}
 .xcard__s{font-size:13px;color:var(--ink-2)}
 .xcard .btn{margin-top:14px;align-self:flex-start}
+.xcard__art{margin-bottom:10px}
 .xcard--coins{background:linear-gradient(150deg,var(--surface),var(--amber-wash));border-color:rgba(231,198,140,.26)}
 .xcard--coins .xcard__v{color:var(--gold-soft)}
 .coinstack{position:absolute;right:-18px;bottom:-18px;opacity:.14;color:var(--gold)}
@@ -525,7 +529,10 @@ img,svg{max-width:100%}
   transform:translateY(16px);transition:transform .28s cubic-bezier(.2,.9,.2,1);border:1px solid var(--line);border-bottom:0}
 .scrim.is-open .sheet{transform:none}
 .sheet__grab{width:38px;height:4px;border-radius:2px;background:var(--line-2);margin:-6px auto 16px}
-.sheet__ico{width:56px;height:56px;border-radius:18px;display:grid;place-items:center;margin-bottom:14px}
+.sheet__ico{--halo:rgba(255,255,255,.16);--ring:rgba(255,255,255,.12);
+  width:60px;height:60px;border-radius:19px;display:grid;place-items:center;margin-bottom:14px;
+  background:radial-gradient(125% 115% at 50% 4%,var(--halo),transparent 72%),#100D0C;
+  box-shadow:inset 0 0 0 1px var(--ring),0 6px 18px -8px var(--halo)}
 .sheet h3{font-size:22px}
 .sheet__why{font-size:13.5px;color:var(--ink-2);margin-top:6px}
 .sheet__terms{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:8px}
@@ -657,10 +664,114 @@ const I = {
 const ico = (n,s=18,w=1.9) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[n]||I.gift}</svg>`;
 const money = n => '₹' + n.toLocaleString('en-IN');
 
+/* ---------------------------- illustrated art ----------------------------
+   Line icons say "UI control"; these say "this is a thing you own".
+   Each is two or three tones plus a highlight, drawn on a 32-unit canvas.
+   Gradient ids are per-instance so the same icon can repeat on a page.
+   ------------------------------------------------------------------------ */
+const lg = (id,a,b,x2=0,y2=1) =>
+  `<linearGradient id="${id}" x1="0" y1="0" x2="${x2}" y2="${y2}"><stop stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient>`;
+const gloss = d => `<path d="${d}" stroke="rgba(255,255,255,.55)" stroke-width="1.6" stroke-linecap="round" fill="none"/>`;
+
+const ART = {
+  /* gold coin — cashback credited */
+  coin: u => `<defs>${lg(u,'#FBDD92','#C98D2B')}${lg(u+'b','#FFF3D4','#F0C367')}</defs>
+    <circle cx="16" cy="17" r="11" fill="#8A5C15"/><circle cx="16" cy="15.5" r="11" fill="url(#${u})"/>
+    <circle cx="16" cy="15.5" r="7.6" fill="none" stroke="url(#${u}b)" stroke-width="1.2" opacity=".85"/>
+    <text x="16" y="20.4" text-anchor="middle" font-size="11.5" font-weight="800" fill="#7A4E12">₹</text>
+    ${gloss('M8.6 12.2a8.4 8.4 0 0 1 6.2-4.4')}`,
+  /* violet notes — cash reward */
+  cash: u => `<defs>${lg(u,'#B18BF0','#6A3CC0')}${lg(u+'b','#D9C8FF','#A683ED')}</defs>
+    <rect x="7" y="9" width="20" height="13" rx="2.4" fill="#5A2FA8" transform="rotate(-11 17 15.5)"/>
+    <rect x="5" y="11.5" width="21" height="12.5" rx="2.4" fill="url(#${u})"/>
+    <circle cx="15.5" cy="17.7" r="3.7" fill="url(#${u}b)"/>
+    <text x="15.5" y="21.2" text-anchor="middle" font-size="7.5" font-weight="800" fill="#4A1F92">₹</text>
+    <rect x="7.4" y="13.8" width="2.6" height="2.6" rx=".7" fill="rgba(255,255,255,.5)"/>
+    <rect x="21" y="19.2" width="2.6" height="2.6" rx=".7" fill="rgba(255,255,255,.35)"/>`,
+  /* mint vouchers — gift cards */
+  voucher: u => `<defs>${lg(u,'#A8F0CC','#2E9A72')}${lg(u+'b','#7FE3B6','#279066')}</defs>
+    <rect x="12" y="7" width="13" height="19" rx="2.4" fill="url(#${u}b)" transform="rotate(12 18 16)"/>
+    <rect x="6" y="7" width="14" height="19" rx="2.4" fill="url(#${u})"/>
+    <path d="M13 7v19" stroke="#1F7B57" stroke-width="1.1" stroke-dasharray="2 2" opacity=".6"/>
+    <path d="M13 13c-2.4 0-3.2-1-3.2-2 0-.9.8-1.6 1.7-1.3 1 .3 1.5 1.7 1.5 3.3zm0 0c2.4 0 3.2-1 3.2-2 0-.9-.8-1.6-1.7-1.3-1 .3-1.5 1.7-1.5 3.3z" fill="#136B49"/>
+    ${gloss('M8.4 10.4a2 2 0 0 1 1.6-1.2')}`,
+  /* screen + play — OTT */
+  play: u => `<defs>${lg(u,'#FF6F76','#B90E1B')}${lg(u+'b','#FFC9CC','#FF7A80')}</defs>
+    <rect x="3.5" y="7" width="25" height="18" rx="4" fill="#7C0711"/>
+    <rect x="3.5" y="6" width="25" height="18" rx="4" fill="url(#${u})"/>
+    <path d="M13.6 10.8 20.4 15l-6.8 4.2z" fill="#fff"/>
+    ${gloss('M6.6 9.4a2.6 2.6 0 0 1 2.2-1.6')}`,
+  /* signal bars — plan benefit */
+  signal: u => `<defs>${lg(u,'#8FE3D2','#1F8E7C')}</defs>
+    <rect x="5" y="18" width="4.6" height="8" rx="1.6" fill="#1F8E7C" opacity=".55"/>
+    <rect x="11.4" y="13" width="4.6" height="13" rx="1.6" fill="url(#${u})" opacity=".8"/>
+    <rect x="17.8" y="8.5" width="4.6" height="17.5" rx="1.6" fill="url(#${u})"/>
+    <circle cx="26" cy="9" r="2.6" fill="#FFD27A"/>`,
+  /* star — insider / premium */
+  star: u => `<defs>${lg(u,'#FFE6AE','#C4862A')}</defs>
+    <path d="m16 4 3.4 7.2 7.6 1-5.6 5.4 1.4 7.8L16 21.6 9.2 25.4l1.4-7.8L5 12.2l7.6-1z" fill="url(#${u})"/>
+    <path d="m16 8.2 2 4.3 4.6.6-3.4 3.2.8 4.7L16 18.6z" fill="rgba(255,255,255,.35)"/>
+    <circle cx="25.5" cy="7" r="1.6" fill="#FFF1CE"/>`,
+  /* gift box — game / earnable */
+  gift: u => `<defs>${lg(u,'#FF8BC2','#C2277E')}${lg(u+'b','#FFC2DE','#FF74B4')}</defs>
+    <rect x="6" y="13" width="20" height="13" rx="2.2" fill="url(#${u})"/>
+    <rect x="4.4" y="9" width="23.2" height="5.4" rx="1.8" fill="url(#${u}b)"/>
+    <rect x="14.4" y="9" width="3.2" height="17" fill="rgba(255,255,255,.55)"/>
+    <path d="M16 9c-2.6 0-4.2-1.2-4.2-2.5S13 4.4 14 5c1.1.7 2 2.3 2 4zm0 0c2.6 0 4.2-1.2 4.2-2.5S19 4.4 18 5c-1.1.7-2 2.3-2 4z" fill="#FFD6E8"/>`,
+  /* note — music / HelloTune */
+  music: u => `<defs>${lg(u,'#FF9AA2','#D8232F')}</defs>
+    <path d="M12.5 21V8.4l11-2.2V18" stroke="url(#${u})" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+    <ellipse cx="10" cy="22" rx="4" ry="3.4" fill="url(#${u})"/>
+    <ellipse cx="21" cy="19.4" rx="3.4" ry="2.9" fill="url(#${u})"/>`,
+  /* gauge — data */
+  data: u => `<defs>${lg(u,'#8CC8FF','#2168C4')}</defs>
+    <path d="M5.5 22a11 11 0 0 1 21 0" stroke="#1E4E8C" stroke-width="3.4" stroke-linecap="round" fill="none" opacity=".45"/>
+    <path d="M5.5 22A11 11 0 0 1 9 14" stroke="url(#${u})" stroke-width="3.4" stroke-linecap="round" fill="none"/>
+    <path d="m16 21 5.4-6.6" stroke="#FF8348" stroke-width="2.4" stroke-linecap="round"/>
+    <circle cx="16" cy="21.6" r="2.6" fill="#DCE9FA"/>`,
+  /* two people — family linking */
+  family: u => `<defs>${lg(u,'#9FD8FF','#3273C6')}</defs>
+    <circle cx="12" cy="11" r="4.4" fill="url(#${u})"/>
+    <path d="M4.5 25a7.5 7.5 0 0 1 15 0z" fill="url(#${u})"/>
+    <circle cx="22" cy="12.6" r="3.4" fill="#6FA9E6" opacity=".8"/>
+    <path d="M17.5 25a6 6 0 0 1 10.5-4" stroke="#6FA9E6" stroke-width="2.4" stroke-linecap="round" fill="none" opacity=".8"/>`,
+  /* card — autopay / billing */
+  card: u => `<defs>${lg(u,'#8FE3B9','#20845E')}</defs>
+    <rect x="3.5" y="8" width="25" height="16" rx="3" fill="url(#${u})"/>
+    <rect x="3.5" y="12" width="25" height="3.4" fill="#0C5C40"/>
+    <rect x="6.5" y="18.5" width="6" height="2.4" rx="1.2" fill="rgba(255,255,255,.75)"/>
+    ${gloss('M6.4 10.4a2.4 2.4 0 0 1 2-1.2')}`,
+  /* wifi — fiber */
+  wifi: u => `<defs>${lg(u,'#A6E7F5','#1E8FB0')}</defs>
+    <path d="M4 11.5a18 18 0 0 1 24 0" stroke="url(#${u})" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <path d="M8.4 16.4a12 12 0 0 1 15.2 0" stroke="url(#${u})" stroke-width="3" stroke-linecap="round" fill="none" opacity=".78"/>
+    <path d="M12.6 21.2a6 6 0 0 1 6.8 0" stroke="url(#${u})" stroke-width="3" stroke-linecap="round" fill="none" opacity=".56"/>
+    <circle cx="16" cy="25.4" r="2.2" fill="#CFF0F9"/>`,
+  /* shield — device cover */
+  shield: u => `<defs>${lg(u,'#FFE2AC','#B8802A')}</defs>
+    <path d="M16 4.5 26 8v7.5c0 6-4.2 10.4-10 12-5.8-1.6-10-6-10-12V8z" fill="url(#${u})"/>
+    <path d="m11.4 16.2 3.2 3.2 6-6.4" stroke="#6B4510" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`,
+  /* phone — subscriptions */
+  phone: u => `<defs>${lg(u,'#B7A6FF','#5238C4')}</defs>
+    <rect x="8" y="3.5" width="16" height="25" rx="3.4" fill="url(#${u})"/>
+    <rect x="10" y="7" width="12" height="16" rx="1.6" fill="rgba(255,255,255,.22)"/>
+    <path d="M14.4 11.6 19 14.8l-4.6 3.2z" fill="#fff"/>
+    <rect x="13.6" y="25" width="4.8" height="1.4" rx=".7" fill="rgba(255,255,255,.5)"/>`
+};
+let _aid = 0;
+const art = (n, s = 34) => {
+  const f = ART[n] || ART.gift;
+  return `<svg width="${s}" height="${s}" viewBox="0 0 32 32" fill="none" aria-hidden="true" style="display:block">${f('a' + (++_aid))}</svg>`;
+};
+/* type → art, overridable per benefit with an `art` field */
+const ART_BY_TYPE = {cash:'cash', ott:'play', voucher:'voucher', plan:'signal', insider:'star', game:'gift'};
+const artOf = b => b.art || ART_BY_TYPE[b.type] || 'gift';
+
+
 /* ================================ rewardData.ts ============================ */
 /* A benefit answers, in this order: WHAT · WHY · STATUS · EXPIRY · ACTION.    */
 const B = {
-  cash100:   {id:'cash100',   type:'cash',    title:'₹100 Cashback',            why:'Unlocked with your ₹599 recharge',           state:'ready',  value:100,  exp:0,  isNew:true,  tags:['recharge','money'], cta:'Claim now', to:'your wallet'},
+  cash100:   {id:'cash100', art:'coin',   type:'cash',    title:'₹100 Cashback',            why:'Unlocked with your ₹599 recharge',           state:'ready',  value:100,  exp:0,  isNew:true,  tags:['recharge','money'], cta:'Claim now', to:'your wallet'},
   ott599:    {id:'ott599',    type:'ott',     title:'1 month Sony LIV',         why:'Unlocked with your ₹599 recharge',           state:'ready',  value:299,  exp:5,  isNew:true,  tags:['recharge','entertainment'], cta:'Activate', partner:true},
   shop50:    {id:'shop50',    type:'voucher', title:'₹50 Shopping voucher',     why:'Unlocked with your ₹599 recharge',           state:'ready',  value:50,   exp:14, isNew:true,  tags:['recharge','shopping'], cta:'Claim now'},
   myntra:    {id:'myntra',    type:'voucher', title:'₹500 Myntra voucher',      why:'Insider reward · Level 3',                  state:'ready',  value:500,  exp:2,  tags:['shopping'], cta:'Use now', partner:true},
@@ -668,12 +779,12 @@ const B = {
   netflix3m: {id:'netflix3m', type:'ott',     title:'Netflix Mobile · 3 months',why:'Unlocked with your ₹599 recharge',           state:'ready',  value:597,  exp:6,  isNew:true,  tags:['recharge','entertainment'], cta:'Claim now', partner:true, to:'Netflix'},
   xstream:   {id:'xstream',   type:'ott',     title:'Xstream Play',            why:'Included in your plan · 22 apps',            state:'active', value:149,  exp:32, tags:['entertainment'], cta:'Open'},
   netflix:   {id:'netflix',   type:'ott',     title:'Netflix Basic',            why:'Included with your ₹1,199 postpaid plan',    state:'active', value:199,  exp:26, tags:['entertainment','premium'], cta:'Open'},
-  fiber:     {id:'fiber',     type:'plan',    title:'Speed boost · 300 Mbps',   why:'Active on your Fiber connection till 30 Sep',state:'active', value:0,    exp:20, tags:['premium','fiber'], cta:'Manage'},
-  shield:    {id:'shield',    type:'insider', title:'Device Shield cover',      why:'Premium benefit · ₹40,000 cover',          state:'active', value:0,    exp:120,tags:['premium'], cta:'View policy'},
-  talktime:  {id:'talktime',  type:'plan',    title:'₹30 talktime',             why:'Set a HelloTune to unlock this reward',      state:'locked', value:30,   exp:null, tags:['music','engagement'], cta:'Set up HelloTune'},
-  autopay:   {id:'autopay',   type:'cash',    title:'₹50 off every month',      why:'Turn on AutoPay for your Fiber bill',        state:'locked', value:600,  exp:null, tags:['premium','billing'], cta:'Set up AutoPay'},
-  family:    {id:'family',    type:'plan',    title:'Add 3 members free',       why:'Link family accounts to your plan',       state:'locked', value:0,    exp:null, tags:['premium','family'], cta:'Link accounts'},
-  minidata:  {id:'minidata',  type:'plan',    title:'1 GB data, on us',         why:'Recharge ₹19 or more in the app today',      state:'locked', value:19,   exp:null, tags:['data'], cta:'Recharge & unlock'},
+  fiber:     {id:'fiber', art:'wifi',     type:'plan',    title:'Speed boost · 300 Mbps',   why:'Active on your Fiber connection till 30 Sep',state:'active', value:0,    exp:20, tags:['premium','fiber'], cta:'Manage'},
+  shield:    {id:'shield', art:'shield',    type:'insider', title:'Device Shield cover',      why:'Premium benefit · ₹40,000 cover',          state:'active', value:0,    exp:120,tags:['premium'], cta:'View policy'},
+  talktime:  {id:'talktime', art:'music',  type:'plan',    title:'₹30 talktime',             why:'Set a HelloTune to unlock this reward',      state:'locked', value:30,   exp:null, tags:['music','engagement'], cta:'Set up HelloTune'},
+  autopay:   {id:'autopay', art:'card',   type:'cash',    title:'₹50 off every month',      why:'Turn on AutoPay for your Fiber bill',        state:'locked', value:600,  exp:null, tags:['premium','billing'], cta:'Set up AutoPay'},
+  family:    {id:'family', art:'family',    type:'plan',    title:'Add 3 members free',       why:'Link family accounts to your plan',       state:'locked', value:0,    exp:null, tags:['premium','family'], cta:'Link accounts'},
+  minidata:  {id:'minidata', art:'data',  type:'plan',    title:'1 GB data, on us',         why:'Recharge ₹19 or more in the app today',      state:'locked', value:19,   exp:null, tags:['data'], cta:'Recharge & unlock'},
   comeback:  {id:'comeback',  type:'cash',    title:'₹20 cashback',             why:'Waiting for you since 28 Aug',               state:'ready',  value:20,   exp:6,  tags:['money'], cta:'Claim now'},
   spin:      {id:'spin',      type:'game',    title:'Spin & Win',               why:"Complete today's challenge to unlock",       state:'locked', value:0,    exp:null, tags:['game'], cta:'Unlock'},
   amazon:    {id:'amazon',    type:'voucher', title:'Amazon ₹500 voucher',      why:'Used on 3 Sep · order #4471',                state:'used',   value:500,  exp:null, tags:['shopping']},
@@ -855,7 +966,7 @@ function BenefitCard(raw, weight){
 
   if (weight === 'quiet' || weight === 'past'){
     return el(`<article class="card card--quiet ${weight==='past'?'card--past':''}" data-flip="b-${b.id}">
-      <span class="card__ico card__ico--${b.type}">${ico(b.type==='cash'?'cash':b.type==='ott'?'ott':b.type==='voucher'?'voucher':b.type==='insider'?'insider':b.type==='game'?'game':'plan',16)}</span>
+      <span class="card__ico card__ico--${b.type}">${art(artOf(b),26)}</span>
       <div class="card__body">
         <h3 class="card__title">${esc(b.title)}</h3>
         <p class="card__why">${esc(b.why)}</p>
@@ -869,7 +980,7 @@ function BenefitCard(raw, weight){
 
   return el(`<article class="card ${weight==='featured'?'card--featured '+tone:''}" data-flip="b-${b.id}">
     <div class="card__top">
-      <span class="card__ico card__ico--${b.type}">${ico(b.type==='cash'?'cash':b.type==='ott'?'ott':b.type==='voucher'?'voucher':b.type==='insider'?'insider':b.type==='game'?'game':'plan', weight==='featured'?21:18)}</span>
+      <span class="card__ico card__ico--${b.type}">${art(artOf(b), weight==='featured'?34:28)}</span>
       <span class="card__flags">
         ${b.isNew && b.state!=='used' ? '<span class="chip chip--new">New</span>' : ''}
         ${hot ? `<span class="chip chip--urgent">${b.exp<=0?'Today':b.exp+'d left'}</span>` : ''}
@@ -987,7 +1098,7 @@ const HEROES = {
     const rows = fresh.map(b => {
       const done = b.state !== 'ready';
       return `<li class="got__row">
-        <span class="card__ico card__ico--${b.type}">${ico(b.type==='cash'?'cash':b.type==='ott'?'ott':'voucher',15,2)}</span>
+        <span class="card__ico card__ico--${b.type}">${art(artOf(b),24)}</span>
         <span class="got__b"><span class="got__t">${esc(b.title)}</span>
           <span class="got__s ${done?'is-done':''}">${done ? (b.state==='active'?'Activated ✓':'Claimed ✓') : 'Ready to claim'}</span></span>
         <span class="got__v">${money(b.value)}</span></li>`;
@@ -1176,7 +1287,7 @@ const SECTIONS = {
       </div><button class="sec__link" data-act="toast" data-msg="All challenges refresh at midnight.">All challenges ${ico('arrow',14,2.4)}</button></div>
       <div class="play">
         <div class="play__card">
-          <div class="play__head"><span class="card__ico card__ico--voucher">${ico('sparkle',17)}</span>
+          <div class="play__head"><span class="card__ico card__ico--voucher">${art('voucher',26)}</span>
             <div><div class="play__t">Today's scratch card</div><div class="play__s">${state.scratch.open?'Revealed — claim it below':'Earned with your last recharge'}</div></div></div>
           <div class="scratch ${state.scratch.open?'is-open':''}" id="scratch">
             <div class="scratch__prize"><div class="scratch__amt">₹100</div><div class="scratch__lbl">Cashback won</div></div>
@@ -1187,7 +1298,7 @@ const SECTIONS = {
             ${state.scratch.open?'Redeem ₹100 now':'Scratch the card first'}</button>
         </div>
         <div class="play__card">
-          <div class="play__head"><span class="card__ico card__ico--ott">${ico('game',17)}</span>
+          <div class="play__head"><span class="card__ico card__ico--game">${art('gift',26)}</span>
             <div><div class="play__t">Spin &amp; Win</div><div class="play__s">${locked?'Unlocks on day 3 of your challenge':'One free spin today'}</div></div></div>
           <div class="wheel-wrap">
             <div class="wheel-outer">
@@ -1259,14 +1370,16 @@ const SECTIONS = {
         <p class="sec__sub">Coins and subscriptions, without leaving this page</p></div></div>
       <div class="extras">
         <div class="xcard xcard--coins">
-          <span class="coinstack">${ico('coin',120,1.2)}</span>
-          <span class="chip chip--gold">${ico('coin',12,2.2)} Coins</span>
+          <span class="coinstack">${art('coin',150)}</span>
+          <span class="xcard__art">${art('coin',40)}</span>
+          <span class="chip chip--gold">Coins</span>
           <div class="xcard__v mono">2,450</div>
           <p class="xcard__s">You've saved ${money(245)} with coins so far. 400 coins expire on 30 Sep.</p>
           <button class="btn btn--sm btn--ghost" data-act="toast" data-msg="Coins wallet — 2,450 coins available.">View coins</button>
         </div>
         <div class="xcard">
-          <span class="chip chip--muted">${ico('sub',12,2.2)} Subscriptions</span>
+          <span class="xcard__art">${art('phone',40)}</span>
+          <span class="chip chip--muted">Subscriptions</span>
           <div class="xcard__v">2 active</div>
           <p class="xcard__s">Netflix and Xstream Play — both billed with your plan.</p>
           <div class="subrow">${SUBS.map(s=>`<span class="sublogo" style="background:${s.c}" title="${s.n}">${s.n[0]}</span>`).join('')}</div>
@@ -1417,11 +1530,8 @@ function burst(anchor){
 const scrim = $('#scrim'), sheet = $('#sheet');
 let lastFocus = null, current = null;
 
-const toneOf = b => b.state==='locked' ? ['var(--red-wash)','var(--red-ink)']
-  : (b.exp !== null && b.exp <= 2) ? ['var(--ember-wash)','var(--ember-ink)'] : ['var(--green-wash)','var(--green-ink)'];
 
 function sheetConfirm(b){
-  const [bg, fg] = toneOf(b);
   const action = b.state === 'locked' ? b.cta : (b.state === 'active' ? 'Open' : (b.type === 'ott' ? 'Activate now' : 'Claim benefit'));
   const terms = [
     ['What you get', b.value ? money(b.value) : 'Plan benefit'],
@@ -1430,7 +1540,7 @@ function sheetConfirm(b){
     ['Where it applies', b.to || (b.partner ? 'Partner app · signed in automatically' : 'App & website')]
   ];
   return `<div class="sheet__grab"></div>
-    <div class="sheet__ico" style="background:${bg};color:${fg}">${ico(b.type==='cash'?'cash':b.type==='ott'?'ott':b.type==='voucher'?'voucher':b.type==='insider'?'insider':'plan',26,2)}</div>
+    <div class="sheet__ico card__ico--${b.type}">${art(artOf(b),38)}</div>
     <h3 id="sheetTitle">${esc(b.title)}</h3>
     <p class="sheet__why">${esc(b.why)}</p>
     <div class="sheet__terms">${terms.map(t=>`<div class="trow"><span>${t[0]}</span><b>${esc(t[1])}</b></div>`).join('')}</div>
