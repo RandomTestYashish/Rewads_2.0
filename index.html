@@ -1,7 +1,7 @@
 <title>Benefits Hub</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,600&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
 /* ============================================================
    TOKENS — light is the base; dark redefines tokens only.
@@ -48,8 +48,8 @@
   --f-display:"Bricolage Grotesque","Figtree",system-ui,sans-serif;
   --f-ui:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
   --f-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
-  --f-serif:"Bodoni Moda",Georgia,"Times New Roman",serif;
-  --ins-1:#B4123F; --ins-2:#7C0A2B; --ins-cream:#F8E4BC;
+  --f-inter:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --ins-ink:#F4EEE6; --ins-dim:rgba(244,238,230,.62); --ins-line:rgba(255,255,255,.12);
 
   --gut:18px;
   --desk:#E7DFDA;
@@ -490,45 +490,49 @@ img,svg{max-width:100%}
    Kept to a single panel so it reads as a destination, not a
    third accent colour loose in the page.
    ============================================================ */
-.ins{position:relative;border-radius:var(--r-l);overflow:hidden;padding:26px 20px 22px;
-  background:radial-gradient(120% 90% at 50% 38%,#C2164A 0%,var(--ins-1) 42%,var(--ins-2) 100%);
-  color:#FBEFE4;text-align:center;box-shadow:0 22px 46px -24px rgba(124,10,43,.75)}
-.ins__sun{position:absolute;inset:-30% -10%;pointer-events:none;opacity:.5;
-  background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(255,255,255,.075) 0deg 5deg,transparent 5deg 13deg);
+.sec--ins{font-family:var(--f-inter)}
+.sec--ins .sec__title{font-family:var(--f-inter);font-weight:700;letter-spacing:-.025em}
+.ins{position:relative;border-radius:var(--r-l);overflow:hidden;padding:28px 20px 22px;
+  background:radial-gradient(125% 85% at 50% 0%,#2A221C 0%,#151211 38%,#070606 100%);
+  border:1px solid rgba(255,255,255,.09);color:var(--ins-ink);text-align:center;
+  font-family:var(--f-inter);box-shadow:0 24px 50px -26px rgba(0,0,0,.9)}
+.ins__sun{position:absolute;inset:-30% -10%;pointer-events:none;opacity:.75;
+  background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(231,198,140,.055) 0deg 5deg,transparent 5deg 13deg);
   -webkit-mask:radial-gradient(closest-side,#000 30%,transparent 78%);mask:radial-gradient(closest-side,#000 30%,transparent 78%)}
-.ins__h{position:relative;font-family:var(--f-serif);font-optical-sizing:auto;font-weight:600;
-  font-size:clamp(2rem,9.4cqw,2.5rem);line-height:1;color:var(--ins-cream);letter-spacing:-.005em}
-.ins__k{position:relative;font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;
-  color:rgba(251,239,228,.72);margin-top:9px;font-weight:600}
+.ins__h{position:relative;font-family:var(--f-inter);font-weight:800;line-height:1.02;
+  font-size:clamp(1.95rem,9cqw,2.35rem);letter-spacing:-.042em;color:#fff}
+.ins__k{position:relative;font-size:10px;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--gold-soft);margin-top:10px;font-weight:600}
 
 .orbit{position:relative;width:240px;height:240px;margin:16px auto 4px}
-.orbit__ring{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(255,255,255,.17)}
-.orbit__ring--i{inset:30px;border-color:rgba(255,255,255,.11)}
+.orbit__ring{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(255,255,255,.13)}
+.orbit__ring--i{inset:30px;border-color:rgba(255,255,255,.07)}
 .orbit__spin{position:absolute;inset:0;animation:orb 46s linear infinite}
 .orbit__sat{position:absolute;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;
-  animation:orb 46s linear infinite reverse;box-shadow:0 6px 14px -4px rgba(40,0,12,.6);
+  animation:orb 46s linear infinite reverse;box-shadow:0 6px 16px -5px rgba(0,0,0,.85);
   font-weight:800;font-size:11px;letter-spacing:-.01em;color:#fff;text-align:center;line-height:1.05}
 .orbit__sat--li{left:0;top:58px;background:#0A66C2;font-size:17px}
-.orbit__sat--cr{left:194px;top:100px;background:#0C0C0C;font-size:9.5px;letter-spacing:.02em}
+.orbit__sat--cr{left:194px;top:100px;background:#0C0C0C;font-size:9.5px;letter-spacing:.02em;
+  box-shadow:0 0 0 1px rgba(255,255,255,.22),0 6px 16px -5px rgba(0,0,0,.85)}
 .orbit__sat--pf{left:32px;top:176px;background:#E1265B;font-size:9px}
-.orbit__dot{position:absolute;width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.5)}
+.orbit__dot{position:absolute;width:7px;height:7px;border-radius:50%;background:rgba(231,198,140,.55)}
 .orbit__core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:140px;height:76px;
   border-radius:38px;display:grid;place-items:center;gap:0;
-  background:linear-gradient(150deg,rgba(255,255,255,.16),rgba(255,255,255,.04));
-  border:1px solid rgba(255,255,255,.22);box-shadow:0 10px 26px -10px rgba(40,0,12,.7),inset 0 1px 0 rgba(255,255,255,.25);
+  background:linear-gradient(150deg,rgba(255,255,255,.11),rgba(255,255,255,.02));
+  border:1px solid rgba(255,255,255,.15);box-shadow:0 10px 26px -10px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.16);
   backdrop-filter:blur(3px)}
 .orbit__core span{display:block;font-size:25px;font-weight:800;letter-spacing:-.035em;color:#fff;text-align:center}
 @keyframes orb{to{transform:rotate(360deg)}}
 @media (prefers-reduced-motion:reduce){.orbit__spin,.orbit__sat{animation:none}}
 
-.ins__tier{position:relative;margin-top:16px;padding-top:15px;border-top:1px solid rgba(255,255,255,.16);
+.ins__tier{position:relative;margin-top:16px;padding-top:15px;border-top:1px solid var(--ins-line);
   display:flex;align-items:center;gap:10px;text-align:left}
 .ins__tier b{font-size:13.5px;font-weight:700}
-.ins__tier p{font-size:11.5px;color:rgba(251,239,228,.7);margin-top:2px}
+.ins__tier p{font-size:11.5px;color:var(--ins-dim);margin-top:2px}
 .ins__lvl{margin-left:auto;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--ins-cream);border:1px solid rgba(248,228,188,.4);
+  text-transform:uppercase;color:var(--gold-soft);border:1px solid rgba(231,198,140,.34);
   border-radius:var(--r-pill);padding:4px 9px;white-space:nowrap;flex:none}
-.ins__bar{position:relative;height:5px;border-radius:3px;background:rgba(255,255,255,.18);margin-top:12px;overflow:hidden}
+.ins__bar{position:relative;height:5px;border-radius:3px;background:rgba(255,255,255,.11);margin-top:12px;overflow:hidden}
 .ins__fill{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,var(--gold),#F0D9A6);width:66%}
 .ins .btn{margin-top:16px;position:relative}
 
@@ -538,7 +542,7 @@ img,svg{max-width:100%}
   color:#fff;font-weight:800;font-size:11px;line-height:1;text-align:center}
 .poffer__b{min-width:0;flex:1}
 .poffer .btn{flex:none}
-.poffer__t{font-size:14px;font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.poffer__t{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .poffer__s{font-size:11.5px;color:var(--ink-3);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 /* ---------- extras ---------- */
@@ -750,7 +754,7 @@ const COHORTS = {
     label:'Active customer',
     note:'The default hub. Priority engine leads with what needs action; everything else falls in behind it.',
     hero:'default',
-    sections:['hero','attention','benefits','earn','insider','extras','activity'],
+    sections:['hero','attention','benefits','insider','earn','extras','activity'],
     ids:['cash100','myntra','ott599','xstream','netflix','mmt','shop50','wynk','spin','amazon','oldcash'],
     relevant:['entertainment','shopping','money'],
     weights:{urgency:.30,recency:.20,relevance:.15,value:.20,engage:.15},
@@ -760,7 +764,7 @@ const COHORTS = {
     label:'Dormant / low engagement',
     note:'Re-engagement first. The catalogue is deliberately trimmed — one streak, one reward, nothing else competing.',
     hero:'welcome',
-    sections:['hero','challenge','benefits','earn','extras'],
+    sections:['hero','challenge','benefits','insider','earn','extras'],
     ids:['comeback','wynk','spin'],
     relevant:['engagement','game'],
     weights:{urgency:.15,recency:.10,relevance:.25,value:.15,engage:.35},
@@ -770,7 +774,7 @@ const COHORTS = {
     label:'Prepaid voice-only',
     note:'No data pack, no OTT habit. The hub leads with the one action this user is actually likely to take.',
     hero:'action',
-    sections:['hero','recommend','benefits','earn','insider','extras'],
+    sections:['hero','recommend','benefits','insider','earn','extras'],
     ids:['talktime','wynk','comeback','spin','amazon'],
     relevant:['music','engagement'],
     weights:{urgency:.15,recency:.10,relevance:.35,value:.10,engage:.30},
@@ -780,7 +784,7 @@ const COHORTS = {
     label:'High-ARPU Fiber / Postpaid',
     note:'This user already holds real value. Premium surface, benefits stated as facts, action framed as "get more".',
     hero:'premium',
-    sections:['hero','recommend','insider','benefits','extras','activity'],
+    sections:['hero','recommend','benefits','insider','extras','activity'],
     ids:['autopay','family','netflix','fiber','shield','mmt','xstream'],
     relevant:['premium','fiber','family'],
     weights:{urgency:.15,recency:.10,relevance:.30,value:.30,engage:.15},
@@ -790,7 +794,7 @@ const COHORTS = {
     label:'Data-exhausted',
     note:'Third exhaustion this month. The reward is framed as the fix, not as an upsell.',
     hero:'lowdata',
-    sections:['hero','recommend','attention','benefits','earn','insider'],
+    sections:['hero','recommend','attention','benefits','insider','earn'],
     ids:['minidata','cash100','wynk','xstream','spin'],
     relevant:['data'],
     weights:{urgency:.20,recency:.15,relevance:.35,value:.15,engage:.15},
@@ -810,7 +814,7 @@ const COHORTS = {
     label:'Just recharged · ₹599',
     note:'The post-transaction moment the BRD is built around: the user sees what the recharge earned before they leave the screen.',
     hero:'success',
-    sections:['hero','attention','earn','insider','benefits','extras'],
+    sections:['hero','attention','insider','earn','benefits','extras'],
     ids:['cash100','ott599','shop50','xstream','wynk','myntra','spin'],
     relevant:['recharge'],
     weights:{urgency:.20,recency:.40,relevance:.20,value:.10,engage:.10},
@@ -1101,9 +1105,11 @@ const SECTIONS = {
   /* PrioritySection — top of the engine's ranking, whatever that is today. */
   attention(cfg){
     const ranked = rank(cfg.ids,cfg).map(view)
+      .filter(b => !inAttention.has(b.id))   // never repeat the recommended action
+      .filter(b => b.type !== 'game')        // games belong in Earn more
       .filter(b => b.state==='ready' || (b.state==='locked' && cfg.hero==='lowdata'));
     const top = ranked.slice(0, cfg.hero==='success' ? 3 : 2);
-    inAttention = new Set(top.map(b=>b.id));
+    top.forEach(b => inAttention.add(b.id));
     if (!top.length) return null;
     const best = top[0]?._s ?? 0;
     const wrap = el(`<section class="sec" data-flip="attention">
@@ -1148,7 +1154,7 @@ const SECTIONS = {
     const g = wrap.querySelector('.grid');
     g.appendChild(BenefitCard(primary,'featured'));
     if (extra) g.appendChild(BenefitCard(extra,'standard'));
-    inAttention = new Set([primary.id, extra?.id].filter(Boolean));
+    [primary.id, extra?.id].filter(Boolean).forEach(id => inAttention.add(id));
     return wrap;
   },
 
@@ -1269,7 +1275,7 @@ const SECTIONS = {
                : `<button class="btn btn--sm btn--ghost" data-act="open" data-id="${b.id}">${esc(b.cta)}</button>`}
       </div>`;
     }).join('');
-    return el(`<section class="sec" data-flip="insider">
+    return el(`<section class="sec sec--ins" data-flip="insider">
       <div class="sec__head"><div><h2 class="sec__title">Insider</h2>
         <p class="sec__sub">Partner offers that come with your plan — nothing to earn</p></div></div>
       <div class="ins">
