@@ -665,6 +665,7 @@ const B = {
   shop50:    {id:'shop50',    type:'voucher', title:'₹50 Shopping voucher',     why:'Unlocked with your ₹599 recharge',           state:'ready',  value:50,   exp:14, isNew:true,  tags:['recharge','shopping'], cta:'Claim now'},
   myntra:    {id:'myntra',    type:'voucher', title:'₹500 Myntra voucher',      why:'Insider reward · Level 3',                  state:'ready',  value:500,  exp:2,  tags:['shopping'], cta:'Use now', partner:true},
   mmt:       {id:'mmt',       type:'insider', title:'₹1,500 off MakeMyTrip',    why:'Insider benefit for 4 years with us',    state:'ready',  value:1500, exp:9,  tags:['travel','premium'], cta:'Use now', partner:true, code:'INSIDER1500MMT'},
+  netflix3m: {id:'netflix3m', type:'ott',     title:'Netflix Mobile · 3 months',why:'Unlocked with your ₹599 recharge',           state:'ready',  value:597,  exp:6,  isNew:true,  tags:['recharge','entertainment'], cta:'Claim now', partner:true, to:'Netflix'},
   xstream:   {id:'xstream',   type:'ott',     title:'Xstream Play',            why:'Included in your plan · 22 apps',            state:'active', value:149,  exp:32, tags:['entertainment'], cta:'Open'},
   netflix:   {id:'netflix',   type:'ott',     title:'Netflix Basic',            why:'Included with your ₹1,199 postpaid plan',    state:'active', value:199,  exp:26, tags:['entertainment','premium'], cta:'Open'},
   fiber:     {id:'fiber',     type:'plan',    title:'Speed boost · 300 Mbps',   why:'Active on your Fiber connection till 30 Sep',state:'active', value:0,    exp:20, tags:['premium','fiber'], cta:'Manage'},
@@ -701,10 +702,10 @@ const COHORTS = {
     note:'The default hub. Priority engine leads with what needs action; everything else falls in behind it.',
     hero:'default',
     sections:['hero','attention','benefits','insider','earn','extras','activity'],
-    ids:['cash100','myntra','ott599','xstream','netflix','mmt','shop50','spin','amazon','oldcash'],
+    ids:['ott599','netflix3m','xstream','mmt','shop50','spin','amazon'],
     relevant:['entertainment','shopping','money'],
     weights:{urgency:.30,recency:.20,relevance:.15,value:.20,engage:.15},
-    copy:{attention:'Needs your attention', attentionSub:'Two of these run out this week'}
+    copy:{attention:'Ready to claim', attentionSub:'Both unlocked by your last recharge — one tap each'}
   },
   dormant: {
     label:'Dormant / low engagement',
@@ -908,7 +909,7 @@ const HEROES = {
         <div>
           <div class="hero__amount"><span class="cur">₹</span>${t.value.toLocaleString('en-IN')}</div>
           <p class="hero__lede">unlocked and sitting in your account right now.</p>
-          <p class="hero__meta"><b>${t.ready} ready to use</b> · ${t.soon} need attention this week</p>
+          <p class="hero__meta"><b>${t.ready} ready to use</b> · ${t.soon ? `${t.soon} need attention this week` : 'nothing expiring this week'}</p>
         </div>
         <div class="hero__ledger">
           <p class="hero__ledger-h">In your account</p>
