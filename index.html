@@ -667,7 +667,6 @@ const B = {
   mmt:       {id:'mmt',       type:'insider', title:'₹1,500 off MakeMyTrip',    why:'Insider benefit for 4 years with us',    state:'ready',  value:1500, exp:9,  tags:['travel','premium'], cta:'Use now', partner:true, code:'INSIDER1500MMT'},
   xstream:   {id:'xstream',   type:'ott',     title:'Xstream Play',            why:'Included in your plan · 22 apps',            state:'active', value:149,  exp:32, tags:['entertainment'], cta:'Open'},
   netflix:   {id:'netflix',   type:'ott',     title:'Netflix Basic',            why:'Included with your ₹1,199 postpaid plan',    state:'active', value:199,  exp:26, tags:['entertainment','premium'], cta:'Open'},
-  wynk:      {id:'wynk',      type:'ott',     title:'Wynk Music Premium',       why:'Free with your prepaid pack',                state:'active', value:99,   exp:58, tags:['music'], cta:'Open'},
   fiber:     {id:'fiber',     type:'plan',    title:'Speed boost · 300 Mbps',   why:'Active on your Fiber connection till 30 Sep',state:'active', value:0,    exp:20, tags:['premium','fiber'], cta:'Manage'},
   shield:    {id:'shield',    type:'insider', title:'Device Shield cover',      why:'Premium benefit · ₹40,000 cover',          state:'active', value:0,    exp:120,tags:['premium'], cta:'View policy'},
   talktime:  {id:'talktime',  type:'plan',    title:'₹30 talktime',             why:'Set a HelloTune to unlock this reward',      state:'locked', value:30,   exp:null, tags:['music','engagement'], cta:'Set up HelloTune'},
@@ -689,7 +688,7 @@ const ACTIVITY = [
   {t:'Xstream · 1 month', s:'Activated · 1 Sep',v:'₹149',  k:'ok'},
   {t:'₹100 Cashback',           s:'Expired · 8 Sep',  v:'lapsed',k:'bad'}
 ];
-const SUBS = [{n:'Netflix',c:'#E50914'},{n:'Xstream',c:'#E30613'},{n:'Wynk',c:'#0B7C6B'}];
+const SUBS = [{n:'Netflix',c:'#E50914'},{n:'Xstream',c:'#E30613'}];
 
 /* ============================== cohortConfig.ts ============================
    Each cohort changes SIX things, not just copy:
@@ -702,7 +701,7 @@ const COHORTS = {
     note:'The default hub. Priority engine leads with what needs action; everything else falls in behind it.',
     hero:'default',
     sections:['hero','attention','benefits','insider','earn','extras','activity'],
-    ids:['cash100','myntra','ott599','xstream','netflix','mmt','shop50','wynk','spin','amazon','oldcash'],
+    ids:['cash100','myntra','ott599','xstream','netflix','mmt','shop50','spin','amazon','oldcash'],
     relevant:['entertainment','shopping','money'],
     weights:{urgency:.30,recency:.20,relevance:.15,value:.20,engage:.15},
     copy:{attention:'Needs your attention', attentionSub:'Two of these run out this week'}
@@ -712,7 +711,7 @@ const COHORTS = {
     note:'Re-engagement first. The catalogue is deliberately trimmed — one streak, one reward, nothing else competing.',
     hero:'welcome',
     sections:['hero','challenge','benefits','insider','earn','extras'],
-    ids:['comeback','wynk','spin'],
+    ids:['comeback','spin'],
     relevant:['engagement','game'],
     weights:{urgency:.15,recency:.10,relevance:.25,value:.15,engage:.35},
     copy:{benefits:'Benefits waiting for you', benefitsSub:'Still yours, nothing expired yet'}
@@ -722,7 +721,7 @@ const COHORTS = {
     note:'No data pack, no OTT habit. The hub leads with the one action this user is actually likely to take.',
     hero:'action',
     sections:['hero','recommend','benefits','insider','earn','extras'],
-    ids:['talktime','wynk','comeback','spin','amazon'],
+    ids:['talktime','comeback','spin','amazon'],
     relevant:['music','engagement'],
     weights:{urgency:.15,recency:.10,relevance:.35,value:.10,engage:.30},
     copy:{benefits:'What you already have', recommend:'Because you call more than you stream'}
@@ -742,7 +741,7 @@ const COHORTS = {
     note:'Third exhaustion this month. The reward is framed as the fix, not as an upsell.',
     hero:'lowdata',
     sections:['hero','recommend','attention','benefits','insider','earn'],
-    ids:['minidata','cash100','wynk','xstream','spin'],
+    ids:['minidata','cash100','xstream','spin'],
     relevant:['data'],
     weights:{urgency:.20,recency:.15,relevance:.35,value:.15,engage:.15},
     copy:{recommend:'Recommended for you right now', attention:'Also waiting for you'}
@@ -752,7 +751,7 @@ const COHORTS = {
     note:'Urgency is spent on two cards only — the rest of the page stays calm so the warning still reads as a warning.',
     hero:'urgent',
     sections:['hero','attention','benefits','insider','extras','activity'],
-    ids:['cash100','myntra','ott599','xstream','netflix','shop50','wynk','amazon','oldcash'],
+    ids:['cash100','myntra','ott599','xstream','netflix','shop50','amazon','oldcash'],
     relevant:['money','shopping'],
     weights:{urgency:.55,recency:.10,relevance:.10,value:.15,engage:.10},
     copy:{attention:'Use these before they expire', attentionSub:'After this they are gone — no extension', benefits:'Your other benefits'}
@@ -762,7 +761,7 @@ const COHORTS = {
     note:'The post-transaction moment the BRD is built around: the user sees what the recharge earned before they leave the screen.',
     hero:'success',
     sections:['hero','attention','insider','earn','benefits','extras'],
-    ids:['cash100','ott599','shop50','xstream','wynk','myntra','spin'],
+    ids:['cash100','ott599','shop50','xstream','myntra','spin'],
     relevant:['recharge'],
     weights:{urgency:.20,recency:.40,relevance:.20,value:.10,engage:.10},
     copy:{attention:'Claim what you just unlocked', attentionSub:'All three are already yours — one tap each', benefits:'Everything else you have'}
@@ -1135,13 +1134,13 @@ const SECTIONS = {
         <h2 class="sec__title">${esc(cfg.copy?.benefits || 'Your benefits')}</h2>
         <p class="sec__sub">${esc(cfg.copy?.benefitsSub || 'Everything you hold right now, in one place')}</p>
       </div></div>
-      <div class="filters">
+      ${all.length > 3 ? `<div class="filters">
         <div class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
           <input id="q" type="search" placeholder="Search benefits" value="${esc(state.q)}" aria-label="Search benefits"></div>
         <div class="tabs" role="tablist" aria-label="Filter benefits">
           ${tab('all','All',counts.all)}${tab('ready','Ready to use',counts.ready)}${tab('active','Active',counts.active)}${tab('expiring','Expiring',counts.expiring)}${tab('used','Used',counts.used)}${tab('expired','Expired',counts.expired)}
         </div>
-      </div>
+      </div>` : ''}
       <div class="grid"></div></section>`);
     const g = wrap.querySelector('.grid');
     if (!list.length){
@@ -1267,10 +1266,10 @@ const SECTIONS = {
         </div>
         <div class="xcard">
           <span class="chip chip--muted">${ico('sub',12,2.2)} Subscriptions</span>
-          <div class="xcard__v">3 active</div>
-          <p class="xcard__s">Netflix, Xstream Play and Wynk — all billed with your plan.</p>
+          <div class="xcard__v">2 active</div>
+          <p class="xcard__s">Netflix and Xstream Play — both billed with your plan.</p>
           <div class="subrow">${SUBS.map(s=>`<span class="sublogo" style="background:${s.c}" title="${s.n}">${s.n[0]}</span>`).join('')}</div>
-          <button class="btn btn--sm btn--ghost" data-act="toast" data-msg="Subscriptions — 3 active, next bill 28 Sep.">Manage subscriptions</button>
+          <button class="btn btn--sm btn--ghost" data-act="toast" data-msg="Subscriptions — 2 active, next bill 28 Sep.">Manage subscriptions</button>
         </div>
       </div></section>`);
   },
