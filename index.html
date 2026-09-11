@@ -1,7 +1,7 @@
 <title>Airtel Benefits Hub</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,600&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
 /* ============================================================
    TOKENS — light is the base; dark redefines tokens only.
@@ -48,6 +48,8 @@
   --f-display:"Bricolage Grotesque","Figtree",system-ui,sans-serif;
   --f-ui:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
   --f-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --f-serif:"Bodoni Moda",Georgia,"Times New Roman",serif;
+  --ins-1:#B4123F; --ins-2:#7C0A2B; --ins-cream:#F8E4BC;
 
   --gut:18px;
   --desk:#E7DFDA;
@@ -483,6 +485,68 @@ img,svg{max-width:100%}
 .task.is-done .task__t{color:var(--ink-3);text-decoration:line-through}
 .task__r{margin-left:auto;font-family:var(--f-mono);font-size:11.5px;color:var(--ink-3);white-space:nowrap;flex:none}
 
+/* ============================================================
+   AIRTEL INSIDER — the one place the product borrows another
+   brand world. Crimson ground, cream serif, partners in orbit.
+   Kept to a single panel so it reads as a destination, not a
+   third accent colour loose in the page.
+   ============================================================ */
+.ins{position:relative;border-radius:var(--r-l);overflow:hidden;padding:26px 20px 22px;
+  background:radial-gradient(120% 90% at 50% 38%,#C2164A 0%,var(--ins-1) 42%,var(--ins-2) 100%);
+  color:#FBEFE4;text-align:center;box-shadow:0 22px 46px -24px rgba(124,10,43,.75)}
+.ins__sun{position:absolute;inset:-30% -10%;pointer-events:none;opacity:.5;
+  background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(255,255,255,.075) 0deg 5deg,transparent 5deg 13deg);
+  -webkit-mask:radial-gradient(closest-side,#000 30%,transparent 78%);mask:radial-gradient(closest-side,#000 30%,transparent 78%)}
+.ins__h{position:relative;font-family:var(--f-serif);font-optical-sizing:auto;font-weight:600;
+  font-size:clamp(2rem,9.4cqw,2.5rem);line-height:1;color:var(--ins-cream);letter-spacing:-.005em}
+.ins__k{position:relative;font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;
+  color:rgba(251,239,228,.72);margin-top:9px;font-weight:600}
+
+.orbit{position:relative;width:240px;height:240px;margin:16px auto 4px}
+.orbit__ring{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(255,255,255,.17)}
+.orbit__ring--i{inset:30px;border-color:rgba(255,255,255,.11)}
+.orbit__spin{position:absolute;inset:0;animation:orb 46s linear infinite}
+.orbit__sat{position:absolute;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;
+  animation:orb 46s linear infinite reverse;box-shadow:0 6px 14px -4px rgba(40,0,12,.6);
+  font-weight:800;font-size:11px;letter-spacing:-.01em;color:#fff;text-align:center;line-height:1.05}
+.orbit__sat--li{left:0;top:58px;background:#0A66C2;font-size:17px}
+.orbit__sat--cr{left:194px;top:100px;background:#0C0C0C;font-size:9.5px;letter-spacing:.02em}
+.orbit__sat--pf{left:32px;top:176px;background:#E1265B;font-size:9px}
+.orbit__dot{position:absolute;width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.5)}
+.orbit__core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:140px;height:76px;
+  border-radius:38px;display:grid;place-items:center;gap:0;
+  background:linear-gradient(150deg,rgba(255,255,255,.16),rgba(255,255,255,.04));
+  border:1px solid rgba(255,255,255,.22);box-shadow:0 10px 26px -10px rgba(40,0,12,.7),inset 0 1px 0 rgba(255,255,255,.25);
+  backdrop-filter:blur(3px)}
+.orbit__lock{display:flex;align-items:center;gap:5px;color:#fff;letter-spacing:.02em;opacity:.92}
+.orbit__swoosh{position:relative;width:17px;height:17px;flex:none}
+.orbit__swoosh::after{content:"";position:absolute;inset:4px 3px 3px 4px;border-left:3px solid #fff;
+  border-bottom:3px solid #fff;border-bottom-left-radius:10px;transform:rotate(-45deg)}
+.orbit__lock b{font-size:14px;font-weight:700;letter-spacing:-.02em}
+.orbit__core span{display:block;font-size:21px;font-weight:800;letter-spacing:-.035em;color:#fff;margin-top:-2px}
+@keyframes orb{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.orbit__spin,.orbit__sat{animation:none}}
+
+.ins__tier{position:relative;margin-top:16px;padding-top:15px;border-top:1px solid rgba(255,255,255,.16);
+  display:flex;align-items:center;gap:10px;text-align:left}
+.ins__tier b{font-size:13.5px;font-weight:700}
+.ins__tier p{font-size:11.5px;color:rgba(251,239,228,.7);margin-top:2px}
+.ins__lvl{margin-left:auto;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ins-cream);border:1px solid rgba(248,228,188,.4);
+  border-radius:var(--r-pill);padding:4px 9px;white-space:nowrap;flex:none}
+.ins__bar{position:relative;height:5px;border-radius:3px;background:rgba(255,255,255,.18);margin-top:12px;overflow:hidden}
+.ins__fill{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,var(--gold),#F0D9A6);width:66%}
+.ins .btn{margin-top:16px;position:relative}
+
+.poffer{display:flex;align-items:center;gap:12px;padding:12px 2px;border-bottom:1px solid var(--line);min-width:0}
+.poffer:last-of-type{border-bottom:0}
+.plogo{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;flex:none;
+  color:#fff;font-weight:800;font-size:11px;line-height:1;text-align:center}
+.poffer__b{min-width:0;flex:1}
+.poffer .btn{flex:none}
+.poffer__t{font-size:14px;font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.poffer__s{font-size:11.5px;color:var(--ink-3);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
 /* ---------- extras ---------- */
 .extras{display:grid;gap:12px}
 .xcard{border-radius:var(--r-m);padding:20px;display:flex;flex-direction:column;gap:5px;
@@ -657,7 +721,7 @@ const B = {
   ott599:    {id:'ott599',    type:'ott',     title:'1 month Sony LIV',         why:'Unlocked with your ₹599 recharge',           state:'ready',  value:299,  exp:5,  isNew:true,  tags:['recharge','entertainment'], cta:'Activate', partner:true},
   shop50:    {id:'shop50',    type:'voucher', title:'₹50 Shopping voucher',     why:'Unlocked with your ₹599 recharge',           state:'ready',  value:50,   exp:14, isNew:true,  tags:['recharge','shopping'], cta:'Claim now'},
   myntra:    {id:'myntra',    type:'voucher', title:'₹500 Myntra voucher',      why:'Airtel Insider reward · Level 3',            state:'ready',  value:500,  exp:2,  tags:['shopping'], cta:'Use now', partner:true},
-  mmt:       {id:'mmt',       type:'insider', title:'₹1,500 off MakeMyTrip',    why:'Insider benefit for 4 years with Airtel',    state:'ready',  value:1500, exp:9,  tags:['travel','premium'], cta:'Use now', partner:true},
+  mmt:       {id:'mmt',       type:'insider', title:'₹1,500 off MakeMyTrip',    why:'Insider benefit for 4 years with Airtel',    state:'ready',  value:1500, exp:9,  tags:['travel','premium'], cta:'Use now', partner:true, code:'AIRTEL1500MMT'},
   xstream:   {id:'xstream',   type:'ott',     title:'Airtel Xstream Play',      why:'Included in your plan · 22 apps',            state:'active', value:149,  exp:32, tags:['entertainment'], cta:'Open'},
   netflix:   {id:'netflix',   type:'ott',     title:'Netflix Basic',            why:'Included with your ₹1,199 postpaid plan',    state:'active', value:199,  exp:26, tags:['entertainment','premium'], cta:'Open'},
   wynk:      {id:'wynk',      type:'ott',     title:'Wynk Music Premium',       why:'Free with your prepaid pack',                state:'active', value:99,   exp:58, tags:['music'], cta:'Open'},
@@ -670,6 +734,9 @@ const B = {
   comeback:  {id:'comeback',  type:'cash',    title:'₹20 cashback',             why:'Waiting for you since 28 Aug',               state:'ready',  value:20,   exp:6,  tags:['money'], cta:'Claim now'},
   spin:      {id:'spin',      type:'game',    title:'Spin & Win',               why:"Complete today's challenge to unlock",       state:'locked', value:0,    exp:null, tags:['game'], cta:'Unlock'},
   amazon:    {id:'amazon',    type:'voucher', title:'Amazon ₹500 voucher',      why:'Used on 3 Sep · order #4471',                state:'used',   value:500,  exp:null, tags:['shopping']},
+  li:        {id:'li',        type:'insider', title:'LinkedIn Premium',          why:'Insider benefit · 1 month free',             state:'ready',  value:1400, exp:21, tags:['premium','career'], cta:'Claim now', partner:true, to:'LinkedIn'},
+  croma:     {id:'croma',     type:'insider', title:'₹500 off at Croma',         why:'Insider benefit · on ₹4,999 and above',      state:'ready',  value:500,  exp:12, tags:['shopping'], cta:'Get code', partner:true, to:'Croma stores & croma.com', code:'INSIDER500CR'},
+  pfm:       {id:'pfm',       type:'insider', title:'Pocket FM 30-day pass',     why:'Insider benefit · unlimited audio series',   state:'ready',  value:149,  exp:7,  tags:['entertainment'], cta:'Claim now', partner:true, to:'Pocket FM'},
   oldcash:   {id:'oldcash',   type:'cash',    title:'₹100 Cashback',            why:'Expired 8 Sep · unclaimed for 30 days',      state:'expired',value:100,  exp:null, tags:['money'], cta:'View details'}
 };
 
@@ -691,7 +758,7 @@ const COHORTS = {
     label:'Active customer',
     note:'The default hub. Priority engine leads with what needs action; everything else falls in behind it.',
     hero:'default',
-    sections:['hero','attention','benefits','earn','extras','activity'],
+    sections:['hero','attention','benefits','earn','insider','extras','activity'],
     ids:['cash100','myntra','ott599','xstream','netflix','mmt','shop50','wynk','spin','amazon','oldcash'],
     relevant:['entertainment','shopping','money'],
     weights:{urgency:.30,recency:.20,relevance:.15,value:.20,engage:.15},
@@ -711,7 +778,7 @@ const COHORTS = {
     label:'Prepaid voice-only',
     note:'No data pack, no OTT habit. The hub leads with the one action this user is actually likely to take.',
     hero:'action',
-    sections:['hero','recommend','benefits','earn','extras'],
+    sections:['hero','recommend','benefits','earn','insider','extras'],
     ids:['talktime','wynk','comeback','spin','amazon'],
     relevant:['music','engagement'],
     weights:{urgency:.15,recency:.10,relevance:.35,value:.10,engage:.30},
@@ -721,7 +788,7 @@ const COHORTS = {
     label:'High-ARPU Fiber / Postpaid',
     note:'This user already holds real value. Premium surface, benefits stated as facts, action framed as "get more".',
     hero:'premium',
-    sections:['hero','recommend','benefits','extras','activity'],
+    sections:['hero','recommend','insider','benefits','extras','activity'],
     ids:['autopay','family','netflix','fiber','shield','mmt','xstream'],
     relevant:['premium','fiber','family'],
     weights:{urgency:.15,recency:.10,relevance:.30,value:.30,engage:.15},
@@ -731,7 +798,7 @@ const COHORTS = {
     label:'Data-exhausted',
     note:'Third exhaustion this month. The reward is framed as the fix, not as an upsell.',
     hero:'lowdata',
-    sections:['hero','recommend','attention','benefits','earn'],
+    sections:['hero','recommend','attention','benefits','earn','insider'],
     ids:['minidata','cash100','wynk','xstream','spin'],
     relevant:['data'],
     weights:{urgency:.20,recency:.15,relevance:.35,value:.15,engage:.15},
@@ -741,7 +808,7 @@ const COHORTS = {
     label:'Benefits expiring today',
     note:'Urgency is spent on two cards only — the rest of the page stays calm so the warning still reads as a warning.',
     hero:'urgent',
-    sections:['hero','attention','benefits','extras','activity'],
+    sections:['hero','attention','benefits','insider','extras','activity'],
     ids:['cash100','myntra','ott599','xstream','netflix','shop50','wynk','amazon','oldcash'],
     relevant:['money','shopping'],
     weights:{urgency:.55,recency:.10,relevance:.10,value:.15,engage:.10},
@@ -751,7 +818,7 @@ const COHORTS = {
     label:'Just recharged · ₹599',
     note:'The post-transaction moment the BRD is built around: the user sees what the recharge earned before they leave the screen.',
     hero:'success',
-    sections:['hero','attention','earn','benefits','extras'],
+    sections:['hero','attention','earn','insider','benefits','extras'],
     ids:['cash100','ott599','shop50','xstream','wynk','myntra','spin'],
     relevant:['recharge'],
     weights:{urgency:.20,recency:.40,relevance:.20,value:.10,engage:.10},
@@ -1191,6 +1258,55 @@ const SECTIONS = {
     return wrap;
   },
 
+  /* Airtel Insider — partner offers that come with the plan, not with a task */
+  insider(cfg){
+    const offers = [
+      {id:'li',    logo:'in',      bg:'#0A66C2', size:'16px'},
+      {id:'croma', logo:'croma',   bg:'#0C0C0C', size:'9.5px'},
+      {id:'pfm',   logo:'Pocket<br>FM', bg:'#E1265B', size:'8.5px'}
+    ];
+    const rows = offers.map(o => {
+      const b = view(B[o.id]);
+      const done = b.state !== 'ready';
+      return `<div class="poffer">
+        <span class="plogo" style="background:${o.bg};font-size:${o.size}">${o.logo}</span>
+        <span class="poffer__b"><span class="poffer__t">${esc(b.title)}</span>
+          <span class="poffer__s">${esc(done ? b.why : b.why.replace('Insider benefit · ',''))}</span></span>
+        ${done ? '<span class="status status--past">Claimed</span>'
+               : `<button class="btn btn--sm btn--ghost" data-act="open" data-id="${b.id}">${esc(b.cta)}</button>`}
+      </div>`;
+    }).join('');
+    return el(`<section class="sec" data-flip="insider">
+      <div class="sec__head"><div><h2 class="sec__title">Airtel Insider</h2>
+        <p class="sec__sub">Partner offers that come with your plan — nothing to earn</p></div></div>
+      <div class="ins">
+        <span class="ins__sun"></span>
+        <h3 class="ins__h">Premium offers</h3>
+        <p class="ins__k">At no extra cost</p>
+        <div class="orbit" aria-hidden="true">
+          <span class="orbit__ring"></span><span class="orbit__ring orbit__ring--i"></span>
+          <span class="orbit__spin">
+            <span class="orbit__sat orbit__sat--li">in</span>
+            <span class="orbit__sat orbit__sat--cr">croma</span>
+            <span class="orbit__sat orbit__sat--pf">Pocket<br>FM</span>
+            <span class="orbit__dot" style="left:116px;top:-4px"></span>
+            <span class="orbit__dot" style="left:208px;top:192px"></span>
+            <span class="orbit__dot" style="left:86px;top:230px"></span>
+          </span>
+          <span class="orbit__core"><span class="orbit__lock">
+            <b>airtel</b></span><span>insider</span></span>
+        </div>
+        <div class="ins__tier">
+          <div><b>You're on Level 3</b><p>4 of 9 offers unlocked this year</p></div>
+          <span class="ins__lvl">Level 3</span>
+        </div>
+        <div class="ins__bar"><span class="ins__fill"></span></div>
+        <button class="btn btn--gold btn--wide" data-act="toast" data-msg="Airtel Insider — 9 partner offers available.">See all Insider offers</button>
+      </div>
+      <div>${rows}</div>
+    </section>`);
+  },
+
   /* CoinsCard + SubscriptionsCard */
   extras(cfg){
     return el(`<section class="sec" data-flip="extras">
@@ -1391,7 +1507,7 @@ function sheetDone(b){
       <span class="done__tick">${ico('tick',30,2.6)}</span>
       <h3 id="sheetTitle" style="margin-top:10px">${msg.t}</h3>
       <p class="sheet__why" style="max-width:30ch">${esc(msg.s)}</p></div>
-    ${b.id==='mmt' ? `<div class="sheet__terms"><div class="trow"><span>Coupon (fallback)</span><b>AIRTEL1500MMT</b></div></div>` : ''}
+    ${b.code ? `<div class="sheet__terms"><div class="trow"><span>Coupon (fallback)</span><b>${esc(b.code)}</b></div></div>` : ''}
     <div class="sheet__acts"><button class="btn btn--ghost btn--wide" data-act="close">Done</button></div>`;
 }
 function openSheet(id){
