@@ -151,7 +151,20 @@ img,svg{max-width:100%}
 .head.is-stuck{border-bottom-color:var(--line)}
 .head__in{padding:11px var(--gut);display:flex;align-items:center;gap:10px}
 .brand{display:flex;align-items:center;font-weight:800;letter-spacing:-.022em;font-size:18px}
-.head__acts{margin-left:auto;display:flex;align-items:center;gap:6px}
+.head__acts{margin-left:auto;display:flex;align-items:center;gap:7px}
+.hdrbtn{--halo:rgba(255,255,255,.14);--ring:rgba(255,255,255,.1);
+  position:relative;width:38px;height:38px;border-radius:12px;display:grid;place-items:center;flex:none;
+  background:radial-gradient(125% 115% at 50% 4%,var(--halo),transparent 72%),#141110;
+  box-shadow:inset 0 0 0 1px var(--ring);transition:transform .14s cubic-bezier(.2,.8,.2,1),box-shadow .2s}
+.hdrbtn:hover{transform:translateY(-1px);box-shadow:inset 0 0 0 1px var(--ring),0 7px 16px -8px var(--halo)}
+.hdrbtn:active{transform:translateY(0) scale(.96)}
+.hdrbtn--coin{--halo:rgba(199,145,65,.42);--ring:rgba(220,170,95,.34)}
+.hdrbtn--voucher{--halo:rgba(60,200,148,.36);--ring:rgba(80,210,160,.3)}
+.hdrbtn--spin{--halo:rgba(230,80,165,.36);--ring:rgba(240,110,180,.3)}
+.hdrbtn__b{position:absolute;top:-4px;right:-4px;min-width:17px;height:17px;border-radius:9px;
+  background:var(--red);color:#fff;font-size:9.5px;font-weight:700;display:grid;place-items:center;
+  padding:0 4px;border:2px solid var(--paper);line-height:1;z-index:1}
+.hdrbtn__b:empty{display:none}
 .iconbtn{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:var(--ink-2);
   transition:background .15s,color .15s}
 .iconbtn:hover{background:var(--surface-2);color:var(--ink)}
@@ -607,12 +620,7 @@ img,svg{max-width:100%}
       <header class="head" id="head">
         <div class="head__in">
           <a class="brand" href="#hub">Benefits</a>
-          <div class="head__acts">
-            <button class="iconbtn" id="searchJump" aria-label="Search benefits">
-              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
-            </button>
-            <button class="iconbtn" aria-label="Account"><span class="avatar" aria-hidden="true">RS</span></button>
-          </div>
+          <div class="head__acts" id="headActs"></div>
         </div>
       </header>
       <main class="wrap" id="hub"><div class="stack" id="stack"></div></main>
@@ -751,6 +759,16 @@ const ART = {
   shield: u => `<defs>${lg(u,'#FFE2AC','#B8802A')}</defs>
     <path d="M16 4.5 26 8v7.5c0 6-4.2 10.4-10 12-5.8-1.6-10-6-10-12V8z" fill="url(#${u})"/>
     <path d="m11.4 16.2 3.2 3.2 6-6.4" stroke="#6B4510" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`,
+  /* prize wheel — Spin & Win */
+  wheel: u => `<circle cx="16" cy="17.5" r="11.6" fill="#0E0B0A"/>
+    <path d="M16 6.5a11 11 0 0 1 9.5 5.5L16 17.5z" fill="#F0323D"/>
+    <path d="M25.5 12a11 11 0 0 1 0 11L16 17.5z" fill="#E8A33A"/>
+    <path d="M25.5 23a11 11 0 0 1-9.5 5.5V17.5z" fill="#22996F"/>
+    <path d="M16 28.5A11 11 0 0 1 6.5 23L16 17.5z" fill="#C2277E"/>
+    <path d="M6.5 23a11 11 0 0 1 0-11L16 17.5z" fill="#7B4BC8"/>
+    <path d="M6.5 12A11 11 0 0 1 16 6.5v11z" fill="#2F8FD0"/>
+    <circle cx="16" cy="17.5" r="3.1" fill="#FBF7F5"/>
+    <path d="m16 2.6 2.6 4h-5.2z" fill="#F4EEE6"/>`,
   /* phone — subscriptions */
   phone: u => `<defs>${lg(u,'#B7A6FF','#5238C4')}</defs>
     <rect x="8" y="3.5" width="16" height="25" rx="3.4" fill="url(#${u})"/>
@@ -1440,6 +1458,8 @@ function render(animate = true){
   if (focused){ const q = $('#q'); q.focus(); q.setSelectionRange(caret, caret); }
   initScratch();
   if (state.cohort === 'data') requestAnimationFrame(()=>{ const m = $('#meterFill'); if (m) m.style.width = '4%'; });
+  const badge = document.getElementById('hBadge');
+  if (badge) badge.textContent = totals(cfg).ready || '';
   $('#chromeNote').innerHTML = `<b>${esc(cfg.label)}.</b> ${esc(cfg.note)}`;
 }
 
@@ -1616,6 +1636,10 @@ document.addEventListener('click', e => {
   else if (a === 'streak'){ state.streak = Math.min(state.streak + 1, 4);
     toast(state.streak > 3 ? 'Challenge complete' : `Day ${state.streak - 1} done`, state.streak > 3 ? 'Spin & Win is unlocked below.' : 'Come back tomorrow to keep the streak.');
     render(); }
+  else if (a === 'jump'){
+    const sec = document.querySelector(`[data-flip="${t.dataset.to}"]`);
+    sec ? sec.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block:'start'}) : toast(t.dataset.msg);
+  }
   else if (a === 'scrollEarn') document.querySelector('[data-flip="earn"]')?.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block:'start'});
 });
 scrim.addEventListener('click', e => { if (e.target === scrim) closeSheet(); });
@@ -1627,16 +1651,22 @@ $('#cohort').addEventListener('change', e => {
   const b = reduce ? 'auto' : 'smooth';
   screenEl.scrollTo({top:0, behavior:b}); window.scrollTo({top:0, behavior:b});
 });
-$('#searchJump').addEventListener('click', () => {
-  document.querySelector('[data-flip="benefits"]')?.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block:'start'});
-  setTimeout(() => $('#q')?.focus(), reduce ? 0 : 380);
-});
 const screenEl = $('#screen');
 const scrolled = () => screenEl.scrollTop || scrollY;
 const onScroll = () => $('#head').classList.toggle('is-stuck', scrolled() > 8);
 addEventListener('scroll', onScroll, {passive:true});
 screenEl.addEventListener('scroll', onScroll, {passive:true});
 addEventListener('resize', () => { if (!state.scratch.open) initScratch(); });
+
+$('#headActs').innerHTML = `
+  <button class="hdrbtn hdrbtn--coin" data-act="jump" data-to="extras"
+    data-msg="Coins wallet — 2,450 coins available." aria-label="Coins — 2,450 available">${art('coin',24)}</button>
+  <button class="hdrbtn hdrbtn--voucher" data-act="jump" data-to="benefits"
+    data-msg="No benefits to show on this page." aria-label="Your vouchers and benefits">
+    <span class="hdrbtn__b" id="hBadge"></span>${art('voucher',24)}</button>
+  <button class="hdrbtn hdrbtn--spin" data-act="jump" data-to="earn"
+    data-msg="Spin & Win isn't running on this account today." aria-label="Spin and win">${art('wheel',24)}</button>
+  <button class="iconbtn" aria-label="Account"><span class="avatar" aria-hidden="true">RS</span></button>`;
 
 render(false);
 </script>
