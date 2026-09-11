@@ -1,11 +1,11 @@
-<title>Airtel Benefits Hub</title>
+<title>Benefits Hub</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,600&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
 /* ============================================================
    TOKENS — light is the base; dark redefines tokens only.
-   Neutrals are warm (red-biased) so they sit under Airtel red.
+   Neutrals are warm (red-biased) so they sit under the brand red.
    Brand red is identity + primary action. Urgency is ember,
    a separate semantic hue, so the page never turns all-red.
    ============================================================ */
@@ -204,12 +204,7 @@ img,svg{max-width:100%}
   backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:border-color .2s,background .2s}
 .head.is-stuck{border-bottom-color:var(--line)}
 .head__in{padding:11px var(--gut);display:flex;align-items:center;gap:10px}
-.brand{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:-.015em;font-size:16px}
-.brand__mark{width:26px;height:26px;border-radius:50%;background:var(--red);position:relative;flex:none}
-.brand__mark::after{content:"";position:absolute;inset:7px 5px 5px 7px;border-left:3.5px solid #fff;
-  border-bottom:3.5px solid #fff;border-bottom-left-radius:12px;transform:rotate(-45deg)}
-.brand__sep{width:1px;height:17px;background:var(--line-2)}
-.brand__page{font-weight:600;color:var(--ink-2);font-size:15px}
+.brand{display:flex;align-items:center;font-weight:800;letter-spacing:-.022em;font-size:18px}
 .head__acts{margin-left:auto;display:flex;align-items:center;gap:6px}
 .iconbtn{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:var(--ink-2);
   transition:background .15s,color .15s}
@@ -246,8 +241,12 @@ img,svg{max-width:100%}
 .hero__amount .cur{font-size:.5em;font-weight:700;letter-spacing:-.02em;transform:translateY(-.1em)}
 .hero__lede{font-size:clamp(1.02rem,4.6cqw,1.18rem);font-weight:600;letter-spacing:-.015em;margin-top:14px;max-width:22ch}
 .hero__meta{font-size:13.5px;color:var(--ink-2);margin-top:7px}
-.hero__ledger{border-top:1px solid var(--line-2);display:flex;flex-direction:column}
-.led{display:flex;align-items:center;gap:12px;padding:11px 2px;border-bottom:1px solid var(--line);min-width:0}
+.hero__ledger{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-m);
+  box-shadow:var(--shadow-1);padding:2px 15px 4px;display:flex;flex-direction:column}
+.hero__ledger-h{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--ink-3);padding:13px 0 11px;border-bottom:1px solid var(--line)}
+.led{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);min-width:0}
+.led:last-child{border-bottom:0}
 .led>span{min-width:0}
 .led__t{font-size:14px;font-weight:600}
 .led__s{font-size:11.5px;color:var(--ink-3)}
@@ -486,7 +485,7 @@ img,svg{max-width:100%}
 .task__r{margin-left:auto;font-family:var(--f-mono);font-size:11.5px;color:var(--ink-3);white-space:nowrap;flex:none}
 
 /* ============================================================
-   AIRTEL INSIDER — the one place the product borrows another
+   INSIDER — the one place the product borrows another
    brand world. Crimson ground, cream serif, partners in orbit.
    Kept to a single panel so it reads as a destination, not a
    third accent colour loose in the page.
@@ -518,12 +517,7 @@ img,svg{max-width:100%}
   background:linear-gradient(150deg,rgba(255,255,255,.16),rgba(255,255,255,.04));
   border:1px solid rgba(255,255,255,.22);box-shadow:0 10px 26px -10px rgba(40,0,12,.7),inset 0 1px 0 rgba(255,255,255,.25);
   backdrop-filter:blur(3px)}
-.orbit__lock{display:flex;align-items:center;gap:5px;color:#fff;letter-spacing:.02em;opacity:.92}
-.orbit__swoosh{position:relative;width:17px;height:17px;flex:none}
-.orbit__swoosh::after{content:"";position:absolute;inset:4px 3px 3px 4px;border-left:3px solid #fff;
-  border-bottom:3px solid #fff;border-bottom-left-radius:10px;transform:rotate(-45deg)}
-.orbit__lock b{font-size:14px;font-weight:700;letter-spacing:-.02em}
-.orbit__core span{display:block;font-size:21px;font-weight:800;letter-spacing:-.035em;color:#fff;margin-top:-2px}
+.orbit__core span{display:block;font-size:25px;font-weight:800;letter-spacing:-.035em;color:#fff;text-align:center}
 @keyframes orb{to{transform:rotate(360deg)}}
 @media (prefers-reduced-motion:reduce){.orbit__spin,.orbit__sat{animation:none}}
 
@@ -654,9 +648,7 @@ img,svg{max-width:100%}
     <div class="screen" id="screen">
       <header class="head" id="head">
         <div class="head__in">
-          <a class="brand" href="#hub"><span class="brand__mark" aria-hidden="true"></span>airtel</a>
-          <span class="brand__sep" aria-hidden="true"></span>
-          <span class="brand__page">Benefits</span>
+          <a class="brand" href="#hub">Benefits</a>
           <div class="head__acts">
             <button class="iconbtn" id="searchJump" aria-label="Search benefits">
               <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
@@ -679,7 +671,7 @@ img,svg{max-width:100%}
 
 <script>
 /* ============================================================================
-   AIRTEL UNIFIED BENEFITS HUB — prototype
+   UNIFIED BENEFITS HUB — prototype
    Architecture (single-file port of the component tree):
      rewardData      → BENEFITS, ACTIVITY, SUBS
      cohortConfig    → COHORTS (hero variant, section order, weights, nudge)
@@ -717,19 +709,19 @@ const money = n => '₹' + n.toLocaleString('en-IN');
 /* ================================ rewardData.ts ============================ */
 /* A benefit answers, in this order: WHAT · WHY · STATUS · EXPIRY · ACTION.    */
 const B = {
-  cash100:   {id:'cash100',   type:'cash',    title:'₹100 Cashback',            why:'Unlocked with your ₹599 recharge',           state:'ready',  value:100,  exp:0,  isNew:true,  tags:['recharge','money'], cta:'Claim now', to:'Airtel Payments Bank'},
+  cash100:   {id:'cash100',   type:'cash',    title:'₹100 Cashback',            why:'Unlocked with your ₹599 recharge',           state:'ready',  value:100,  exp:0,  isNew:true,  tags:['recharge','money'], cta:'Claim now', to:'your wallet'},
   ott599:    {id:'ott599',    type:'ott',     title:'1 month Sony LIV',         why:'Unlocked with your ₹599 recharge',           state:'ready',  value:299,  exp:5,  isNew:true,  tags:['recharge','entertainment'], cta:'Activate', partner:true},
   shop50:    {id:'shop50',    type:'voucher', title:'₹50 Shopping voucher',     why:'Unlocked with your ₹599 recharge',           state:'ready',  value:50,   exp:14, isNew:true,  tags:['recharge','shopping'], cta:'Claim now'},
-  myntra:    {id:'myntra',    type:'voucher', title:'₹500 Myntra voucher',      why:'Airtel Insider reward · Level 3',            state:'ready',  value:500,  exp:2,  tags:['shopping'], cta:'Use now', partner:true},
-  mmt:       {id:'mmt',       type:'insider', title:'₹1,500 off MakeMyTrip',    why:'Insider benefit for 4 years with Airtel',    state:'ready',  value:1500, exp:9,  tags:['travel','premium'], cta:'Use now', partner:true, code:'AIRTEL1500MMT'},
-  xstream:   {id:'xstream',   type:'ott',     title:'Airtel Xstream Play',      why:'Included in your plan · 22 apps',            state:'active', value:149,  exp:32, tags:['entertainment'], cta:'Open'},
+  myntra:    {id:'myntra',    type:'voucher', title:'₹500 Myntra voucher',      why:'Insider reward · Level 3',                  state:'ready',  value:500,  exp:2,  tags:['shopping'], cta:'Use now', partner:true},
+  mmt:       {id:'mmt',       type:'insider', title:'₹1,500 off MakeMyTrip',    why:'Insider benefit for 4 years with us',    state:'ready',  value:1500, exp:9,  tags:['travel','premium'], cta:'Use now', partner:true, code:'INSIDER1500MMT'},
+  xstream:   {id:'xstream',   type:'ott',     title:'Xstream Play',            why:'Included in your plan · 22 apps',            state:'active', value:149,  exp:32, tags:['entertainment'], cta:'Open'},
   netflix:   {id:'netflix',   type:'ott',     title:'Netflix Basic',            why:'Included with your ₹1,199 postpaid plan',    state:'active', value:199,  exp:26, tags:['entertainment','premium'], cta:'Open'},
   wynk:      {id:'wynk',      type:'ott',     title:'Wynk Music Premium',       why:'Free with your prepaid pack',                state:'active', value:99,   exp:58, tags:['music'], cta:'Open'},
   fiber:     {id:'fiber',     type:'plan',    title:'Speed boost · 300 Mbps',   why:'Active on your Fiber connection till 30 Sep',state:'active', value:0,    exp:20, tags:['premium','fiber'], cta:'Manage'},
-  shield:    {id:'shield',    type:'insider', title:'Device Shield cover',      why:'Airtel Black benefit · ₹40,000 cover',       state:'active', value:0,    exp:120,tags:['premium'], cta:'View policy'},
+  shield:    {id:'shield',    type:'insider', title:'Device Shield cover',      why:'Premium benefit · ₹40,000 cover',          state:'active', value:0,    exp:120,tags:['premium'], cta:'View policy'},
   talktime:  {id:'talktime',  type:'plan',    title:'₹30 talktime',             why:'Set a HelloTune to unlock this reward',      state:'locked', value:30,   exp:null, tags:['music','engagement'], cta:'Set up HelloTune'},
   autopay:   {id:'autopay',   type:'cash',    title:'₹50 off every month',      why:'Turn on AutoPay for your Fiber bill',        state:'locked', value:600,  exp:null, tags:['premium','billing'], cta:'Set up AutoPay'},
-  family:    {id:'family',    type:'plan',    title:'Add 3 members free',       why:'Link family accounts to your Airtel Black',  state:'locked', value:0,    exp:null, tags:['premium','family'], cta:'Link accounts'},
+  family:    {id:'family',    type:'plan',    title:'Add 3 members free',       why:'Link family accounts to your plan',       state:'locked', value:0,    exp:null, tags:['premium','family'], cta:'Link accounts'},
   minidata:  {id:'minidata',  type:'plan',    title:'1 GB data, on us',         why:'Recharge ₹19 or more in the app today',      state:'locked', value:19,   exp:null, tags:['data'], cta:'Recharge & unlock'},
   comeback:  {id:'comeback',  type:'cash',    title:'₹20 cashback',             why:'Waiting for you since 28 Aug',               state:'ready',  value:20,   exp:6,  tags:['money'], cta:'Claim now'},
   spin:      {id:'spin',      type:'game',    title:'Spin & Win',               why:"Complete today's challenge to unlock",       state:'locked', value:0,    exp:null, tags:['game'], cta:'Unlock'},
@@ -743,7 +735,7 @@ const B = {
 const ACTIVITY = [
   {t:'₹75 Cashback',            s:'Claimed · 6 Sep',  v:'+₹75',  k:'ok'},
   {t:'Zomato ₹150 voucher',     s:'Used · 3 Sep',     v:'−₹150', k:'ok'},
-  {t:'Airtel Xstream · 1 month', s:'Activated · 1 Sep',v:'₹149',  k:'ok'},
+  {t:'Xstream · 1 month', s:'Activated · 1 Sep',v:'₹149',  k:'ok'},
   {t:'₹100 Cashback',           s:'Expired · 8 Sep',  v:'lapsed',k:'bad'}
 ];
 const SUBS = [{n:'Netflix',c:'#E50914'},{n:'Xstream',c:'#E30613'},{n:'Wynk',c:'#0B7C6B'}];
@@ -792,7 +784,7 @@ const COHORTS = {
     ids:['autopay','family','netflix','fiber','shield','mmt','xstream'],
     relevant:['premium','fiber','family'],
     weights:{urgency:.15,recency:.10,relevance:.30,value:.30,engage:.15},
-    copy:{benefits:'Active on your account', recommend:'Get more from your Airtel plan', benefitsSub:'Airtel Black · 3 services on one bill'}
+    copy:{benefits:'Active on your account', recommend:'Get more from your plan', benefitsSub:'Premium · 3 services on one bill'}
   },
   data: {
     label:'Data-exhausted',
@@ -961,7 +953,7 @@ const HEROES = {
   default(cfg,t){
     const rows = rank(cfg.ids,cfg).map(view).filter(b=>b.state==='ready'||b.state==='active').slice(0,3);
     return `<section class="sec hero hero--default" data-flip="hero">
-      <p class="eyebrow hero__eyebrow">Your Airtel benefits · September</p>
+      <p class="eyebrow hero__eyebrow">Your benefits · September</p>
       <div class="hero__grid">
         <div>
           <div class="hero__amount"><span class="cur">₹</span>${t.value.toLocaleString('en-IN')}</div>
@@ -969,6 +961,7 @@ const HEROES = {
           <p class="hero__meta"><b>${t.ready} ready to use</b> · ${t.soon} need attention this week</p>
         </div>
         <div class="hero__ledger">
+          <p class="hero__ledger-h">In your account</p>
           ${rows.map(b=>`<div class="led">
             <span class="led__dot" style="background:${b.state==='ready'?'var(--ember)':'var(--green)'}"></span>
             <span><span class="led__t">${esc(b.title)}</span><br><span class="led__s">${b.state==='ready'?'Waiting to be claimed':'Active now'}</span></span>
@@ -1000,8 +993,8 @@ const HEROES = {
   premium(cfg,t){
     return `<section class="sec hero hero--premium" data-flip="hero">
       <div class="hero__panel">
-        <span class="tier"><span class="tier__gem"></span>Airtel Black · 4 years</span>
-        <h1>Get more from your Airtel plan</h1>
+        <span class="tier"><span class="tier__gem"></span>Premium · 4 years</span>
+        <h1>Get more from your plan</h1>
         <p class="hero__meta" style="margin-top:12px;max-width:36ch">You're already holding ${money(t.value)} of benefits across Fiber, postpaid and DTH. Two more are one tap away.</p>
         <div class="prem__row">
           <div><div class="prem__v">${money(t.value)}</div><div class="prem__l">Benefits held</div></div>
@@ -1149,7 +1142,7 @@ const SECTIONS = {
     const wrap = el(`<section class="sec" data-flip="recommend">
       <div class="sec__head"><div>
         <h2 class="sec__title">${esc(cfg.copy?.recommend || 'Recommended for you')}</h2>
-        <p class="sec__sub">Based on how you've used Airtel in the last 30 days</p>
+        <p class="sec__sub">Based on how you've used the app in the last 30 days</p>
       </div></div>
       <div class="grid"></div></section>`);
     const g = wrap.querySelector('.grid');
@@ -1258,7 +1251,7 @@ const SECTIONS = {
     return wrap;
   },
 
-  /* Airtel Insider — partner offers that come with the plan, not with a task */
+  /* Insider — partner offers that come with the plan, not with a task */
   insider(cfg){
     const offers = [
       {id:'li',    logo:'in',      bg:'#0A66C2', size:'16px'},
@@ -1277,7 +1270,7 @@ const SECTIONS = {
       </div>`;
     }).join('');
     return el(`<section class="sec" data-flip="insider">
-      <div class="sec__head"><div><h2 class="sec__title">Airtel Insider</h2>
+      <div class="sec__head"><div><h2 class="sec__title">Insider</h2>
         <p class="sec__sub">Partner offers that come with your plan — nothing to earn</p></div></div>
       <div class="ins">
         <span class="ins__sun"></span>
@@ -1293,15 +1286,14 @@ const SECTIONS = {
             <span class="orbit__dot" style="left:208px;top:192px"></span>
             <span class="orbit__dot" style="left:86px;top:230px"></span>
           </span>
-          <span class="orbit__core"><span class="orbit__lock">
-            <b>airtel</b></span><span>insider</span></span>
+          <span class="orbit__core"><span>insider</span></span>
         </div>
         <div class="ins__tier">
           <div><b>You're on Level 3</b><p>4 of 9 offers unlocked this year</p></div>
           <span class="ins__lvl">Level 3</span>
         </div>
         <div class="ins__bar"><span class="ins__fill"></span></div>
-        <button class="btn btn--gold btn--wide" data-act="toast" data-msg="Airtel Insider — 9 partner offers available.">See all Insider offers</button>
+        <button class="btn btn--gold btn--wide" data-act="toast" data-msg="Insider — 9 partner offers available.">See all Insider offers</button>
       </div>
       <div>${rows}</div>
     </section>`);
@@ -1310,12 +1302,12 @@ const SECTIONS = {
   /* CoinsCard + SubscriptionsCard */
   extras(cfg){
     return el(`<section class="sec" data-flip="extras">
-      <div class="sec__head"><div><h2 class="sec__title">Your Airtel extras</h2>
+      <div class="sec__head"><div><h2 class="sec__title">Your extras</h2>
         <p class="sec__sub">Coins and subscriptions, without leaving this page</p></div></div>
       <div class="extras">
         <div class="xcard xcard--coins">
           <span class="coinstack">${ico('coin',120,1.2)}</span>
-          <span class="chip chip--gold">${ico('coin',12,2.2)} Airtel Coins</span>
+          <span class="chip chip--gold">${ico('coin',12,2.2)} Coins</span>
           <div class="xcard__v mono">2,450</div>
           <p class="xcard__s">You've saved ${money(245)} with coins so far. 400 coins expire on 30 Sep.</p>
           <button class="btn btn--sm btn--ghost" data-act="toast" data-msg="Coins wallet — 2,450 coins available.">View coins</button>
@@ -1323,7 +1315,7 @@ const SECTIONS = {
         <div class="xcard">
           <span class="chip chip--muted">${ico('sub',12,2.2)} Subscriptions</span>
           <div class="xcard__v">3 active</div>
-          <p class="xcard__s">Netflix, Xstream Play and Wynk — all billed with your Airtel plan.</p>
+          <p class="xcard__s">Netflix, Xstream Play and Wynk — all billed with your plan.</p>
           <div class="subrow">${SUBS.map(s=>`<span class="sublogo" style="background:${s.c}" title="${s.n}">${s.n[0]}</span>`).join('')}</div>
           <button class="btn btn--sm btn--ghost" data-act="toast" data-msg="Subscriptions — 3 active, next bill 28 Sep.">Manage subscriptions</button>
         </div>
@@ -1480,9 +1472,9 @@ function sheetConfirm(b){
   const action = b.state === 'locked' ? b.cta : (b.state === 'active' ? 'Open' : (b.type === 'ott' ? 'Activate now' : 'Claim benefit'));
   const terms = [
     ['What you get', b.value ? money(b.value) : 'Plan benefit'],
-    ['Why you have it', b.tags.includes('recharge') ? 'Recharge reward' : b.tags.includes('premium') ? 'Airtel Black' : b.tags.includes('engagement') ? 'Engagement reward' : 'Airtel Insider'],
+    ['Why you have it', b.tags.includes('recharge') ? 'Recharge reward' : b.tags.includes('premium') ? 'Premium' : b.tags.includes('engagement') ? 'Engagement reward' : 'Insider'],
     ['Valid till', b.exp === null ? 'No expiry' : b.exp <= 0 ? 'Today, 11:59 PM' : new Date(2026, 8, 10 + b.exp).toLocaleDateString('en-IN', {day:'numeric', month:'short'})],
-    ['Where it applies', b.to || (b.partner ? 'Partner app · signed in automatically' : 'Airtel app & website')]
+    ['Where it applies', b.to || (b.partner ? 'Partner app · signed in automatically' : 'App & website')]
   ];
   return `<div class="sheet__grab"></div>
     <div class="sheet__ico" style="background:${bg};color:${fg}">${ico(b.type==='cash'?'cash':b.type==='ott'?'ott':b.type==='voucher'?'voucher':b.type==='insider'?'insider':'plan',26,2)}</div>
@@ -1497,7 +1489,7 @@ function sheetConfirm(b){
 function sheetHandoff(b){
   return `<div class="sheet__grab"></div><div class="handoff"><div class="spinner"></div>
     <p style="font-weight:650">Taking you to ${esc(b.id==='mmt'?'MakeMyTrip':b.id==='myntra'?'Myntra':b.id==='ott599'?'Sony LIV':'the partner')}…</p>
-    <p class="sheet__why" style="text-align:center;max-width:28ch">Signing you in with your Airtel number — no code to copy.</p></div>`;
+    <p class="sheet__why" style="text-align:center;max-width:28ch">Signing you in with your number — no code to copy.</p></div>`;
 }
 function sheetDone(b){
   const msg = b.state==='locked'
@@ -1529,7 +1521,7 @@ function confirmSheet(){
     } else if (b.type === 'ott' || b.state === 'active'){
       state.activated.add(b.id); toast('Activated', `${b.title} is ready to watch.`);
     } else {
-      state.claimed.add(b.id); toast(`${b.title} claimed`, 'Added to your Airtel account.');
+      state.claimed.add(b.id); toast(`${b.title} claimed`, 'Added to your account.');
     }
     sheet.innerHTML = sheetDone(b);
     sheet.querySelector('.btn')?.focus();
@@ -1554,10 +1546,10 @@ document.addEventListener('click', e => {
   else if (a === 'toast')  toast(t.dataset.msg);
   else if (a === 'claimAll'){
     ['cash100','ott599','shop50'].forEach(id => B[id].type === 'ott' ? state.activated.add(id) : state.claimed.add(id));
-    toast('3 benefits claimed', '₹449 added to your Airtel account.');
+    toast('3 benefits claimed', '₹449 added to your account.');
     render(false); burst(document.querySelector('.hero--success'));
   }
-  else if (a === 'claimScratch'){ state.claimed.add('cash100'); toast('₹100 cashback claimed','Credited to Airtel Payments Bank.'); render(false); }
+  else if (a === 'claimScratch'){ state.claimed.add('cash100'); toast('₹100 cashback claimed','Credited to your wallet.'); render(false); }
   else if (a === 'streak'){ state.streak = Math.min(state.streak + 1, 4);
     toast(state.streak > 3 ? 'Challenge complete' : `Day ${state.streak - 1} done`, state.streak > 3 ? 'Spin & Win is unlocked below.' : 'Come back tomorrow to keep the streak.');
     render(); }
