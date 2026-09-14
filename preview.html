@@ -452,18 +452,6 @@ img,svg{max-width:100%}
 .xfeat__t{display:block;font-size:14px;font-weight:700;letter-spacing:-.02em;color:var(--text)}
 .xfeat__s{display:block;font-size:11.5px;color:var(--text-2);margin-top:1px}
 
-/* ============================ PRODUCT GRID ============================ */
-.prods{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s2)}
-.prod{background:var(--card);border-radius:var(--r-md);padding:var(--s3) var(--s2) var(--s2);
-  display:flex;flex-direction:column;align-items:center;gap:var(--s2);text-align:center;min-height:112px;
-  box-shadow:inset 0 0 0 1px var(--border-soft),var(--sh-sm);position:relative;transition:box-shadow .2s,transform .16s}
-.prod:hover{box-shadow:var(--sh-card)}
-.prod:active{transform:scale(.97)}
-.prod__t{font-size:12px;font-weight:600;color:var(--text);line-height:1.25;letter-spacing:-.01em}
-.prod__art{margin-top:auto;opacity:.95}
-.prod__b{position:absolute;top:-7px;left:50%;transform:translateX(-50%);background:var(--text);color:#fff;
-  font-size:9.5px;font-weight:700;border-radius:var(--r-pill);padding:3px 8px;white-space:nowrap}
-
 /* =========================== OFFER CAROUSEL =========================== */
 .offer{width:212px;border-radius:var(--r-lg);padding:var(--s5) var(--s4);display:flex;flex-direction:column;
   gap:var(--s1);min-height:150px;color:#fff;text-align:left;position:relative;overflow:hidden;
@@ -481,7 +469,6 @@ img,svg{max-width:100%}
 .play__card{position:relative;background:var(--card);border-radius:var(--r-lg);padding:var(--s3);
   display:flex;flex-direction:column;gap:10px;box-shadow:inset 0 0 0 1px var(--border-soft),var(--sh-sm)}
 .play__head{display:flex;align-items:flex-start;gap:8px}
-.play__head .card__ico{width:34px;height:34px;border-radius:var(--r-sm)}
 .play__b{min-width:0;flex:1}
 .play__t{display:block;font-weight:700;font-size:13px;letter-spacing:-.02em;color:var(--text);line-height:1.2}
 .play__s{display:block;font-size:11px;color:var(--text-3);margin-top:3px;line-height:1.3}
@@ -887,7 +874,7 @@ const COHORTS = {
     label:'Active customer',
     note:'The default hub. Priority engine leads with what needs action; everything else falls in behind it.',
     hero:'default',
-    sections:['hero','benefits','explore','addons','insider','earn','products','extras'],
+    sections:['hero','benefits','explore','addons','insider','earn','extras'],
     ids:['ott599','netflix3m','xstream','mmt','shop50','spin','amazon'],
     relevant:['entertainment','shopping','money'],
     weights:{urgency:.30,recency:.20,relevance:.15,value:.20,engage:.15},
@@ -917,7 +904,7 @@ const COHORTS = {
     label:'High-ARPU Fiber / Postpaid',
     note:'This user already holds real value. Premium surface, benefits stated as facts, action framed as "get more".',
     hero:'premium',
-    sections:['hero','recommend','benefits','explore','insider','extras','products','activity'],
+    sections:['hero','recommend','benefits','explore','insider','extras','activity'],
     ids:['autopay','family','netflix','fiber','shield','mmt','xstream'],
     relevant:['premium','fiber','family'],
     weights:{urgency:.15,recency:.10,relevance:.30,value:.30,engage:.15},
@@ -1375,7 +1362,7 @@ const SECTIONS = {
       </div><button class="sec__link" data-act="toast" data-msg="All challenges refresh at midnight.">All challenges ${ico('arrow',14,2.4)}</button></div>
       <div class="play">
         <div class="play__card">
-          <div class="play__head"><span class="card__ico card__ico--voucher">${art('voucher',22)}</span>
+          <div class="play__head">
             <span class="play__b" style="padding-right:${state.scratch.open?'0':'34px'}">
               <span class="play__t">Today's scratch card</span>
               <span class="play__s">${state.scratch.open?'Revealed — claim it':'From your last recharge'}</span></span>
@@ -1388,7 +1375,7 @@ const SECTIONS = {
             ${state.scratch.open?'Redeem ₹100':'Scratch first'}</button>
         </div>
         <div class="play__card">
-          <div class="play__head"><span class="card__ico card__ico--game">${art('gift',22)}</span>
+          <div class="play__head">
             <span class="play__b"><span class="play__t">Spin &amp; Win</span>
               <span class="play__s">${locked?'Unlocks on day 3 of your challenge':'One free spin today'}</span></span></div>
           <div class="wheel-wrap">
@@ -1497,26 +1484,6 @@ const SECTIONS = {
         <span class="offer__p">${o.p}</span>
         <span class="offer__d">${esc(o.d)}</span>
         <span class="offer__art">${art(o.a,64)}</span></button>`).join('')}</div>
-    </section>`);
-  },
-
-  /* ProductsGrid — three columns, consistent heights */
-  products(cfg){
-    const items = [
-      {t:'Refer a friend', a:'family', b:'Earn ₹300'},
-      {t:'Pay bills',      a:'card'},
-      {t:'Shop partners',  a:'voucher'},
-      {t:'Daily check-in', a:'gift'},
-      {t:'Watch & earn',   a:'play'},
-      {t:'Airtel Coins',   a:'coin'}
-    ];
-    return el(`<section class="sec" data-flip="products">
-      <div class="sec__head"><h2 class="sec__title">More ways to earn</h2>
-        <button class="sec__link" data-act="toast" data-msg="All earning options.">View all</button></div>
-      <div class="prods">${items.map(i=>`<button class="prod" data-act="toast" data-msg="${esc(i.t)}">
-        ${i.b?`<span class="prod__b">${i.b}</span>`:''}
-        <span class="prod__t">${esc(i.t)}</span>
-        <span class="prod__art">${art(i.a,40)}</span></button>`).join('')}</div>
     </section>`);
   },
 
