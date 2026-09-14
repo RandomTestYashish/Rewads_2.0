@@ -252,11 +252,6 @@ img,svg{max-width:100%}
 .hero__panel,.hero--default .hero__grid{position:relative;z-index:0;background:var(--card);
   color:var(--text);border-radius:var(--r-xl);padding:var(--s6) var(--s5);
   box-shadow:inset 0 0 0 1px var(--border-soft),var(--sh-card)}
-.hero__panel::before,.hero--default .hero__grid::before{content:"";position:absolute;z-index:-1;
-  top:14px;bottom:14px;right:-6px;width:20px;border-radius:var(--r-lg);
-  background:var(--surface-muted);box-shadow:0 6px 14px -8px rgba(16,24,40,.35)}
-.hero__panel::after,.hero--default .hero__grid::after{content:"";position:absolute;z-index:-1;
-  top:20px;bottom:20px;left:-6px;width:20px;border-radius:var(--r-lg);background:var(--border)}
 .hero__lede{font-size:1rem;font-weight:600;letter-spacing:-.02em;margin-top:10px;max-width:24ch;color:var(--text)}
 .hero__meta{font-size:13px;color:var(--text-2);margin-top:var(--s2)}
 .hero__meta b{color:var(--text);font-weight:700}
@@ -292,8 +287,6 @@ img,svg{max-width:100%}
 /* premium — the one dark card */
 .hero--premium .hero__panel{background:linear-gradient(160deg,#1B1C1F,#08080A);color:#F3EFE9;
   box-shadow:var(--sh-lift);border:1px solid rgba(231,198,140,.22)}
-.hero--premium .hero__panel::before{background:#33363C;box-shadow:none}
-.hero--premium .hero__panel::after{background:#4A4E55}
 .hero--premium h1{color:#fff;font-size:1.5rem;max-width:16ch}
 .hero--premium .hero__meta{color:#B9BDC2}
 .hero--premium .hero__meta b{color:#fff}
