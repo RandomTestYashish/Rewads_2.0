@@ -159,16 +159,18 @@ img,svg{max-width:100%}
 .head.is-stuck{border-bottom-color:var(--border)}
 .head__in{padding:var(--s3) var(--gut);display:flex;align-items:center;gap:var(--s2)}
 .brand{display:flex;align-items:center;font-weight:700;letter-spacing:-.025em;font-size:18px;color:var(--on-bg)}
-.head__acts{margin-left:auto;display:flex;align-items:center;gap:7px}
+.head__acts{margin-left:auto;display:flex;align-items:center;gap:var(--s4)}
 .iconbtn{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:var(--on-bg-2)}
-.avatar{width:34px;height:34px;border-radius:50%;background:var(--red);color:#fff;
-  display:grid;place-items:center;font-size:12px;font-weight:700}
-.hdrbtn{position:relative;width:38px;height:38px;border-radius:var(--r-sm);display:grid;place-items:center;flex:none;
-  background:var(--card);box-shadow:inset 0 0 0 1px var(--border-soft),var(--sh-sm);
-  transition:transform .18s cubic-bezier(.2,.8,.2,1),box-shadow .18s}
-.hdrbtn:hover{transform:translateY(-1px);box-shadow:inset 0 0 0 1px var(--border),var(--sh-card)}
+.hdrbtn{display:flex;flex-direction:column;align-items:center;gap:5px;flex:none;
+  transition:transform .18s cubic-bezier(.2,.8,.2,1)}
+.hdrbtn:hover{transform:translateY(-1px)}
 .hdrbtn:active{transform:translateY(0) scale(.96)}
-.hdrbtn__b{position:absolute;top:-4px;right:-4px;min-width:17px;height:17px;border-radius:9px;
+.hdrbtn__c{position:relative;width:38px;height:38px;border-radius:var(--r-sm);display:grid;place-items:center;
+  background:var(--card);box-shadow:inset 0 0 0 1px var(--border-soft),var(--sh-sm);transition:box-shadow .18s}
+.hdrbtn:hover .hdrbtn__c{box-shadow:inset 0 0 0 1px var(--border),var(--sh-card)}
+.hdrbtn__l{font-size:9.5px;font-weight:600;letter-spacing:-.005em;color:var(--text-2);white-space:nowrap}
+.hdrbtn:hover .hdrbtn__l{color:var(--text)}
+.hdrbtn__b{position:absolute;top:-5px;right:-5px;min-width:17px;height:17px;border-radius:9px;
   background:var(--red);color:#fff;font-size:9.5px;font-weight:700;display:grid;place-items:center;
   padding:0 4px;border:2px solid var(--bg);line-height:1;z-index:1}
 .hdrbtn__b:empty{display:none}
@@ -1804,14 +1806,13 @@ screenEl.addEventListener('scroll', onScroll, {passive:true});
 addEventListener('resize', () => { if (!state.scratch.open) initScratch(); });
 
 $('#headActs').innerHTML = `
-  <button class="hdrbtn hdrbtn--coin" data-act="jump" data-to="extras"
-    data-msg="Coins wallet — 2,450 coins available." aria-label="Coins — 2,450 available">${art('coin',24)}</button>
-  <button class="hdrbtn hdrbtn--voucher" data-act="jump" data-to="benefits"
-    data-msg="No benefits to show on this page." aria-label="Your vouchers and benefits">
-    <span class="hdrbtn__b" id="hBadge"></span>${art('voucher',24)}</button>
-  <button class="hdrbtn hdrbtn--spin" data-act="jump" data-to="earn"
-    data-msg="Spin & Win isn't running on this account today." aria-label="Spin and win">${art('wheel',24)}</button>
-  <button class="iconbtn" aria-label="Account"><span class="avatar" aria-hidden="true">RS</span></button>`;
+  <button class="hdrbtn" data-act="jump" data-to="extras" data-msg="Coins wallet — 2,450 coins available.">
+    <span class="hdrbtn__c">${art('coin',24)}</span><span class="hdrbtn__l">Coins</span></button>
+  <button class="hdrbtn" data-act="jump" data-to="benefits" data-msg="No benefits to show on this page.">
+    <span class="hdrbtn__c"><span class="hdrbtn__b" id="hBadge"></span>${art('voucher',24)}</span>
+    <span class="hdrbtn__l">Vouchers</span></button>
+  <button class="hdrbtn" data-act="jump" data-to="earn" data-msg="Spin & Win isn't running on this account today.">
+    <span class="hdrbtn__c">${art('wheel',24)}</span><span class="hdrbtn__l">Spin &amp; win</span></button>`;
 
 render(false);
 </script>
