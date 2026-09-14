@@ -150,7 +150,7 @@ img,svg{max-width:100%}
   .homebar{display:block;flex:none;padding:7px 0 9px;background:var(--card)}
   .homebar i{display:block;width:128px;height:5px;border-radius:3px;background:var(--text);opacity:.3;margin:0 auto}
   .scrim{position:absolute}
-  .toasts{position:absolute;left:14px;right:14px;bottom:80px;width:auto;max-width:none;transform:none}
+  .toasts{position:absolute;left:14px;right:14px;bottom:22px;width:auto;max-width:none;transform:none}
 }
 
 /* ========================= TOP NAVIGATION ========================= */
@@ -176,7 +176,7 @@ img,svg{max-width:100%}
 .hdrbtn__b:empty{display:none}
 
 /* ============================= LAYOUT ============================= */
-.wrap{padding:0 var(--gut) 96px}
+.wrap{padding:0 var(--gut) 56px}
 .stack{display:flex;flex-direction:column;gap:var(--s7);min-width:0}
 .stack>*{min-width:0}
 .sec{display:flex;flex-direction:column;gap:var(--s3);min-width:0;
@@ -574,16 +574,6 @@ img,svg{max-width:100%}
 .poffer__t{font-size:14px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .poffer__s{font-size:11.5px;color:var(--text-3);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
-/* ========================= BOTTOM NAVIGATION ========================= */
-.bnav{position:sticky;bottom:0;z-index:30;display:flex;background:var(--card);
-  border-top:1px solid var(--border-soft);padding:var(--s2) var(--s2) calc(var(--s2) + env(safe-area-inset-bottom))}
-.bnav__i{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:var(--s1) 0;
-  font-size:10px;font-weight:600;color:var(--text-3);transition:color .18s}
-.bnav__i:hover{color:var(--text-2)}
-.bnav__i[aria-current="page"]{color:var(--text)}
-.bnav__i[aria-current="page"] .bnav__d{opacity:1}
-.bnav__d{width:4px;height:4px;border-radius:50%;background:var(--red);opacity:0;margin-top:1px}
-
 /* ======================= DIALOG · TOAST · MOTION ======================= */
 .scrim{position:fixed;inset:0;background:rgba(0,0,0,.62);backdrop-filter:blur(3px);z-index:80;
   display:grid;place-items:end center;opacity:0;pointer-events:none;transition:opacity .22s}
@@ -611,7 +601,7 @@ img,svg{max-width:100%}
 .spinner{width:34px;height:34px;border-radius:50%;border:3px solid var(--border);border-top-color:var(--red);
   animation:sp .8s linear infinite}
 @keyframes sp{to{transform:rotate(360deg)}}
-.toasts{position:fixed;left:50%;bottom:88px;transform:translateX(-50%);z-index:90;display:flex;
+.toasts{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:90;display:flex;
   flex-direction:column;gap:var(--s2);width:calc(100% - 32px);max-width:400px;pointer-events:none}
 .toast{background:var(--card);color:var(--text);border-radius:var(--r-md);padding:var(--s3) var(--s4);
   font-size:13.5px;box-shadow:var(--sh-lift);display:flex;align-items:center;gap:10px;
@@ -670,20 +660,6 @@ img,svg{max-width:100%}
         </div>
       </header>
       <main class="wrap" id="hub"><div class="stack" id="stack"></div></main>
-      <nav class="bnav" aria-label="Primary">
-        <button class="bnav__i" aria-current="page" data-act="jump" data-to="hero" data-msg="Home">
-          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 11 12 4l8.5 7M6 9.5V20h4v-5.5h4V20h4V9.5"/></svg>
-          Home<span class="bnav__d"></span></button>
-        <button class="bnav__i" data-act="jump" data-to="benefits" data-msg="No benefits on this page.">
-          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4z"/><path d="M14 6v2M14 11v2M14 16v2"/></svg>
-          Benefits<span class="bnav__d"></span></button>
-        <button class="bnav__i" data-act="jump" data-to="earn" data-msg="No games on this page.">
-          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5v17M3.5 12h17M6 6l12 12M18 6 6 18"/></svg>
-          Earn<span class="bnav__d"></span></button>
-        <button class="bnav__i" data-act="toast" data-msg="Account settings.">
-          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8.5" r="4"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/></svg>
-          Account<span class="bnav__d"></span></button>
-      </nav>
     </div>
 
     <div class="homebar" aria-hidden="true"><i></i></div>
