@@ -181,7 +181,8 @@ img,svg{max-width:100%}
 .stack>*{min-width:0}
 .sec{display:flex;flex-direction:column;gap:var(--s3);min-width:0;
   animation:rise .38s cubic-bezier(.2,.8,.2,1) both}
-.sec__head{display:flex;align-items:baseline;gap:var(--s3);flex-wrap:wrap}
+.sec__head{display:flex;align-items:baseline;gap:var(--s3)}
+.sec__head>div{flex:1;min-width:0}
 .sec__title{color:var(--on-bg-2)}
 .sec__sub{font-size:var(--t-meta);color:var(--on-bg-3);margin-top:var(--s1);letter-spacing:0;
   text-transform:none;font-weight:400}
@@ -467,34 +468,38 @@ img,svg{max-width:100%}
   padding:3px 9px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:var(--s2)}
 
 /* ========================== GAMIFICATION ========================== */
-.play{display:grid;gap:var(--s3)}
-.play__card{background:var(--card);border-radius:var(--r-lg);padding:var(--s5);
-  display:flex;flex-direction:column;gap:var(--s3);box-shadow:inset 0 0 0 1px var(--border-soft),var(--sh-sm)}
-.play__head{display:flex;align-items:center;gap:var(--s3)}
-.play__t{font-weight:700;font-size:15px;letter-spacing:-.02em;color:var(--text)}
-.play__s{font-size:12.5px;color:var(--text-3)}
-.scratch{position:relative;height:150px;border-radius:var(--r-md);overflow:hidden;
-  background:linear-gradient(135deg,var(--red),#8E0D14);display:grid;place-items:center;text-align:center}
+.play{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s3);align-items:start}
+.play__card{position:relative;background:var(--card);border-radius:var(--r-lg);padding:var(--s3);
+  display:flex;flex-direction:column;gap:10px;box-shadow:inset 0 0 0 1px var(--border-soft),var(--sh-sm)}
+.play__head{display:flex;align-items:flex-start;gap:8px}
+.play__head .card__ico{width:34px;height:34px;border-radius:var(--r-sm)}
+.play__b{min-width:0;flex:1}
+.play__t{display:block;font-weight:700;font-size:13px;letter-spacing:-.02em;color:var(--text);line-height:1.2}
+.play__s{display:block;font-size:11px;color:var(--text-3);margin-top:3px;line-height:1.3}
+.play__new{position:absolute;top:10px;right:10px;background:var(--green-soft);color:var(--green);
+  border-radius:var(--r-pill);padding:3px 7px;font-size:9px;font-weight:700;letter-spacing:.07em;
+  text-transform:uppercase}
+.play__card .btn{font-size:12.5px;padding:0 var(--s3)}
+.scratch{position:relative;height:152px;border-radius:var(--r-md);overflow:hidden;
+  background:linear-gradient(140deg,#E51B23,#8E0D14);display:grid;place-items:center;text-align:center}
 .scratch__prize{position:absolute;inset:0;display:grid;place-content:center;gap:4px;text-align:center;
   background:var(--surface);color:var(--text)}
-.scratch__amt{font-size:32px;font-weight:800;letter-spacing:-.04em}
-.scratch__lbl{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--green)}
+.scratch__amt{font-size:26px;font-weight:800;letter-spacing:-.04em}
+.scratch__lbl{font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--green)}
 .scratch canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:grab}
-.scratch__hint{position:absolute;color:#fff;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
-  font-weight:700;pointer-events:none}
-.scratch.is-open canvas,.scratch.is-open .scratch__hint{display:none}
-.wheel-wrap{display:grid;place-items:center;gap:var(--s3);padding:var(--s1) 0}
-.wheel-outer{position:relative;width:170px;height:170px}
-.wheel{width:170px;height:170px;border-radius:50%;position:relative;border:6px solid var(--card);
+.scratch.is-open canvas{display:none}
+.wheel-wrap{display:grid;place-items:center;gap:10px;padding:var(--s1) 0}
+.wheel-outer{position:relative;width:120px;height:120px}
+.wheel{width:120px;height:120px;border-radius:50%;position:relative;border:5px solid var(--card);
   box-shadow:0 0 0 1px var(--border),var(--sh-card);transition:transform 4.2s cubic-bezier(.12,.72,.06,1)}
-.wheel__lbl{position:absolute;left:50%;top:50%;transform-origin:0 0;font-size:9.5px;font-weight:600;
-  color:#fff;white-space:nowrap;text-shadow:0 1px 2px rgba(0,0,0,.4)}
-.wheel__hub{position:absolute;inset:50% auto auto 50%;transform:translate(-50%,-50%);width:40px;height:40px;
-  border-radius:50%;background:var(--card);border:1px solid var(--border);display:grid;place-items:center;
-  font-size:9px;letter-spacing:.1em;font-weight:700;color:var(--text-3);z-index:2}
-.wheel__pin{position:absolute;left:50%;top:-4px;transform:translateX(-50%);width:0;height:0;
-  border-left:8px solid transparent;border-right:8px solid transparent;border-top:14px solid var(--text);z-index:3}
-.wheel__out{font-size:13px;color:var(--text-2);text-align:center;min-height:20px}
+.wheel__lbl{position:absolute;left:50%;top:50%;transform-origin:0 0;font-size:7.5px;font-weight:600;
+  color:#fff;white-space:nowrap;text-shadow:0 1px 2px rgba(0,0,0,.45)}
+.wheel__hub{position:absolute;inset:50% auto auto 50%;transform:translate(-50%,-50%);width:34px;height:34px;
+  border-radius:50%;background:var(--card);box-shadow:0 0 0 1px var(--border),var(--sh-sm);
+  display:grid;place-items:center;font-size:8.5px;letter-spacing:.08em;font-weight:700;color:var(--text-2);z-index:2}
+.wheel__pin{position:absolute;left:50%;top:-5px;transform:translateX(-50%);width:0;height:0;
+  border-left:7px solid transparent;border-right:7px solid transparent;border-top:12px solid var(--text);z-index:3}
+.wheel__out{font-size:11.5px;color:var(--text-3);text-align:center;min-height:16px;line-height:1.3}
 .wheel__out b{color:var(--text);font-weight:700}
 .task{display:flex;align-items:center;gap:var(--s3);padding:11px 0;border-bottom:1px solid var(--border-soft)}
 .task:last-of-type{border-bottom:0}
@@ -568,16 +573,6 @@ img,svg{max-width:100%}
 .ins__bar{position:relative;height:5px;border-radius:3px;background:rgba(255,255,255,.2);margin-top:var(--s3);overflow:hidden}
 .ins__fill{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,var(--gold),#F0D9A6);width:66%}
 .ins .btn{margin-top:var(--s4);position:relative}
-.poffer{display:flex;align-items:center;gap:var(--s3);padding:var(--s3) var(--s4);min-width:0;
-  background:var(--card);border-radius:var(--r-md);margin-top:var(--s2);box-shadow:inset 0 0 0 1px var(--border-soft),var(--sh-sm)}
-.plogo{width:36px;height:36px;border-radius:var(--r-sm);display:grid;place-items:center;flex:none;
-  color:#fff;font-weight:800;font-size:11px;line-height:1;text-align:center;
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.13)}
-.poffer__b{min-width:0;flex:1}
-.poffer .btn{flex:none}
-.poffer__t{font-size:14px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.poffer__s{font-size:11.5px;color:var(--text-3);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-
 /* ======================= DIALOG · TOAST · MOTION ======================= */
 .scrim{position:fixed;inset:0;background:rgba(0,0,0,.62);backdrop-filter:blur(3px);z-index:80;
   display:grid;place-items:end center;opacity:0;pointer-events:none;transition:opacity .22s}
@@ -861,9 +856,6 @@ const B = {
   comeback:  {id:'comeback',  type:'cash',    title:'₹20 cashback',             why:'Waiting for you since 28 Aug',               state:'ready',  value:20,   exp:6,  tags:['money'], cta:'Claim now'},
   spin:      {id:'spin',      type:'game',    title:'Spin & Win',               why:"Complete today's challenge to unlock",       state:'locked', value:0,    exp:null, tags:['game'], cta:'Unlock'},
   amazon:    {id:'amazon',    type:'voucher', title:'Amazon ₹500 voucher',      why:'Used on 3 Sep · order #4471',                state:'used',   value:500,  exp:null, tags:['shopping']},
-  li:        {id:'li',        type:'insider', title:'LinkedIn Premium',          why:'Insider benefit · 1 month free',             state:'ready',  value:1400, exp:21, tags:['premium','career'], cta:'Claim now', partner:true, to:'LinkedIn'},
-  croma:     {id:'croma',     type:'insider', title:'₹500 off at Croma',         why:'Insider benefit · on ₹4,999 and above',      state:'ready',  value:500,  exp:12, tags:['shopping'], cta:'Get code', partner:true, to:'Croma stores & croma.com', code:'INSIDER500CR'},
-  pfm:       {id:'pfm',       type:'insider', title:'Pocket FM 30-day pass',     why:'Insider benefit · unlimited audio series',   state:'ready',  value:149,  exp:7,  tags:['entertainment'], cta:'Claim now', partner:true, to:'Pocket FM'},
   oldcash:   {id:'oldcash',   type:'cash',    title:'₹100 Cashback',            why:'Expired 8 Sep · unclaimed for 30 days',      state:'expired',value:100,  exp:null, tags:['money'], cta:'View details'}
 };
 
@@ -1358,13 +1350,13 @@ const SECTIONS = {
   earn(cfg){
     const locked = state.streak <= 3 && state.cohort==='dormant';
     const segs = [
-      {l:'₹10 cashback', c:'#E30613'},{l:'50 MB data', c:'#2A0B10'},
-      {l:'₹100 voucher', c:'#D4530F'},{l:'Better luck', c:'#5C4F4A'},
-      {l:'1 GB data',    c:'#0E7A55'},{l:'₹25 cashback', c:'#B0121F'}
+      {l:'₹10 back',  c:'#E51B23'},{l:'50 MB',    c:'#2A1013'},
+      {l:'₹100 off',  c:'#E0700F'},{l:'Try again', c:'#6B5D57'},
+      {l:'1 GB data', c:'#12845C'},{l:'₹25 back',  c:'#A81018'}
     ];
     const step = 360/segs.length;
     const grad = segs.map((s,i)=>`${s.c} ${i*step}deg ${(i+1)*step}deg`).join(',');
-    const labels = segs.map((s,i)=>`<span class="wheel__lbl" style="transform:rotate(${i*step+step/2-90}deg) translate(28px,-4px)">${s.l}</span>`).join('');
+    const labels = segs.map((s,i)=>`<span class="wheel__lbl" style="transform:rotate(${i*step+step/2-90}deg) translate(19px,-2.5px)">${s.l}</span>`).join('');
 
     const wrap = el(`<section class="sec" data-flip="earn">
       <div class="sec__head"><div>
@@ -1373,29 +1365,32 @@ const SECTIONS = {
       </div><button class="sec__link" data-act="toast" data-msg="All challenges refresh at midnight.">All challenges ${ico('arrow',14,2.4)}</button></div>
       <div class="play">
         <div class="play__card">
-          <div class="play__head"><span class="card__ico card__ico--voucher">${art('voucher',26)}</span>
-            <div><div class="play__t">Today's scratch card</div><div class="play__s">${state.scratch.open?'Revealed — claim it below':'Earned with your last recharge'}</div></div></div>
+          <div class="play__head"><span class="card__ico card__ico--voucher">${art('voucher',22)}</span>
+            <span class="play__b" style="padding-right:${state.scratch.open?'0':'34px'}">
+              <span class="play__t">Today's scratch card</span>
+              <span class="play__s">${state.scratch.open?'Revealed — claim it':'From your last recharge'}</span></span>
+            ${state.scratch.open?'':'<span class="play__new">New</span>'}</div>
           <div class="scratch ${state.scratch.open?'is-open':''}" id="scratch">
             <div class="scratch__prize"><div class="scratch__amt">₹100</div><div class="scratch__lbl">Cashback won</div></div>
             <canvas id="scratchCanvas"></canvas>
-            <span class="scratch__hint">Scratch to reveal</span>
           </div>
-          <button class="btn ${state.scratch.open?'btn--primary':'btn--ghost'} btn--wide" ${state.scratch.open?'':'disabled'} data-act="claimScratch">
-            ${state.scratch.open?'Redeem ₹100 now':'Scratch the card first'}</button>
+          <button class="btn ${state.scratch.open?'btn--primary':'btn--ghost'} btn--wide btn--sm" ${state.scratch.open?'':'disabled'} data-act="claimScratch">
+            ${state.scratch.open?'Redeem ₹100':'Scratch first'}</button>
         </div>
         <div class="play__card">
-          <div class="play__head"><span class="card__ico card__ico--game">${art('gift',26)}</span>
-            <div><div class="play__t">Spin &amp; Win</div><div class="play__s">${locked?'Unlocks on day 3 of your challenge':'One free spin today'}</div></div></div>
+          <div class="play__head"><span class="card__ico card__ico--game">${art('gift',22)}</span>
+            <span class="play__b"><span class="play__t">Spin &amp; Win</span>
+              <span class="play__s">${locked?'Unlocks on day 3 of your challenge':'One free spin today'}</span></span></div>
           <div class="wheel-wrap">
             <div class="wheel-outer">
               <span class="wheel__pin"></span>
               <div class="wheel" id="wheel" style="background:conic-gradient(${grad});transform:rotate(${state.spin.angle}deg)">${labels}</div>
               <span class="wheel__hub">SPIN</span>
             </div>
-            <p class="wheel__out" id="spinOut">${state.spin.result?`You won <b>${state.spin.result}</b>`:'Land the pointer on a prize'}</p>
+            <p class="wheel__out" id="spinOut">${state.spin.result?`You won <b>${state.spin.result}</b>`:'One tap, one prize'}</p>
           </div>
-          <button class="btn ${locked?'btn--ghost':'btn--primary'} btn--wide" ${locked||state.spin.result?'disabled':''} data-act="spin">
-            ${locked?'Locked':state.spin.result?'Come back tomorrow':'Play now'}</button>
+          <button class="btn ${locked?'btn--ghost':'btn--primary'} btn--wide btn--sm" ${locked||state.spin.result?'disabled':''} data-act="spin">
+            ${locked?'Locked':state.spin.result?'Come back tomorrow':'Spin now'}</button>
         </div>
       </div></section>`);
     return wrap;
@@ -1403,22 +1398,6 @@ const SECTIONS = {
 
   /* Insider — partner offers that come with the plan, not with a task */
   insider(cfg){
-    const offers = [
-      {id:'li',    logo:'in',      bg:'#0A66C2', size:'16px'},
-      {id:'croma', logo:'croma',   bg:'#0C0C0C', size:'9.5px'},
-      {id:'pfm',   logo:'Pocket<br>FM', bg:'#E1265B', size:'8.5px'}
-    ];
-    const rows = offers.map(o => {
-      const b = view(B[o.id]);
-      const done = b.state !== 'ready';
-      return `<div class="poffer">
-        <span class="plogo" style="background:${o.bg};font-size:${o.size}">${o.logo}</span>
-        <span class="poffer__b"><span class="poffer__t">${esc(b.title)}</span>
-          <span class="poffer__s">${esc(done ? b.why : b.why.replace('Insider benefit · ',''))}</span></span>
-        ${done ? '<span class="status status--past">Claimed</span>'
-               : `<button class="btn btn--sm btn--ghost" data-act="open" data-id="${b.id}">${esc(b.cta)}</button>`}
-      </div>`;
-    }).join('');
     return el(`<section class="sec sec--ins" data-flip="insider">
       <div class="sec__head"><div><h2 class="sec__title">Insider</h2>
         <p class="sec__sub">Partner offers that come with your plan — nothing to earn</p></div></div>
@@ -1445,7 +1424,6 @@ const SECTIONS = {
         <div class="ins__bar"><span class="ins__fill"></span></div>
         <button class="btn btn--gold btn--wide" data-act="toast" data-msg="Insider — 9 partner offers available.">See all Insider offers</button>
       </div>
-      ${rows}
     </section>`);
   },
 
@@ -1623,13 +1601,34 @@ function initScratch(){
   const c = cv.getContext('2d');
   c.scale(dpr, dpr);
   const g = c.createLinearGradient(0, 0, r.width, r.height);
-  g.addColorStop(0, '#E30613'); g.addColorStop(.55, '#A50410'); g.addColorStop(1, '#6E0209');
+  g.addColorStop(0, '#E51B23'); g.addColorStop(.55, '#B20E18'); g.addColorStop(1, '#7C0A0F');
   c.fillStyle = g; c.fillRect(0, 0, r.width, r.height);
+
+  let drawing = false, cleared = 0, touched = false;
+  // the prompt and the gift live ON the cover, so they scratch away with it
+  c.save();
+  c.fillStyle = 'rgba(255,255,255,.94)';
+  c.textAlign = 'center';
+  c.font = '700 8.5px Inter, system-ui, sans-serif';
+  try { c.letterSpacing = '1.4px'; } catch (e) {}
+  c.fillText('SCRATCH TO REVEAL', r.width / 2, r.height - 18);
+  c.restore();
+  const img = new Image();
+  img.onload = () => {
+    if (touched || state.scratch.open) return;
+    c.save(); c.globalCompositeOperation = 'source-over';
+    const w = Math.min(66, r.width * .5);
+    c.drawImage(img, (r.width - w) / 2, r.height / 2 - w / 2 - 12, w, w);
+    c.restore();
+  };
+  img.src = 'data:image/svg+xml;utf8,' + encodeURIComponent(
+    `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">${ART.gift('sc')}</svg>`);
+
   c.globalCompositeOperation = 'destination-out';
-  let drawing = false, cleared = 0;
   const at = e => { const b = cv.getBoundingClientRect(); return [e.clientX - b.left, e.clientY - b.top]; };
   const rub = e => {
     if (!drawing) return;
+    touched = true;
     const [x, y] = at(e);
     c.beginPath(); c.arc(x, y, 22, 0, 7); c.fill();
     if (++cleared % 9 === 0 && cleared > 16) check();
