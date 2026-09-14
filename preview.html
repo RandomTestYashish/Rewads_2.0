@@ -162,6 +162,22 @@ img,svg{max-width:100%}
   .toasts{position:absolute;left:14px;right:14px;bottom:22px;width:auto;max-width:none;transform:none}
 }
 
+/* ===================== DESIGN RATIONALE (prototype chrome) ===================== */
+.rat{display:none}
+@media (min-width:1180px){
+  .rat{display:block;width:296px;flex:none;position:sticky;top:44px}
+  .rat__h{font-size:10px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--on-bg-3);
+    display:flex;align-items:center;gap:7px}
+  .rat__h i{width:6px;height:6px;border-radius:50%;background:var(--blue);flex:none}
+  .rat__s{font-size:12.5px;color:var(--on-bg-2);line-height:1.5;margin-top:10px}
+  .rat__l{display:flex;flex-direction:column;gap:var(--s4);margin-top:var(--s5)}
+  .rat__i{padding-left:var(--s3);border-left:2px solid var(--border)}
+  .rat__t{font-size:12.5px;font-weight:700;color:var(--on-bg);letter-spacing:-.01em}
+  .rat__d{font-size:12px;color:var(--on-bg-2);line-height:1.55;margin-top:4px}
+  .rat__f{margin-top:var(--s5);padding-top:var(--s4);border-top:1px solid var(--border);
+    font-size:11.5px;color:var(--on-bg-3);line-height:1.5}
+}
+
 /* ========================= TOP NAVIGATION ========================= */
 .head{position:sticky;top:0;z-index:40;background:var(--bg);
   border-bottom:1px solid transparent;transition:border-color .2s}
@@ -664,6 +680,8 @@ img,svg{max-width:100%}
     </div>
     <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
   </div>
+
+  <aside class="rat" id="rat" aria-label="Design rationale"></aside>
 </div>
 
 <script>
@@ -870,6 +888,7 @@ const SUBS = [{n:'Netflix',c:'#E50914'},{n:'Xstream',c:'#E30613'}];
    ========================================================================== */
 const COHORTS = {
   active: {
+    ux:[["Von Restorff effect","One claim card carries a ring and a filled button. Everything else is deliberately quieter, so the eye lands on the thing worth doing."],["Hick's law","The hero surfaces two claims, not eleven. The full catalogue waits below behind filters, so the first decision is small."],["Serial position effect","Highest-value action first, passive holdings last \u2014 the ends of the list are what gets remembered."]],
     label:'Active customer',
     note:'The default hub. Priority engine leads with what needs action; everything else falls in behind it.',
     hero:'default',
@@ -880,6 +899,7 @@ const COHORTS = {
     copy:{attention:'Ready to claim', attentionSub:'Both unlocked by your last recharge — one tap each'}
   },
   dormant: {
+    ux:[["Goal-gradient effect","Motivation rises as a goal looks closer, so the streak shows day 1 of 3 rather than an abstract 'come back soon'."],["Zeigarnik effect","An unfinished sequence stays mentally open. Two empty circles are the reason to return tomorrow."],["Hick's law","The catalogue is cut to a single reward. A lapsed user given nine options picks none."]],
     label:'Dormant / low engagement',
     note:'Re-engagement first. The catalogue is deliberately trimmed — one streak, one reward, nothing else competing.',
     hero:'welcome',
@@ -890,6 +910,7 @@ const COHORTS = {
     copy:{benefits:'Benefits waiting for you', benefitsSub:'Still yours, nothing expired yet'}
   },
   voice: {
+    ux:[["Cocktail party effect","People attend to what names them. The reward is built on this user's one observed habit \u2014 calls and music, not data."],["Fitts's law","A single full-width CTA in the thumb zone: large target, short travel, one decision."],["Hick's law","One recommendation replaces a menu, because the goal is a first action, not a comparison."]],
     label:'Prepaid voice-only',
     note:'No data pack, no OTT habit. The hub leads with the one action this user is actually likely to take.',
     hero:'action',
@@ -900,6 +921,7 @@ const COHORTS = {
     copy:{benefits:'What you already have', recommend:'Because you call more than you stream'}
   },
   arpu: {
+    ux:[["Endowment effect","Benefits are stated as already held \u2014 'Active on your account' \u2014 which raises their perceived value over the same thing offered."],["Aesthetic\u2013usability effect","The dark premium surface reads as care, and users rate a considered interface as easier to use."],["Serial position effect","The recommended action opens the screen; subscriptions and history close it. Nothing important sits in the sagging middle."]],
     label:'High-ARPU Fiber / Postpaid',
     note:'This user already holds real value. Premium surface, benefits stated as facts, action framed as "get more".',
     hero:'premium',
@@ -910,6 +932,7 @@ const COHORTS = {
     copy:{benefits:'Active on your account', recommend:'Get more from your plan', benefitsSub:'Premium · 3 services on one bill'}
   },
   data: {
+    ux:[["Miller's law","0.08 GB is a number to decode. The meter turns it into one glanceable quantity instead."],["Framing effect","The same top-up framed as the fix for a problem the user already has, not as an upsell."],["Fitts's law","The recharge CTA is full-width at the bottom of the card \u2014 the largest, nearest target on the screen."]],
     label:'Data-exhausted',
     note:'Third exhaustion this month. The reward is framed as the fix, not as an upsell.',
     hero:'lowdata',
@@ -920,6 +943,7 @@ const COHORTS = {
     copy:{recommend:'Recommended for you right now', attention:'Also waiting for you'}
   },
   expiring: {
+    ux:[["Loss aversion","Losing \u20b9600 weighs heavier than gaining it. 'Expires today' states the cost of doing nothing."],["Von Restorff effect","Only the two urgent cards carry red. If the whole page shouted, the warning would stop registering."],["Doherty threshold","Claiming resolves in well under 400ms, so urgency never turns into friction."]],
     label:'Benefits expiring today',
     note:'Urgency is spent on two cards only — the rest of the page stays calm so the warning still reads as a warning.',
     hero:'urgent',
@@ -930,6 +954,7 @@ const COHORTS = {
     copy:{attention:'Use these before they expire', attentionSub:'After this they are gone — no extension', benefits:'Your other benefits'}
   },
   recharged: {
+    ux:[["Peak\u2013end rule","The reward lands at the emotional peak of the transaction, which is what the user will remember of the recharge."],["Zeigarnik effect","Unclaimed benefits stay visibly open \u2014 a loop the user wants to close."],["Fitts's law","'Claim all 3' collapses three targets into one, because the cheapest interaction is the one not required."]],
     label:'Just recharged · ₹599',
     note:'The post-transaction moment the BRD is built around: the user sees what the recharge earned before they leave the screen.',
     hero:'success',
@@ -1579,6 +1604,16 @@ function render(animate = true){
   const badge = document.getElementById('hBadge');
   if (badge) badge.textContent = totals(cfg).ready || '';
   $('#chromeNote').innerHTML = `<b>${esc(cfg.label)}.</b> ${esc(cfg.note)}`;
+  const rat = document.getElementById('rat');
+  if (rat) rat.innerHTML = `
+    <p class="rat__h"><i></i>Why this screen</p>
+    <p class="rat__s">What the priority engine chose for <b>${esc(cfg.label)}</b>, and the principle behind each call.</p>
+    <div class="rat__l">${(cfg.ux || []).map(([t,d]) =>
+      `<div class="rat__i"><div class="rat__t">${esc(t)}</div><div class="rat__d">${esc(d)}</div></div>`).join('')}
+      <div class="rat__i"><div class="rat__t">Jakob's law</div>
+        <div class="rat__d">Pill filters, circular quick actions and bottom-sheet claims are borrowed from apps this user already has. Familiar form, so the content is the only new thing.</div></div>
+    </div>
+    <p class="rat__f">Every touch target is at least 44&nbsp;px; motion runs 150–220&nbsp;ms and is disabled under reduced-motion.</p>`;
 }
 
 /* ============================== ScratchCard ================================ */
