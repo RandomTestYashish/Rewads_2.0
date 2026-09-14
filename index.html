@@ -253,24 +253,25 @@ img,svg{max-width:100%}
   color:var(--text);border-radius:var(--r-xl);padding:var(--s6) var(--s5);
   box-shadow:inset 0 0 0 1px var(--border-soft),var(--sh-card)}
 .hero__panel::before,.hero--default .hero__grid::before{content:"";position:absolute;z-index:-1;
-  top:12px;bottom:12px;right:-7px;width:26px;border-radius:var(--r-lg);background:#1C1D20}
+  top:14px;bottom:14px;right:-6px;width:20px;border-radius:var(--r-lg);
+  background:var(--surface-muted);box-shadow:0 6px 14px -8px rgba(16,24,40,.35)}
 .hero__panel::after,.hero--default .hero__grid::after{content:"";position:absolute;z-index:-1;
-  top:12px;bottom:12px;left:-7px;width:26px;border-radius:var(--r-lg);background:var(--border)}
-.hero__lede{font-size:1.0625rem;font-weight:600;letter-spacing:-.02em;margin-top:var(--s3);max-width:24ch;color:var(--text)}
+  top:20px;bottom:20px;left:-6px;width:20px;border-radius:var(--r-lg);background:var(--border)}
+.hero__lede{font-size:1rem;font-weight:600;letter-spacing:-.02em;margin-top:10px;max-width:24ch;color:var(--text)}
 .hero__meta{font-size:13px;color:var(--text-2);margin-top:var(--s2)}
 .hero__meta b{color:var(--text);font-weight:700}
 .hero h1{color:var(--text);font-size:var(--t-display)}
 
 /* default — the ledger */
-.hero--default .hero__grid{display:grid;gap:var(--s5)}
-.hero__amount{display:flex;align-items:baseline;gap:2px;font-weight:800;letter-spacing:-.05em;
-  font-size:clamp(2.6rem,13cqw,3.3rem);line-height:.9;color:var(--text)}
+.hero--default .hero__grid{display:grid;gap:var(--s4)}
+.hero__amount{display:flex;align-items:baseline;gap:1px;font-weight:800;letter-spacing:-.045em;
+  font-size:clamp(2.15rem,10.6cqw,2.7rem);line-height:.95;color:var(--text)}
 .hero__amount .cur{font-size:.5em;font-weight:700;transform:translateY(-.12em)}
 .hero__ledger{background:var(--surface);border-radius:var(--r-md);padding:2px var(--s4) var(--s1);
   display:flex;flex-direction:column;margin-top:var(--s2)}
 .hero__ledger-h{font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;
   color:var(--text-3);padding:var(--s3) 0 10px;border-bottom:1px solid var(--border-soft)}
-.led{display:flex;align-items:center;gap:var(--s3);padding:11px 0;border-bottom:1px solid var(--border-soft);min-width:0}
+.led{display:flex;align-items:center;gap:var(--s3);padding:9px 0;border-bottom:1px solid var(--border-soft);min-width:0}
 .led:last-child{border-bottom:0}
 .led>span{min-width:0}
 .led__t{font-size:14px;font-weight:600;color:var(--text)}
@@ -291,7 +292,8 @@ img,svg{max-width:100%}
 /* premium — the one dark card */
 .hero--premium .hero__panel{background:linear-gradient(160deg,#1B1C1F,#08080A);color:#F3EFE9;
   box-shadow:var(--sh-lift);border:1px solid rgba(231,198,140,.22)}
-.hero--premium .hero__panel::after{background:var(--border)}
+.hero--premium .hero__panel::before{background:#33363C;box-shadow:none}
+.hero--premium .hero__panel::after{background:#4A4E55}
 .hero--premium h1{color:#fff;font-size:1.5rem;max-width:16ch}
 .hero--premium .hero__meta{color:#B9BDC2}
 .hero--premium .hero__meta b{color:#fff}
@@ -405,22 +407,6 @@ img,svg{max-width:100%}
 .card--quiet .btn--quiet:hover{background:var(--surface);color:var(--blue)}
 .card--past{opacity:.6}
 .card--past:hover{opacity:.85}
-
-/* =========================== MY SERVICES CARD =========================== */
-.svc{display:flex;align-items:center;gap:var(--s3);width:100%;text-align:left;
-  background:var(--card);border-radius:var(--r-pill);padding:10px var(--s4) 10px 10px;box-shadow:inset 0 0 0 1px var(--border-soft),var(--sh-sm);
-  transition:box-shadow .2s,transform .16s cubic-bezier(.2,.8,.2,1)}
-.svc:hover{box-shadow:inset 0 0 0 1px var(--border),var(--sh-card)}
-.svc:active{transform:scale(.99)}
-.svc__ava{width:42px;height:42px;border-radius:50%;background:var(--red-soft);display:grid;place-items:center;flex:none}
-.svc__b{min-width:0;flex:1}
-.svc__t{display:block;font-size:15px;font-weight:700;letter-spacing:-.02em;color:var(--text);
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.svc__s{display:block;font-size:12.5px;font-weight:600;margin-top:1px}
-.svc__s--alert{color:var(--red)}
-.svc__s--ok{color:var(--green)}
-.svc__s--mute{color:var(--text-3)}
-.svc__go{color:var(--text-3);flex:none}
 
 /* =========================== PLAN / PACK CARD =========================== */
 .plan{width:148px;background:var(--card);border-radius:var(--r-md);padding:var(--s4);
@@ -910,9 +896,8 @@ const COHORTS = {
   active: {
     label:'Active customer',
     note:'The default hub. Priority engine leads with what needs action; everything else falls in behind it.',
-    svc:{t:'+91 93195 90283', s:'Prepaid · valid till 3 Dec', k:'mute'},
     hero:'default',
-    sections:['hero','services','attention','benefits','explore','addons','insider','earn','products','extras'],
+    sections:['hero','attention','benefits','explore','addons','insider','earn','products','extras'],
     ids:['ott599','netflix3m','xstream','mmt','shop50','spin','amazon'],
     relevant:['entertainment','shopping','money'],
     weights:{urgency:.30,recency:.20,relevance:.15,value:.20,engage:.15},
@@ -921,9 +906,8 @@ const COHORTS = {
   dormant: {
     label:'Dormant / low engagement',
     note:'Re-engagement first. The catalogue is deliberately trimmed — one streak, one reward, nothing else competing.',
-    svc:{t:'+91 93195 90283', s:'Pack expired · 34 days inactive', k:'alert'},
     hero:'welcome',
-    sections:['hero','services','challenge','benefits','explore','insider','earn','extras'],
+    sections:['hero','challenge','benefits','explore','insider','earn','extras'],
     ids:['comeback','spin'],
     relevant:['engagement','game'],
     weights:{urgency:.15,recency:.10,relevance:.25,value:.15,engage:.35},
@@ -932,9 +916,8 @@ const COHORTS = {
   voice: {
     label:'Prepaid voice-only',
     note:'No data pack, no OTT habit. The hub leads with the one action this user is actually likely to take.',
-    svc:{t:'+91 93195 90283', s:'Prepaid · voice-only pack', k:'mute'},
     hero:'action',
-    sections:['hero','services','recommend','benefits','explore','insider','earn','extras'],
+    sections:['hero','recommend','benefits','explore','insider','earn','extras'],
     ids:['talktime','comeback','spin','amazon'],
     relevant:['music','engagement'],
     weights:{urgency:.15,recency:.10,relevance:.35,value:.10,engage:.30},
@@ -943,9 +926,8 @@ const COHORTS = {
   arpu: {
     label:'High-ARPU Fiber / Postpaid',
     note:'This user already holds real value. Premium surface, benefits stated as facts, action framed as "get more".',
-    svc:{t:'+91 93195 90283', s:'Postpaid + Fiber + DTH · one bill', k:'ok'},
     hero:'premium',
-    sections:['hero','services','recommend','benefits','explore','insider','extras','products','activity'],
+    sections:['hero','recommend','benefits','explore','insider','extras','products','activity'],
     ids:['autopay','family','netflix','fiber','shield','mmt','xstream'],
     relevant:['premium','fiber','family'],
     weights:{urgency:.15,recency:.10,relevance:.30,value:.30,engage:.15},
@@ -954,9 +936,8 @@ const COHORTS = {
   data: {
     label:'Data-exhausted',
     note:'Third exhaustion this month. The reward is framed as the fix, not as an upsell.',
-    svc:{t:'+91 93195 90283', s:'Prepaid · 0.08 GB left today', k:'alert'},
     hero:'lowdata',
-    sections:['hero','services','recommend','packs','attention','benefits','explore','addons','insider','earn'],
+    sections:['hero','recommend','packs','attention','benefits','explore','addons','insider','earn'],
     ids:['minidata','cash100','xstream','spin'],
     relevant:['data'],
     weights:{urgency:.20,recency:.15,relevance:.35,value:.15,engage:.15},
@@ -965,9 +946,8 @@ const COHORTS = {
   expiring: {
     label:'Benefits expiring today',
     note:'Urgency is spent on two cards only — the rest of the page stays calm so the warning still reads as a warning.',
-    svc:{t:'+91 93195 90283', s:'Prepaid · 2 benefits expire today', k:'alert'},
     hero:'urgent',
-    sections:['hero','attention','services','benefits','explore','insider','extras','activity'],
+    sections:['hero','attention','benefits','explore','insider','extras','activity'],
     ids:['cash100','myntra','ott599','xstream','netflix','shop50','amazon','oldcash'],
     relevant:['money','shopping'],
     weights:{urgency:.55,recency:.10,relevance:.10,value:.15,engage:.10},
@@ -976,9 +956,8 @@ const COHORTS = {
   recharged: {
     label:'Just recharged · ₹599',
     note:'The post-transaction moment the BRD is built around: the user sees what the recharge earned before they leave the screen.',
-    svc:{t:'+91 93195 90283', s:'Prepaid · ₹599 · 84 days left', k:'ok'},
     hero:'success',
-    sections:['hero','attention','services','insider','earn','benefits','explore','extras'],
+    sections:['hero','attention','insider','earn','benefits','explore','extras'],
     ids:['cash100','ott599','shop50','xstream','myntra','spin'],
     relevant:['recharge'],
     weights:{urgency:.20,recency:.40,relevance:.20,value:.10,engage:.10},
@@ -1469,19 +1448,6 @@ const SECTIONS = {
       </div>
       ${rows}
     </section>`);
-  },
-
-  /* MyServices — the account line this hub belongs to */
-  services(cfg){
-    const v = cfg.svc;
-    return el(`<section class="sec" data-flip="services">
-      <div class="sec__head"><h2 class="sec__title">My services</h2></div>
-      <button class="svc" data-act="toast" data-msg="Account · ${esc(v.t)}">
-        <span class="svc__ava">${art('signal',24)}</span>
-        <span class="svc__b"><span class="svc__t">${esc(v.t)}</span>
-          <span class="svc__s svc__s--${v.k}">${esc(v.s)}</span></span>
-        <span class="svc__go">${ico('arrow',18,2.2)}</span>
-      </button></section>`);
   },
 
   /* RecommendedPacks — mini top-ups, shown where a pack is the real fix */
