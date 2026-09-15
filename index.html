@@ -162,7 +162,8 @@ img,svg{max-width:100%}
   .rat__s{font-size:12.5px;color:var(--on-bg-2);line-height:1.5;margin-top:10px}
   .rat__l{display:flex;flex-direction:column;gap:var(--s4);margin-top:var(--s5)}
   .rat__i{padding-left:var(--s3);border-left:2px solid var(--border)}
-  .rat__t{font-size:12.5px;font-weight:700;color:var(--on-bg);letter-spacing:-.01em}
+  .rat__k{font-size:9.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--text-3)}
+  .rat__t{font-size:13px;font-weight:700;color:var(--on-bg);letter-spacing:-.015em;margin-top:3px}
   .rat__d{font-size:12px;color:var(--on-bg-2);line-height:1.55;margin-top:4px}
   .rat__f{margin-top:var(--s5);padding-top:var(--s4);border-top:1px solid var(--border);
     font-size:11.5px;color:var(--on-bg-3);line-height:1.5}
@@ -377,6 +378,10 @@ img,svg{max-width:100%}
 .card__top{display:flex;align-items:flex-start;gap:var(--s3)}
 .card__flags{margin-left:auto;display:flex;gap:6px;align-items:center}
 .card__title{font-size:var(--t-title);font-weight:700;letter-spacing:-.025em;color:var(--text);overflow-wrap:anywhere}
+.card__num{font-size:1.05rem;font-weight:800;letter-spacing:-.035em;color:var(--text);
+  font-variant-numeric:tabular-nums;margin-top:-2px}
+.card__num span{font-size:.66em;font-weight:600;color:var(--text-3);letter-spacing:0}
+.card__numq{font-size:13px;font-weight:700;color:var(--text);font-variant-numeric:tabular-nums;flex:none}
 .card__why{font-size:13px;color:var(--text-2);line-height:1.45}
 .card__foot{margin-top:auto;padding-top:var(--s1);display:flex;align-items:center;gap:6px var(--s3);flex-wrap:wrap;min-width:0}
 .status{font-size:12.5px;font-weight:600}
@@ -402,6 +407,7 @@ img,svg{max-width:100%}
 .card--featured{padding:var(--s6) var(--s5);border-radius:var(--r-xl);box-shadow:var(--sh-card);gap:10px}
 .card--featured .card__title{font-size:1.4rem;letter-spacing:-.035em}
 .card--featured .card__why{font-size:14px;max-width:40ch}
+.card--featured .card__num{font-size:1.35rem}
 .card--featured .card__ico{width:54px;height:54px;border-radius:var(--r-lg)}
 .card--featured::before{content:"";position:absolute;inset:0;border-radius:var(--r-xl);pointer-events:none;
   box-shadow:inset 0 0 0 1.5px var(--red);opacity:.85}
@@ -979,7 +985,7 @@ const SUBS = [{n:'Netflix',c:'#E50914'},{n:'Xstream',c:'#E30613'}];
    ========================================================================== */
 const COHORTS = {
   active: {
-    ux:[["Von Restorff effect","One claim card carries a ring and a filled button. Everything else is deliberately quieter, so the eye lands on the thing worth doing."],["Hick's law","The hero surfaces two claims, not eleven. The full catalogue waits below behind filters, so the first decision is small."],["Serial position effect","Highest-value action first, passive holdings last \u2014 the ends of the list are what gets remembered."]],
+    ux:[["Experience", "Clarity creates momentum", "Two claims sit on the hero with their value, expiry and action on the face of the card. Nothing asks you to tap to find out what it is."],["Journey", "No hurried journeys", "Claiming opens a single-task screen \u2014 validity, what you get, how to redeem \u2014 and then waits. Nothing auto-advances."],["Visual", "Numeric-first hierarchy", "The unlocked total opens the page, and every card carries its own \u20b9 value before its name has to be read."]],
     label:'Active customer',
     note:'The default hub. Priority engine leads with what needs action; everything else falls in behind it.',
     hero:'default',
@@ -990,7 +996,7 @@ const COHORTS = {
     copy:{attention:'Ready to claim', attentionSub:'Both unlocked by your last recharge — one tap each'}
   },
   dormant: {
-    ux:[["Goal-gradient effect","Motivation rises as a goal looks closer, so the streak shows day 1 of 3 rather than an abstract 'come back soon'."],["Zeigarnik effect","An unfinished sequence stays mentally open. Two empty circles are the reason to return tomorrow."],["Hick's law","The catalogue is cut to a single reward. A lapsed user given nine options picks none."]],
+    ux:[["Experience", "Clarity creates momentum", "Day 1 of 3 is stated, not implied. What is left to do is visible without opening anything."],["Journey", "No hurried journeys", "One task on the screen: come back tomorrow. The catalogue is trimmed so nothing competes with it."],["Visual", "Numeric-first hierarchy", "The streak is counted rather than described \u2014 1, 2, 3 \u2014 and the reward carries its \u20b9 value."]],
     label:'Dormant / low engagement',
     note:'Re-engagement first. The catalogue is deliberately trimmed — one streak, one reward, nothing else competing.',
     hero:'welcome',
@@ -1001,7 +1007,7 @@ const COHORTS = {
     copy:{benefits:'Benefits waiting for you', benefitsSub:'Still yours, nothing expired yet'}
   },
   voice: {
-    ux:[["Cocktail party effect","People attend to what names them. The reward is built on this user's one observed habit \u2014 calls and music, not data."],["Fitts's law","A single full-width CTA in the thumb zone: large target, short travel, one decision."],["Hick's law","One recommendation replaces a menu, because the goal is a first action, not a comparison."]],
+    ux:[["Experience", "Clarity creates momentum", "One recommendation, with the reward and the effort \u2014 about 40 seconds \u2014 both stated before the tap."],["Journey", "No hurried journeys", "A single action per screen. HelloTune setup is not bundled with a plan change or an upsell."],["Visual", "Numeric-first hierarchy", "\u20b930 leads the offer, because the number is the reason to act."]],
     label:'Prepaid voice-only',
     note:'No data pack, no OTT habit. The hub leads with the one action this user is actually likely to take.',
     hero:'action',
@@ -1012,7 +1018,7 @@ const COHORTS = {
     copy:{benefits:'What you already have', recommend:'Because you call more than you stream'}
   },
   arpu: {
-    ux:[["Endowment effect","Benefits are stated as already held \u2014 'Active on your account' \u2014 which raises their perceived value over the same thing offered."],["Aesthetic\u2013usability effect","The dark premium surface reads as care, and users rate a considered interface as easier to use."],["Serial position effect","The recommended action opens the screen; subscriptions and history close it. Nothing important sits in the sagging middle."]],
+    ux:[["Experience", "Clarity creates momentum", "Benefits are stated as already held, with renewal dates on the card rather than buried in settings."],["Journey", "No hurried journeys", "Renew is its own screen with its own confirmation \u2014 no inline one-tap changes to a paid plan."],["Visual", "Numeric-first hierarchy", "\u20b91,848 held and \u20b97,200 saved anchor the page before any product name appears."]],
     label:'High-ARPU Fiber / Postpaid',
     note:'This user already holds real value. Premium surface, benefits stated as facts, action framed as "get more".',
     hero:'premium',
@@ -1023,7 +1029,7 @@ const COHORTS = {
     copy:{benefits:'Active on your account', recommend:'Get more from your plan', benefitsSub:'Premium · 3 services on one bill'}
   },
   data: {
-    ux:[["Miller's law","0.08 GB is a number to decode. The meter turns it into one glanceable quantity instead."],["Framing effect","The same top-up framed as the fix for a problem the user already has, not as an upsell."],["Fitts's law","The recharge CTA is full-width at the bottom of the card \u2014 the largest, nearest target on the screen."]],
+    ux:[["Experience", "Clarity creates momentum", "The meter shows where you stand and the fix for it in the same view."],["Journey", "No hurried journeys", "Recharge is one decision. Packs are listed with price and validity up front, not hidden behind a flow."],["Visual", "Numeric-first hierarchy", "0.08 GB and \u20b919 are the two numbers this screen is built on."]],
     label:'Data-exhausted',
     note:'Third exhaustion this month. The reward is framed as the fix, not as an upsell.',
     hero:'lowdata',
@@ -1034,7 +1040,7 @@ const COHORTS = {
     copy:{recommend:'Recommended for you right now', attention:'Also waiting for you'}
   },
   expiring: {
-    ux:[["Loss aversion","Losing \u20b9600 weighs heavier than gaining it. 'Expires today' states the cost of doing nothing."],["Von Restorff effect","Only the two urgent cards carry red. If the whole page shouted, the warning would stop registering."],["Doherty threshold","Claiming resolves in well under 400ms, so urgency never turns into friction."]],
+    ux:[["Experience", "Clarity creates momentum", "Every expiring benefit states its deadline on the card itself, not in a modal you have to open."],["Journey", "No hurried journeys", "Urgency is stated once. Claiming still opens the full screen with terms \u2014 pressure never shortens the journey."],["Visual", "Numeric-first hierarchy", "Hours left and \u20b9 value lead. The countdown is a number, not a colour on its own."]],
     label:'Benefits expiring today',
     note:'Urgency is spent on two cards only — the rest of the page stays calm so the warning still reads as a warning.',
     hero:'urgent',
@@ -1045,7 +1051,7 @@ const COHORTS = {
     copy:{attention:'Use these before they expire', attentionSub:'After this they are gone — no extension', benefits:'Your other benefits'}
   },
   recharged: {
-    ux:[["Peak\u2013end rule","The reward lands at the emotional peak of the transaction, which is what the user will remember of the recharge."],["Zeigarnik effect","Unclaimed benefits stay visibly open \u2014 a loop the user wants to close."],["Fitts's law","'Claim all 3' collapses three targets into one, because the cheapest interaction is the one not required."]],
+    ux:[["Experience", "Clarity creates momentum", "The recharge and what it earned are shown together, each benefit named with its own value."],["Journey", "No hurried journeys", "Claim all is offered for speed, but every benefit can still be opened and read on its own screen."],["Visual", "Numeric-first hierarchy", "\u20b9599 paid and \u20b9449 earned sit next to each other, so the return is legible at a glance."]],
     label:'Just recharged · ₹599',
     note:'The post-transaction moment the BRD is built around: the user sees what the recharge earned before they leave the screen.',
     hero:'success',
@@ -1152,6 +1158,7 @@ function BenefitCard(raw, weight){
         <p class="card__why">${esc(b.why)}</p>
       </div>
       <div class="card__foot">
+        ${b.value ? `<span class="card__numq">${money(b.value)}</span>` : ''}
         <span class="status status--${status[1]}">${status[0]}</span>
         ${b.cta ? `<button class="btn btn--quiet" data-act="open" data-id="${b.id}">${esc(b.cta)}</button>` : ''}
       </div>
@@ -1169,6 +1176,7 @@ function BenefitCard(raw, weight){
       </span>
     </div>
     <h3 class="card__title">${esc(b.title)}</h3>
+    ${b.value ? `<p class="card__num">${money(b.value)} <span>value</span></p>` : ''}
     <p class="card__why">${esc(b.why)}</p>
     <div class="card__foot">
       <span class="status status--${status[1]}">${status[0]}</span>
@@ -1698,13 +1706,13 @@ function render(animate = true){
   const rat = document.getElementById('rat');
   if (rat) rat.innerHTML = `
     <p class="rat__h"><i></i>Why this screen</p>
-    <p class="rat__s">What the priority engine chose for <b>${esc(cfg.label)}</b>, and the principle behind each call.</p>
-    <div class="rat__l">${(cfg.ux || []).map(([t,d]) =>
-      `<div class="rat__i"><div class="rat__t">${esc(t)}</div><div class="rat__d">${esc(d)}</div></div>`).join('')}
-      <div class="rat__i"><div class="rat__t">Jakob's law</div>
-        <div class="rat__d">Pill filters, circular quick actions and bottom-sheet claims are borrowed from apps this user already has. Familiar form, so the content is the only new thing.</div></div>
+    <p class="rat__s">How <b>${esc(cfg.label)}</b> is composed, against the three principles this product is built on.</p>
+    <div class="rat__l">${(cfg.ux || []).map(([k,t,d]) =>
+      `<div class="rat__i"><div class="rat__k">${esc(k)}</div>
+        <div class="rat__t">${esc(t)}</div><div class="rat__d">${esc(d)}</div></div>`).join('')}
     </div>
-    <p class="rat__f">Every touch target is at least 44&nbsp;px; motion runs 150–220&nbsp;ms and is disabled under reduced-motion.</p>`;
+    <p class="rat__f">Across every screen: targets no smaller than 44&nbsp;px, motion held to 150–220&nbsp;ms and
+      switched off under reduced-motion, and no control that fails to say what it will do.</p>`;
 }
 
 /* ============================== ScratchCard ================================ */
@@ -1970,7 +1978,9 @@ function ProductPage(b){
              <p>Taking you to ${esc(b.brand || 'the partner')}…</p></div>`
         : spent
           ? `<button class="btn btn--ghost btn--wide" data-act="closePage">Done</button>`
-          : `<button class="btn ${hot ? 'btn--ember' : 'btn--primary'} btn--wide" data-act="confirm">${esc(action)}</button>`}
+          : (b.app && claimed)
+            ? `<button class="btn btn--primary btn--wide" data-act="openApp" data-brand="${esc(b.brand)}">Open ${esc(b.brand)}</button>`
+            : `<button class="btn ${hot ? 'btn--ember' : 'btn--primary'} btn--wide" data-act="confirm">${esc(action)}</button>`}
     </div>`;
 }
 
@@ -2002,7 +2012,6 @@ function confirmProduct(){
     }
     state.page.stage = 'done';
     paintProduct(); burst(pageEl); render(false);
-    if (b.app) setTimeout(() => openApp(b.brand), reduce ? 0 : 420);
   };
   if (b.partner && b.state !== 'locked'){
     state.page.stage = 'handoff'; paintProduct();
