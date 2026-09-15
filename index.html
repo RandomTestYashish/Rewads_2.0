@@ -149,7 +149,6 @@ img,svg{max-width:100%}
   .batt::after{content:"";position:absolute;right:-3.4px;top:3px;width:2px;height:4px;background:var(--text);border-radius:0 1px 1px 0}
   .homebar{display:block;flex:none;padding:7px 0 9px;background:var(--card)}
   .homebar i{display:block;width:128px;height:5px;border-radius:3px;background:var(--text);opacity:.3;margin:0 auto}
-  .scrim{position:absolute}
   .toasts{position:absolute;left:14px;right:14px;bottom:22px;width:auto;max-width:none;transform:none}
 }
 
@@ -575,33 +574,75 @@ img,svg{max-width:100%}
 .ins__bar{position:relative;height:5px;border-radius:3px;background:rgba(255,255,255,.2);margin-top:var(--s3);overflow:hidden}
 .ins__fill{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,var(--gold),#F0D9A6);width:66%}
 .ins .btn{margin-top:var(--s4);position:relative}
-/* ======================= DIALOG · TOAST · MOTION ======================= */
-.scrim{position:fixed;inset:0;background:rgba(0,0,0,.62);backdrop-filter:blur(3px);z-index:80;
-  display:grid;place-items:end center;opacity:0;pointer-events:none;transition:opacity .22s}
-.scrim.is-open{opacity:1;pointer-events:auto}
-.scrim[hidden]{display:none}
-.sheet{width:100%;background:var(--card);color:var(--text);border-radius:var(--r-xl) var(--r-xl) 0 0;
-  padding:var(--s5) var(--s5) calc(var(--s6) + env(safe-area-inset-bottom));box-shadow:var(--sh-lift);
-  transform:translateY(16px);transition:transform .28s cubic-bezier(.2,.9,.2,1)}
-.scrim.is-open .sheet{transform:none}
-.sheet__grab{width:38px;height:4px;border-radius:2px;background:var(--border);margin:-6px auto var(--s4)}
-.sheet__ico{--tint:var(--surface-muted);width:60px;height:60px;border-radius:var(--r-lg);display:grid;
-  place-items:center;margin-bottom:var(--s3);background:var(--tint)}
-.sheet h3{font-size:1.35rem;color:var(--text)}
-.sheet__why{font-size:13.5px;color:var(--text-2);margin-top:var(--s1)}
-.sheet__terms{margin-top:var(--s4);padding-top:var(--s3);border-top:1px solid var(--border-soft);
-  display:flex;flex-direction:column;gap:var(--s2)}
-.trow{display:flex;gap:var(--s3);font-size:12.5px;color:var(--text-2)}
-.trow b{color:var(--text);font-weight:700;margin-left:auto;font-size:12px}
-.sheet__acts{margin-top:var(--s5);display:flex;flex-direction:column;gap:var(--s2)}
-.done{display:grid;place-items:center;text-align:center;gap:var(--s1);padding:var(--s2) 0 var(--s1)}
-.done__tick{width:64px;height:64px;border-radius:50%;background:var(--green);color:#fff;display:grid;
-  place-items:center;animation:pop .45s cubic-bezier(.2,1.5,.4,1)}
-@keyframes pop{0%{transform:scale(.5);opacity:0}60%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
-.handoff{display:grid;place-items:center;gap:var(--s3);padding:var(--s6) 0}
-.spinner{width:34px;height:34px;border-radius:50%;border:3px solid var(--border);border-top-color:var(--red);
-  animation:sp .8s linear infinite}
+/* ======================= PRODUCT PAGE · TOAST · MOTION ======================= */
+.page{position:fixed;inset:0;z-index:80;background:var(--bg);display:flex;flex-direction:column;
+  opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .24s,transform .28s cubic-bezier(.2,.9,.2,1)}
+.page.is-open{opacity:1;transform:none;pointer-events:auto}
+.page[hidden]{display:none}
+.page__bar{flex:none;display:flex;align-items:center;gap:var(--s3);padding:var(--s3) var(--gut);
+  background:var(--bg);border-bottom:1px solid var(--border-soft)}
+.page__back{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:var(--text);
+  background:var(--card);box-shadow:inset 0 0 0 1px var(--border-soft),var(--sh-sm);flex:none}
+.page__back:hover{box-shadow:inset 0 0 0 1px var(--border),var(--sh-card)}
+.page__brandbar{font-size:15px;font-weight:700;letter-spacing:-.02em;color:var(--text);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.page__scroll{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:0 var(--gut) var(--s6);scrollbar-width:none}
+.page__scroll::-webkit-scrollbar{display:none}
+
+.page__hero{--tint:var(--surface-muted);background:var(--tint);border-radius:var(--r-xl);
+  padding:var(--s6) var(--s5);margin-top:var(--s4);text-align:center}
+.page__logo{display:grid;place-items:center;width:72px;height:72px;border-radius:var(--r-lg);margin:0 auto var(--s4);
+  background:var(--card);box-shadow:var(--sh-card)}
+.page__brand{font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--text-2)}
+.page__hero h1{font-size:1.4rem;margin-top:var(--s2);color:var(--text)}
+.page__why{font-size:13px;color:var(--text-2);margin-top:var(--s2)}
+.page__value{font-size:1.15rem;font-weight:800;letter-spacing:-.035em;color:var(--text);margin-top:var(--s4)}
+.page__value span{font-size:.72em;font-weight:600;color:var(--text-2);letter-spacing:0}
+
+.vald{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s2);margin-top:var(--s3);
+  background:var(--card);border-radius:var(--r-md);padding:var(--s4) var(--s3);
+  box-shadow:inset 0 0 0 1px var(--border-soft),var(--sh-sm)}
+.vald__i{text-align:center;min-width:0}
+.vald__l{display:block;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3)}
+.vald__v{display:block;font-size:13px;font-weight:700;color:var(--text);margin-top:5px;
+  font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.vald__v.is-hot{color:var(--red)}
+
+.page__sec{margin-top:var(--s6);display:flex;flex-direction:column;gap:var(--s3)}
+.page__sec .sec__title{color:var(--text-2)}
+.perks{display:flex;flex-direction:column;gap:var(--s2)}
+.perk{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;color:var(--text);line-height:1.45;
+  background:var(--card);border-radius:var(--r-md);padding:var(--s3) var(--s4);
+  box-shadow:inset 0 0 0 1px var(--border-soft)}
+.perk__t{width:18px;height:18px;border-radius:50%;background:var(--green-soft);color:var(--green);
+  display:grid;place-items:center;flex:none;margin-top:1px}
+
+.code{display:flex;align-items:center;gap:var(--s3);background:var(--card);border-radius:var(--r-md);
+  padding:var(--s4);box-shadow:inset 0 0 0 1px var(--border-soft)}
+.code.is-open{box-shadow:inset 0 0 0 1.5px var(--green)}
+.code__v{flex:1;min-width:0;font-size:17px;font-weight:700;letter-spacing:.09em;color:var(--text-3);
+  font-variant-numeric:tabular-nums;overflow:hidden;text-overflow:ellipsis}
+.code.is-open .code__v{color:var(--text)}
+.code__c{flex:none;border-radius:var(--r-pill);padding:8px 14px;font-size:12.5px;font-weight:700;
+  background:var(--surface-muted);color:var(--text)}
+.code__c:hover{background:var(--border)}
+.code__h{font-size:12px;color:var(--text-3);line-height:1.5}
+
+.steps{display:flex;flex-direction:column;gap:var(--s3);counter-reset:s}
+.steps li{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;color:var(--text-2);line-height:1.45}
+.steps b{width:20px;height:20px;border-radius:50%;background:var(--text);color:#fff;font-size:11px;
+  display:grid;place-items:center;flex:none;margin-top:1px}
+.page__terms{font-size:11.5px;color:var(--text-3);line-height:1.6;margin-top:var(--s6)}
+
+.page__foot{flex:none;padding:var(--s4) var(--gut) calc(var(--s4) + env(safe-area-inset-bottom));
+  background:var(--card);border-top:1px solid var(--border-soft);box-shadow:0 -6px 18px rgba(16,24,40,.06)}
+.handoff{display:flex;align-items:center;justify-content:center;gap:var(--s3);padding:var(--s2) 0;
+  font-size:13.5px;font-weight:600;color:var(--text-2)}
+.spinner{width:22px;height:22px;border-radius:50%;border:2.5px solid var(--border);border-top-color:var(--red);
+  animation:sp .8s linear infinite;flex:none}
 @keyframes sp{to{transform:rotate(360deg)}}
+@media (min-width:900px){ .page{position:absolute} }
+
 .toasts{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:90;display:flex;
   flex-direction:column;gap:var(--s2);width:calc(100% - 32px);max-width:400px;pointer-events:none}
 .toast{background:var(--card);color:var(--text);border-radius:var(--r-md);padding:var(--s3) var(--s4);
@@ -665,9 +706,7 @@ img,svg{max-width:100%}
 
     <div class="homebar" aria-hidden="true"><i></i></div>
 
-    <div class="scrim" id="scrim" role="dialog" aria-modal="true" aria-labelledby="sheetTitle" hidden>
-      <div class="sheet" id="sheet"></div>
-    </div>
+    <div class="page" id="page" role="dialog" aria-modal="true" aria-labelledby="pageTitle" hidden></div>
     <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
   </div>
 
@@ -843,23 +882,23 @@ const artOf = b => b.art || ART_BY_TYPE[b.type] || 'gift';
 /* ================================ rewardData.ts ============================ */
 /* A benefit answers, in this order: WHAT · WHY · STATUS · EXPIRY · ACTION.    */
 const B = {
-  cash100:   {id:'cash100', art:'coin',   type:'cash',    title:'₹100 Cashback',            why:'Unlocked with your ₹599 recharge',           state:'ready',  value:100,  exp:0,  isNew:true,  tags:['recharge','money'], cta:'Claim now', to:'your wallet'},
-  ott599:    {id:'ott599',    type:'ott',     title:'1 month Sony LIV',         why:'Unlocked with your ₹599 recharge',           state:'ready',  value:299,  exp:5,  isNew:true,  tags:['recharge','entertainment'], cta:'Activate', partner:true},
-  shop50:    {id:'shop50',    type:'voucher', title:'₹50 Shopping voucher',     why:'Unlocked with your ₹599 recharge',           state:'ready',  value:50,   exp:14, isNew:true,  tags:['recharge','shopping'], cta:'Claim now'},
-  myntra:    {id:'myntra',    type:'voucher', title:'₹500 Myntra voucher',      why:'Insider reward · Level 3',                  state:'ready',  value:500,  exp:2,  tags:['shopping'], cta:'Use now', partner:true},
-  mmt:       {id:'mmt',       type:'insider', title:'₹1,500 off MakeMyTrip',    why:'Insider benefit for 4 years with us',    state:'ready',  value:1500, exp:9,  tags:['travel','premium'], cta:'Use now', partner:true, code:'INSIDER1500MMT'},
-  netflix3m: {id:'netflix3m', type:'ott',     title:'Netflix Mobile · 3 months',why:'Unlocked with your ₹599 recharge',           state:'ready',  value:597,  exp:6,  isNew:true,  tags:['recharge','entertainment'], cta:'Claim now', partner:true, to:'Netflix'},
-  xstream:   {id:'xstream',   type:'ott',     title:'Xstream Play',            why:'Included in your plan · 22 apps',            state:'active', value:149,  exp:32, tags:['entertainment'], cta:'Open'},
-  netflix:   {id:'netflix',   type:'ott',     title:'Netflix Basic',            why:'Included with your ₹1,199 postpaid plan',    state:'active', value:199,  exp:26, tags:['entertainment','premium'], cta:'Open'},
-  fiber:     {id:'fiber', art:'wifi',     type:'plan',    title:'Speed boost · 300 Mbps',   why:'Active on your Fiber connection till 30 Sep',state:'active', value:0,    exp:20, tags:['premium','fiber'], cta:'Manage'},
-  shield:    {id:'shield', art:'shield',    type:'insider', title:'Device Shield cover',      why:'Premium benefit · ₹40,000 cover',          state:'active', value:0,    exp:120,tags:['premium'], cta:'View policy'},
-  talktime:  {id:'talktime', art:'music',  type:'plan',    title:'₹30 talktime',             why:'Set a HelloTune to unlock this reward',      state:'locked', value:30,   exp:null, tags:['music','engagement'], cta:'Set up HelloTune'},
-  autopay:   {id:'autopay', art:'card',   type:'cash',    title:'₹50 off every month',      why:'Turn on AutoPay for your Fiber bill',        state:'locked', value:600,  exp:null, tags:['premium','billing'], cta:'Set up AutoPay'},
-  family:    {id:'family', art:'family',    type:'plan',    title:'Add 3 members free',       why:'Link family accounts to your plan',       state:'locked', value:0,    exp:null, tags:['premium','family'], cta:'Link accounts'},
-  minidata:  {id:'minidata', art:'data',  type:'plan',    title:'1 GB data, on us',         why:'Recharge ₹19 or more in the app today',      state:'locked', value:19,   exp:null, tags:['data'], cta:'Recharge & unlock'},
-  comeback:  {id:'comeback',  type:'cash',    title:'₹20 cashback',             why:'Waiting for you since 28 Aug',               state:'ready',  value:20,   exp:6,  tags:['money'], cta:'Claim now'},
-  spin:      {id:'spin',      type:'game',    title:'Spin & Win',               why:"Complete today's challenge to unlock",       state:'locked', value:0,    exp:null, tags:['game'], cta:'Unlock'},
-  amazon:    {id:'amazon',    type:'voucher', title:'Amazon ₹500 voucher',      why:'Used on 3 Sep · order #4471',                state:'used',   value:500,  exp:null, tags:['shopping']},
+  cash100:   {id:'cash100', brand:"Payments Bank", perks:["Credited to your wallet the moment you claim", "No minimum spend, no partner app needed", "Spend it anywhere UPI is accepted"], art:'coin',   type:'cash',    title:'₹100 Cashback',            why:'Unlocked with your ₹599 recharge',           state:'ready',  value:100,  exp:0,  isNew:true,  tags:['recharge','money'], cta:'Claim now', to:'your wallet'},
+  ott599:    {id:'ott599', brand:"Sony LIV", perks:["One month of Sony LIV Premium", "Live sport, originals and the full catalogue", "Streams on two devices at once"],    type:'ott',     title:'1 month Sony LIV',         why:'Unlocked with your ₹599 recharge',           state:'ready',  value:299,  exp:5,  isNew:true,  tags:['recharge','entertainment'], cta:'Activate', partner:true},
+  shop50:    {id:'shop50', brand:"Shopping", perks:["\u20b950 off any order above \u20b9199", "Applies at checkout automatically", "Stacks on top of sale prices"],    type:'voucher', title:'₹50 Shopping voucher',     why:'Unlocked with your ₹599 recharge',           state:'ready',  value:50,   exp:14, isNew:true,  tags:['recharge','shopping'], cta:'Claim now'},
+  myntra:    {id:'myntra', brand:"Myntra", perks:["\u20b9500 off orders above \u20b91,999", "Works on sale items too", "One use per account"],    type:'voucher', title:'₹500 Myntra voucher',      why:'Insider reward · Level 3',                  state:'ready',  value:500,  exp:2,  tags:['shopping'], cta:'Use now', partner:true},
+  mmt:       {id:'mmt', brand:"MakeMyTrip", perks:["\u20b91,500 off domestic flights", "Reserved for Insider members", "No coupon hunting \u2014 we apply it for you"],       type:'insider', title:'₹1,500 off MakeMyTrip',    why:'Insider benefit for 4 years with us',    state:'ready',  value:1500, exp:9,  tags:['travel','premium'], cta:'Use now', partner:true, code:'INSIDER1500MMT'},
+  netflix3m: {id:'netflix3m', brand:"Netflix", perks:["Three months of Netflix Mobile, fully paid", "Watch on one phone or tablet, ad-free", "Nothing auto-charges when it ends"], type:'ott',     title:'Netflix Mobile · 3 months',why:'Unlocked with your ₹599 recharge',           state:'ready',  value:597,  exp:6,  isNew:true,  tags:['recharge','entertainment'], cta:'Claim now', partner:true, to:'Netflix'},
+  xstream:   {id:'xstream', brand:"Xstream Play", perks:["22 OTT apps in one subscription", "Included with your plan at no cost", "Download and watch offline"],   type:'ott',     title:'Xstream Play',            why:'Included in your plan · 22 apps',            state:'active', value:149,  exp:32, tags:['entertainment'], cta:'Open'},
+  netflix:   {id:'netflix', brand:"Netflix", perks:["Included with your \u20b91,199 postpaid plan", "Full HD on two screens", "Billed with your Airtel plan, never separately"],   type:'ott',     title:'Netflix Basic',            why:'Included with your ₹1,199 postpaid plan',    state:'active', value:199,  exp:26, tags:['entertainment','premium'], cta:'Open'},
+  fiber:     {id:'fiber', brand:"Fiber", perks:["300 Mbps on your home connection", "Unlimited data, no fair-usage cap", "Free router and installation"], art:'wifi',     type:'plan',    title:'Speed boost · 300 Mbps',   why:'Active on your Fiber connection till 30 Sep',state:'active', value:0,    exp:20, tags:['premium','fiber'], cta:'Manage'},
+  shield:    {id:'shield', brand:"Device Shield", perks:["\u20b940,000 of accidental damage cover", "Screen repairs at 400+ service centres", "Claim online in under five minutes"], art:'shield',    type:'insider', title:'Device Shield cover',      why:'Premium benefit · ₹40,000 cover',          state:'active', value:0,    exp:120,tags:['premium'], cta:'View policy'},
+  talktime:  {id:'talktime', brand:"HelloTune", perks:["\u20b930 talktime credited on setup", "Pick any song from 10 million tracks", "Change your tune as often as you like"], art:'music',  type:'plan',    title:'₹30 talktime',             why:'Set a HelloTune to unlock this reward',      state:'locked', value:30,   exp:null, tags:['music','engagement'], cta:'Set up HelloTune'},
+  autopay:   {id:'autopay', brand:"AutoPay", perks:["\u20b950 off every bill, every month", "Never miss a due date again", "Cancel from the app at any time"], art:'card',   type:'cash',    title:'₹50 off every month',      why:'Turn on AutoPay for your Fiber bill',        state:'locked', value:600,  exp:null, tags:['premium','billing'], cta:'Set up AutoPay'},
+  family:    {id:'family', brand:"Family", perks:["Add up to three members free", "One bill for the whole family", "Each member keeps their own data"], art:'family',    type:'plan',    title:'Add 3 members free',       why:'Link family accounts to your plan',       state:'locked', value:0,    exp:null, tags:['premium','family'], cta:'Link accounts'},
+  minidata:  {id:'minidata', brand:"Data", perks:["1 GB added instantly on top-up", "Valid for the rest of today", "App-only \u2014 not available on other channels"], art:'data',  type:'plan',    title:'1 GB data, on us',         why:'Recharge ₹19 or more in the app today',      state:'locked', value:19,   exp:null, tags:['data'], cta:'Recharge & unlock'},
+  comeback:  {id:'comeback', brand:"Cashback", perks:["\u20b920 waiting since 28 August", "Credited straight to your wallet", "No conditions attached"],  type:'cash',    title:'₹20 cashback',             why:'Waiting for you since 28 Aug',               state:'ready',  value:20,   exp:6,  tags:['money'], cta:'Claim now'},
+  spin:      {id:'spin', brand:"Spin & Win", perks:["One free spin every day", "Six prizes, one guaranteed win", "Unused spins do not carry over"],      type:'game',    title:'Spin & Win',               why:"Complete today's challenge to unlock",       state:'locked', value:0,    exp:null, tags:['game'], cta:'Unlock'},
+  amazon:    {id:'amazon', brand:"Amazon", perks:["\u20b9500 off any order", "Used on 3 September", "Order #4471"],    type:'voucher', title:'Amazon ₹500 voucher',      why:'Used on 3 Sep · order #4471',                state:'used',   value:500,  exp:null, tags:['shopping']},
   oldcash:   {id:'oldcash',   type:'cash',    title:'₹100 Cashback',            why:'Expired 8 Sep · unclaimed for 30 days',      state:'expired',value:100,  exp:null, tags:['money'], cta:'View details'}
 };
 
@@ -1001,7 +1040,7 @@ function weightOf(b, i, top){
 const state = {
   cohort:'active', filter:'all', q:'',
   claimed:new Set(), activated:new Set(),
-  scratch:{open:false}, spin:{angle:0, result:null, spinning:false},
+  scratch:{open:false}, spin:{angle:0, result:null, spinning:false}, page:{id:null, stage:'idle'},
   streak:1, tasks:{recharge:true, hellotune:false, refer:false}
 };
 const $  = s => document.querySelector(s);
@@ -1707,75 +1746,124 @@ function burst(anchor){
   setTimeout(() => layer.remove(), 1500);
 }
 
-/* ============================== ClaimDialog ================================
-   One-tap claim. No coupon code to copy unless the partner has no SSO —
-   that fallback is shown only for the MakeMyTrip voucher.
+/* ============================== ProductPage =================================
+   Claiming opens a full screen, not a sheet: brand, validity, the three
+   things this reward actually gives you, and the redemption number —
+   masked until it is yours.
    ========================================================================== */
-const scrim = $('#scrim'), sheet = $('#sheet');
-let lastFocus = null, current = null;
+const pageEl = $('#page');
+let lastFocus = null;
 
+const CODES = {};
+const codeOf = b => CODES[b.id] || (CODES[b.id] = (() => {
+  const p = (b.brand || 'AIRTEL').replace(/[^A-Za-z]/g, '').slice(0, 4).toUpperCase().padEnd(4, 'X');
+  let h = 0; for (let i = 0; i < b.id.length; i++) h = (h * 31 + b.id.charCodeAt(i)) >>> 0;
+  const seg = n => String(h % n).padStart(4, '0');
+  return `${p}-${seg(9000)}-${(h % 46656).toString(36).toUpperCase().padStart(3, '0')}`;
+})());
 
-function sheetConfirm(b){
-  const action = b.state === 'locked' ? b.cta : (b.state === 'active' ? 'Open' : (b.type === 'ott' ? 'Activate now' : 'Claim benefit'));
-  const terms = [
-    ['What you get', b.value ? money(b.value) : 'Plan benefit'],
-    ['Why you have it', b.tags.includes('recharge') ? 'Recharge reward' : b.tags.includes('premium') ? 'Premium' : b.tags.includes('engagement') ? 'Engagement reward' : 'Insider'],
-    ['Valid till', b.exp === null ? 'No expiry' : b.exp <= 0 ? 'Today, 11:59 PM' : new Date(2026, 8, 10 + b.exp).toLocaleDateString('en-IN', {day:'numeric', month:'short'})],
-    ['Where it applies', b.to || (b.partner ? 'Partner app · signed in automatically' : 'App & website')]
-  ];
-  return `<div class="sheet__grab"></div>
-    <div class="sheet__ico card__ico--${b.type}">${art(artOf(b),38)}</div>
-    <h3 id="sheetTitle">${esc(b.title)}</h3>
-    <p class="sheet__why">${esc(b.why)}</p>
-    <div class="sheet__terms">${terms.map(t=>`<div class="trow"><span>${t[0]}</span><b>${esc(t[1])}</b></div>`).join('')}</div>
-    <div class="sheet__acts">
-      <button class="btn ${b.exp!==null&&b.exp<=2?'btn--ember':'btn--primary'} btn--wide" data-act="confirm">${esc(action)}</button>
-      <button class="btn btn--quiet btn--wide" data-act="close">Not now</button>
+const validTill = b => b.exp === null ? 'No expiry'
+  : new Date(2026, 8, 15 + b.exp).toLocaleDateString('en-IN', {day:'numeric', month:'short', year:'numeric'});
+
+function ProductPage(b){
+  const claimed = b.state === 'used' || b.state === 'active';
+  const stage = state.page.stage;
+  const hot = b.exp !== null && b.exp <= 2;
+  const action = b.state === 'locked' ? b.cta : (b.type === 'ott' ? 'Activate now' : 'Claim now');
+  const perks = b.perks || ['Yours to use right away','No coupon code to hunt for','Applied automatically at checkout'];
+
+  return `
+    <div class="page__bar">
+      <button class="page__back" data-act="closePage" aria-label="Back">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5 8 12l7 7"/></svg>
+      </button>
+      <span class="page__brandbar">${esc(b.brand || 'Benefit')}</span>
+    </div>
+    <div class="page__scroll">
+      <div class="page__hero card__ico--${b.type}">
+        <span class="page__logo">${art(artOf(b), 44)}</span>
+        <p class="page__brand">${esc(b.brand || 'Benefit')}</p>
+        <h1 id="pageTitle">${esc(b.title)}</h1>
+        <p class="page__why">${esc(b.why)}</p>
+        ${b.value ? `<p class="page__value">${money(b.value)} <span>value</span></p>` : ''}
+      </div>
+
+      <div class="vald">
+        <div class="vald__i"><span class="vald__l">Valid till</span><span class="vald__v">${validTill(b)}</span></div>
+        <div class="vald__i"><span class="vald__l">Days left</span>
+          <span class="vald__v ${hot ? 'is-hot' : ''}">${b.exp === null ? '—' : b.exp <= 0 ? 'Today' : b.exp}</span></div>
+        <div class="vald__i"><span class="vald__l">Status</span>
+          <span class="vald__v">${claimed ? 'Claimed' : b.state === 'locked' ? 'Locked' : 'Ready'}</span></div>
+      </div>
+
+      <section class="page__sec">
+        <h2 class="sec__title">What you get</h2>
+        <ul class="perks">${perks.slice(0,3).map(t => `<li class="perk">
+          <span class="perk__t">${ico('tick',13,3)}</span>${esc(t)}</li>`).join('')}</ul>
+      </section>
+
+      <section class="page__sec">
+        <h2 class="sec__title">Redemption number</h2>
+        <div class="code ${claimed ? 'is-open' : ''}">
+          <span class="code__v">${claimed ? codeOf(b) : '••••-••••-•••'}</span>
+          ${claimed ? `<button class="code__c" data-act="copyCode" data-code="${codeOf(b)}">Copy</button>` : ''}
+        </div>
+        <p class="code__h">${claimed
+          ? 'Quote this number if support ever asks about this reward.'
+          : 'Your number appears here the moment you claim.'}</p>
+      </section>
+
+      <section class="page__sec">
+        <h2 class="sec__title">How to redeem</h2>
+        <ol class="steps">
+          <li><b>1</b>Tap ${esc(action.toLowerCase())} below.</li>
+          <li><b>2</b>${b.partner ? `We sign you in to ${esc(b.brand)} with your number — no password.` : 'It lands in your account straight away.'}</li>
+          <li><b>3</b>${b.type === 'cash' ? 'Spend it wherever UPI works.' : 'Start using it. Nothing else to do.'}</li>
+        </ol>
+      </section>
+
+      <p class="page__terms">Offer applies to this number only and cannot be transferred or exchanged for cash.
+        ${b.exp !== null ? `Unclaimed after ${validTill(b)}, it lapses.` : ''} Terms apply.</p>
+    </div>
+    <div class="page__foot">
+      ${stage === 'handoff'
+        ? `<div class="handoff"><div class="spinner"></div>
+             <p>Taking you to ${esc(b.brand || 'the partner')}…</p></div>`
+        : claimed
+          ? `<button class="btn btn--ghost btn--wide" data-act="closePage">Done</button>`
+          : `<button class="btn ${hot ? 'btn--ember' : 'btn--primary'} btn--wide" data-act="confirm">${esc(action)}</button>`}
     </div>`;
 }
-function sheetHandoff(b){
-  return `<div class="sheet__grab"></div><div class="handoff"><div class="spinner"></div>
-    <p style="font-weight:650">Taking you to ${esc(b.id==='mmt'?'MakeMyTrip':b.id==='myntra'?'Myntra':b.id==='ott599'?'Sony LIV':'the partner')}…</p>
-    <p class="sheet__why" style="text-align:center;max-width:28ch">Signing you in with your number — no code to copy.</p></div>`;
+
+function openProduct(id){
+  lastFocus = document.activeElement;
+  state.page = {id, stage:'idle'};
+  pageEl.hidden = false;
+  pageEl.innerHTML = ProductPage(view(B[id]));
+  requestAnimationFrame(() => { pageEl.classList.add('is-open'); pageEl.querySelector('.page__back')?.focus(); });
 }
-function sheetDone(b){
-  const msg = b.state==='locked'
-    ? {t:'All set ✓', s: b.id==='talktime' ? 'HelloTune activated. ₹30 talktime is on its way.' : b.id==='autopay' ? 'AutoPay is on. ₹50 comes off every bill from October.' : b.id==='minidata' ? '1 GB added. It’s live on your number now.' : 'Unlocked. Your reward has been added.'}
-    : {t:'Claimed ✓', s:`${b.title} has been added to your account.`};
-  return `<div class="sheet__grab"></div><div class="done">
-      <span class="done__tick">${ico('tick',30,2.6)}</span>
-      <h3 id="sheetTitle" style="margin-top:10px">${msg.t}</h3>
-      <p class="sheet__why" style="max-width:30ch">${esc(msg.s)}</p></div>
-    ${b.code ? `<div class="sheet__terms"><div class="trow"><span>Coupon (fallback)</span><b>${esc(b.code)}</b></div></div>` : ''}
-    <div class="sheet__acts"><button class="btn btn--ghost btn--wide" data-act="close">Done</button></div>`;
+function paintProduct(){ if (state.page.id) pageEl.innerHTML = ProductPage(view(B[state.page.id])); }
+function closeProduct(){
+  pageEl.classList.remove('is-open');
+  setTimeout(() => { pageEl.hidden = true; pageEl.innerHTML = ''; state.page = {id:null, stage:'idle'}; lastFocus?.focus?.(); }, 240);
 }
-function openSheet(id){
-  const b = view(B[id]); current = b; lastFocus = document.activeElement;
-  scrim.hidden = false; sheet.innerHTML = (b.state==='used'||b.state==='expired') ? sheetDone(b) : sheetConfirm(b);
-  requestAnimationFrame(()=>{ scrim.classList.add('is-open'); sheet.querySelector('.btn')?.focus(); });
-}
-function closeSheet(){
-  scrim.classList.remove('is-open');
-  setTimeout(()=>{ scrim.hidden = true; sheet.innerHTML=''; lastFocus?.focus?.(); }, 220);
-}
-function confirmSheet(){
-  const b = current; if (!b) return;
+function confirmProduct(){
+  const b = view(B[state.page.id]); if (!b) return;
   const finish = () => {
     if (b.state === 'locked'){
-      if (b.id==='talktime') state.tasks.hellotune = true;
+      if (b.id === 'talktime') state.tasks.hellotune = true;
       state.claimed.add(b.id);
-      toast('Unlocked', b.id==='minidata' ? '1 GB is live on your number.' : 'Your reward has been added.');
+      toast('Unlocked', b.id === 'minidata' ? '1 GB is live on your number.' : 'Your reward has been added.');
     } else if (b.type === 'ott' || b.state === 'active'){
-      state.activated.add(b.id); toast('Activated', `${b.title} is ready to watch.`);
+      state.activated.add(b.id); toast('Activated', `${b.title} is ready to use.`);
     } else {
       state.claimed.add(b.id); toast(`${b.title} claimed`, 'Added to your account.');
     }
-    sheet.innerHTML = sheetDone(b);
-    sheet.querySelector('.btn')?.focus();
-    burst(sheet); render(false);
+    state.page.stage = 'done';
+    paintProduct(); burst(pageEl); render(false);
   };
   if (b.partner && b.state !== 'locked'){
-    sheet.innerHTML = sheetHandoff(b);
+    state.page.stage = 'handoff'; paintProduct();
     setTimeout(finish, reduce ? 0 : 1400);
   } else finish();
 }
@@ -1786,9 +1874,14 @@ document.addEventListener('click', e => {
   if (!t) return;
   const a = t.dataset.act;
   if (t.dataset.filter){ state.filter = t.dataset.filter; render(false); return; }
-  if (a === 'open')        openSheet(t.dataset.id);
-  else if (a === 'close')  closeSheet();
-  else if (a === 'confirm')confirmSheet();
+  if (a === 'open')          openProduct(t.dataset.id);
+  else if (a === 'closePage')closeProduct();
+  else if (a === 'confirm')  confirmProduct();
+  else if (a === 'copyCode'){
+    navigator.clipboard?.writeText(t.dataset.code).then(
+      () => toast('Number copied', t.dataset.code),
+      () => toast('Copy failed', 'Write the number down instead.'));
+  }
   else if (a === 'spin')   spin();
   else if (a === 'toast')  toast(t.dataset.msg);
   else if (a === 'claimAll'){
@@ -1806,8 +1899,7 @@ document.addEventListener('click', e => {
   }
   else if (a === 'scrollEarn') document.querySelector('[data-flip="earn"]')?.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block:'start'});
 });
-scrim.addEventListener('click', e => { if (e.target === scrim) closeSheet(); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape' && !scrim.hidden) closeSheet(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !pageEl.hidden) closeProduct(); });
 document.addEventListener('input', e => { if (e.target.id === 'q'){ state.q = e.target.value; render(false); } });
 $('#cohort').addEventListener('change', e => {
   state.cohort = e.target.value; state.filter = 'all'; state.q = '';
