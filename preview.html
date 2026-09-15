@@ -179,8 +179,9 @@ img,svg{max-width:100%}
 }
 
 /* ========================= TOP NAVIGATION ========================= */
-.head{position:sticky;top:0;z-index:40;background:var(--bg);
-  border-bottom:1px solid transparent;transition:border-color .2s}
+.head{position:sticky;top:0;z-index:40;background:var(--bg);border-bottom:1px solid transparent;
+  transition:border-color .2s,transform .26s cubic-bezier(.2,.8,.2,1)}
+.head.is-hidden{transform:translateY(-100%)}
 .head.is-stuck{border-bottom-color:var(--border)}
 .head__in{padding:var(--s3) var(--gut);display:flex;align-items:center;gap:var(--s2)}
 .brand{display:flex;align-items:center;font-weight:700;letter-spacing:-.025em;font-size:18px;color:var(--on-bg)}
@@ -2073,9 +2074,24 @@ $('#cohort').addEventListener('change', e => {
   const b = reduce ? 'auto' : 'smooth';
   screenEl.scrollTo({top:0, behavior:b}); window.scrollTo({top:0, behavior:b});
 });
+/* Header yields while the page is moving and returns the moment it settles —
+   also on any upward scroll, and always within the first screenful. Under
+   reduced-motion it simply never hides. */
 const screenEl = $('#screen');
+const headEl = $('#head');
 const scrolled = () => screenEl.scrollTop || scrollY;
-const onScroll = () => $('#head').classList.toggle('is-stuck', scrolled() > 8);
+let lastY = 0, idleTimer;
+function onScroll(){
+  const y = scrolled(), dy = y - lastY;
+  headEl.classList.toggle('is-stuck', y > 8);
+  if (!reduce){
+    if (y > 72 && dy > 4)        headEl.classList.add('is-hidden');
+    else if (dy < -4 || y <= 72) headEl.classList.remove('is-hidden');
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(() => headEl.classList.remove('is-hidden'), 180);
+  }
+  lastY = y;
+}
 addEventListener('scroll', onScroll, {passive:true});
 screenEl.addEventListener('scroll', onScroll, {passive:true});
 addEventListener('resize', () => { if (!state.scratch.open) initScratch(); });
