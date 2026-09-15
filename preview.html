@@ -244,6 +244,7 @@ img,svg{max-width:100%}
   font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:700}
 .chip--new{background:var(--red);color:#fff}
 .chip--urgent{background:var(--red-soft);color:var(--red)}
+.chip--soon{background:var(--amber-soft);color:var(--amber-ink)}
 .chip--active{background:var(--green-soft);color:var(--green)}
 .chip--muted{background:var(--surface-muted);color:var(--text-2)}
 .chip--gold{background:rgba(199,145,65,.18);color:var(--gold-soft)}
@@ -393,6 +394,7 @@ img,svg{max-width:100%}
 .status--locked,.status--past{color:var(--text-3)}
 .expiry{font-size:11.5px;color:var(--text-3);margin-left:auto;white-space:nowrap}
 .expiry--hot{color:var(--red);font-weight:600}
+.expiry--soon{color:var(--amber-ink);font-weight:600}
 .card .btn{margin-top:var(--s2)}
 
 /* icon well — soft grey by default, tinted per family */
@@ -429,6 +431,8 @@ img,svg{max-width:100%}
 .card--quiet .btn{margin:0}
 .card--quiet .btn--quiet{color:var(--blue)}
 .card--quiet .btn--quiet:hover{background:var(--surface);color:var(--blue)}
+.card--soon{box-shadow:inset 0 0 0 1.5px rgba(232,163,58,.55),var(--sh-sm)}
+.card--soon:hover{box-shadow:inset 0 0 0 1.5px rgba(232,163,58,.8),var(--sh-card)}
 .card--past{opacity:.6}
 .card--past:hover{opacity:.85}
 
@@ -1106,7 +1110,7 @@ function weightOf(b, i, top){
 
 /* ================================ state ==================================== */
 const state = {
-  cohort:'active', filter:'all', q:'',
+  cohort:'active', filter:'expiring', q:'',
   claimed:new Set(), activated:new Set(),
   scratch:{open:false}, spin:{angle:0, result:null, spinning:false},
   page:{id:null, stage:'idle'}, app:null,
@@ -1140,7 +1144,9 @@ const STATUS = {
 
 /* ============================= BenefitCard ================================= */
 function BenefitCard(raw, weight){
-  const b = raw, hot = b.exp !== null && b.exp <= 2 && (b.state==='ready'||b.state==='active');
+  const b = raw, live = b.state === 'ready' || b.state === 'active';
+  const hot = b.exp !== null && b.exp <= 2 && live;
+  const soon = b.exp !== null && b.exp > 2 && b.exp <= 10 && live;
   const [stxt, skey] = (STATUS[b.state] || STATUS.ready)(b);
   const status = hot && b.state !== 'locked' ? ['Expiring','expiring'] : [stxt, skey];
   const tone = b.state==='locked' ? 'tone-red' : (hot ? '' : 'tone-green');
@@ -1162,20 +1168,21 @@ function BenefitCard(raw, weight){
     </article>`);
   }
 
-  return el(`<article class="card ${weight==='featured'?'card--featured '+tone:''}" data-flip="b-${b.id}">
+  return el(`<article class="card ${weight==='featured'?'card--featured '+tone:''} ${soon&&weight!=='featured'?'card--soon':''}" data-flip="b-${b.id}">
     <div class="card__top">
       <span class="card__ico card__ico--${b.type}">${art(artOf(b), weight==='featured'?34:28)}</span>
       <span class="card__flags">
         ${b.isNew && b.state!=='used' ? '<span class="chip chip--new">New</span>' : ''}
         ${hot ? `<span class="chip chip--urgent">${b.exp<=0?'Today':b.exp+'d left'}</span>` : ''}
-        ${b.state==='active' && !hot ? '<span class="chip chip--active">Active</span>' : ''}
+        ${soon ? `<span class="chip chip--soon">${b.exp}d left</span>` : ''}
+        ${b.state==='active' && !hot && !soon ? '<span class="chip chip--active">Active</span>' : ''}
       </span>
     </div>
     <h3 class="card__title">${esc(b.title)}</h3>
     <p class="card__why">${esc(b.why)}</p>
     <div class="card__foot">
       <span class="status status--${status[1]}">${status[0]}</span>
-      ${exp ? `<span class="expiry ${hot?'expiry--hot':''}">${exp}</span>` : ''}
+      ${exp ? `<span class="expiry ${hot?'expiry--hot':soon?'expiry--soon':''}">${exp}</span>` : ''}
     </div>
     ${b.cta ? `<button class="btn ${btnKind} ${weight==='featured'?'':'btn--sm'}" data-act="open" data-id="${b.id}">
         ${esc(b.cta)} ${weight==='featured'?ico('arrow',17,2.2):''}</button>` : ''}
@@ -1413,8 +1420,11 @@ const SECTIONS = {
 
   /* FilterBar + BenefitGrid */
   benefits(cfg){
-    const filtering = state.filter !== 'all' || state.q.trim() !== '';
     const all = rank(cfg.ids,cfg).map(view);
+    // too few to warrant a filter bar? show everything — without clearing the
+    // user's choice, which still applies on the cohorts that do show the bar
+    const filter = all.length > 3 ? state.filter : 'all';
+    const filtering = filter !== 'all' || state.q.trim() !== '';
     const counts = {
       all: all.length,
       ready: all.filter(b=>b.state==='ready').length,
@@ -1428,15 +1438,15 @@ const SECTIONS = {
       if (!filtering && inAttention.has(b.id)) return false;   // no duplicate of the priority row
       if (b.state === 'locked' && b.type === 'game') return false; // lives in Earn more
       if (q && !(b.title+' '+b.why).toLowerCase().includes(q)) return false;
-      if (state.filter==='ready')    return b.state==='ready';
-      if (state.filter==='active')   return b.state==='active';
-      if (state.filter==='expiring') return b.exp!==null && b.exp<=10 && (b.state==='ready'||b.state==='active');
-      if (state.filter==='used')     return b.state==='used';
-      if (state.filter==='expired')  return b.state==='expired';
+      if (filter==='ready')    return b.state==='ready';
+      if (filter==='active')   return b.state==='active';
+      if (filter==='expiring') return b.exp!==null && b.exp<=10 && (b.state==='ready'||b.state==='active');
+      if (filter==='used')     return b.state==='used';
+      if (filter==='expired')  return b.state==='expired';
       return true;
     });
     const TABI = {all:'home', ready:'zap', active:'ott', expiring:'clock', used:'tick', expired:'x'};
-    const tab = (k,l,n) => `<button class="tab" role="tab" data-filter="${k}" aria-selected="${state.filter===k}">
+    const tab = (k,l,n) => `<button class="tab" role="tab" data-filter="${k}" aria-selected="${filter===k}">
       ${ico(TABI[k],14,2.2)}${l}<span class="tab__n">${n}</span></button>`;
     const wrap = el(`<section class="sec" data-flip="benefits">
       <div class="sec__head"><div>
@@ -1684,6 +1694,12 @@ function render(animate = true){
   }
 
   if (focused){ const q = $('#q'); q.focus(); q.setSelectionRange(caret, caret); }
+  // a pre-selected filter that sits off-screen in the rail reads as unselected
+  const sel = stack.querySelector('.tab[aria-selected="true"]');
+  if (sel){
+    const rail = sel.parentElement;
+    if (rail.scrollWidth > rail.clientWidth) rail.scrollLeft = Math.max(0, sel.offsetLeft - 18);
+  }
   initScratch();
   if (state.cohort === 'data') requestAnimationFrame(()=>{ const m = $('#meterFill'); if (m) m.style.width = '4%'; });
   const badge = document.getElementById('hBadge');
@@ -2043,7 +2059,7 @@ document.addEventListener('keydown', e => {
 });
 document.addEventListener('input', e => { if (e.target.id === 'q'){ state.q = e.target.value; render(false); } });
 $('#cohort').addEventListener('change', e => {
-  state.cohort = e.target.value; state.filter = 'all'; state.q = '';
+  state.cohort = e.target.value; state.q = '';
   render(true);
   const b = reduce ? 'auto' : 'smooth';
   screenEl.scrollTo({top:0, behavior:b}); window.scrollTo({top:0, behavior:b});
